@@ -20,6 +20,7 @@ const db = require("./db");
 // const tourRouter = require('./routes/tourRoutes');
 // const userRouter = require("./routes/userRoutes");
 // const provinceRouter = require("./routes/provincesRoutes");
+const KhachHangRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -38,7 +39,7 @@ if (process.env.NODE_ENV === "production") console.log("Working in Production");
 // });
 //cors
 const corsOrigin = {
-  origin: "http://localhost:3001", //or whatever port your frontend is using
+  origin: "http://127.0.0.1:20585", //or whatever port your frontend is using
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -76,11 +77,9 @@ app.use((req, res, next) => {
 // app.use("/api/vouchers", voucherRouter);
 // app.use("/api/orders", orderRouter);
 // app.use("/api/products", productRouter);
-app.get("/", async (req, res) => {
-  const data = await db.one('Select * from "KHACHHANG" ');
-  console.log(data);
-  return res.json(data);
-});
+
+app.use("/api/user", KhachHangRoutes);
+
 //Global error handler
 
 app.all("*", (req, res, next) => {
