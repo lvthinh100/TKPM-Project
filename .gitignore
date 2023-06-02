@@ -5,6 +5,9 @@
 /server/node_modules
 /qlks/node_modules
 /client/node_modules
+/server/.vscode
+/client/.vscode
+/qlks/.vscode
 /.pnp
 .pnp.js
 

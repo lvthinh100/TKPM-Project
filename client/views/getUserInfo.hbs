@@ -1,0 +1,19 @@
+<form action="/getUserInfo" method="post" >
+  <div class="mb-3">
+    <label for="idKH" class="form-label">Ma Khach Hang: </label>
+    <input
+      name="idKh"
+      type="text"
+      class="form-control"
+      id="idKH"
+      aria-describedby="emailHelp"
+    />
+    <div id="emailHelp" class="form-text">Search User info by ID.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{{#if error}}
+    <span>Id khong hop le thu lai</span>
+{{else}}
+    {{> CardUserInfo user}}
+{{/if}}

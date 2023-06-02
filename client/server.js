@@ -2,10 +2,13 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
 //Route
-const viewRoutes = require("./router/viewRoutes");
-const app = express();
+// const viewRoutes = require("./router/viewRoutes");
+const homeRoutes = require("./router/homeRoutes");
+const dashboardRoutes = require("./router/dashboardRoutes");
+const userInfoRoutes = require("./router/userInfoRoutes");
+const getUserInfoByIdRoutes = require("./router/getUserInfoByIdRoutes");
 
-const axios = require("axios");
+const app = express();
 
 //public
 app.use("/public", express.static(path.join(__dirname, "public")));
@@ -26,11 +29,11 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
-app.get("/", async (req, res) => {
-  return res.render("home", {
-    template: { title: "Test" },
-  });
-});
+// Server-side rendering, dynamic
+app.use("/home", homeRoutes);
+app.use("/dashboard", dashboardRoutes);
+app.use("/userInfo", userInfoRoutes);
+app.use("/getUserInfo", getUserInfoByIdRoutes);
 
 app.all("*", (req, res, next) => {
   res.json({

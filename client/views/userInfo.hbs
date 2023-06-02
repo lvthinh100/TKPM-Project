@@ -1,0 +1,15 @@
+{{#if error}}
+  <h1 style="color: red"> {{title}} </h1>
+{{else}}
+  <h1> {{title}} </h1>
+{{/if}}
+
+{{#each users}}
+
+  <div class="card m-2">
+    <div class="card-body">
+      {{> CardUserInfo this}}
+    </div>
+  </div>
+
+{{/each}}

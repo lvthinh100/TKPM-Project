@@ -38,7 +38,7 @@ exports.getUserById = catchAsync(async (req, res) => {
   const query = req.query;
   console.log(query);
   const data = await KhachHangModel.getOneById(id);
-
+  // next (new AppError)
   res.json({
     message: "success",
     data,
