@@ -44,3 +44,16 @@ exports.getUserById = catchAsync(async (req, res) => {
     data,
   });
 });
+
+// exports.getUserById = catchAsync(async (req, res) => {
+//   const { id } = req.params;
+
+//   const query = req.query;
+//   console.log(query);
+//   const data = await KhachHangModel.getOneById(id);
+//   // next (new AppError)
+//   res.json({
+//     message: "success",
+//     data,
+//   });
+// });
