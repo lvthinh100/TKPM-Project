@@ -1,13 +1,13 @@
 const express = require("express");
-const KhachHangController = require("../controller/KhachHangController");
-
+const authController = require("../controller/authController");
+const userController = require("../controller/userController");
 //Comment API
 const router = express.Router();
 
-router.get("/", KhachHangController.getCustomer);
+router.get("/", userController.getCustomer);
 
 //Get user by ID
-router.get("/:id", KhachHangController.getUserById);
-router.post("/", KhachHangController.createCustomer);
+router.get("/:id", authController.isLoggedIn, userController.getUserById);
+router.post("/", userController.createCustomer);
 
 module.exports = router;

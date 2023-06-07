@@ -1,10 +1,10 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
-const KhachHangModel = require("../model/KhachHangModel");
+const UserModel = require("../model/UserModel");
 
 exports.getCustomer = catchAsync(async (req, res) => {
-  const data = await KhachHangModel.createOne();
+  const data = await UserModel.createOne();
   //Xử lý data => Controller
   console.log(data);
   //Gửi data lại thông qua res
@@ -32,12 +32,14 @@ exports.createCustomer = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUserById = catchAsync(async (req, res) => {
+exports.getUserById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-
-  const query = req.query;
-  console.log(query);
-  const data = await KhachHangModel.getOneById(id);
+  const { account } = req;
+  if (account.userId !== id)
+    return next(new AppError(403, "You do not have permission to do this"));
+  // const query = req.query;
+  // console.log(query);
+  const [data] = await UserModel.getOneById(id);
   // next (new AppError)
   res.json({
     message: "success",
