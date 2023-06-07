@@ -19,6 +19,10 @@ html {
   width: 80px;
 }
 
+.login__img {
+  width: 100%;
+}
+
 .movie {
   height: 200px;
 }
