@@ -21,7 +21,13 @@ const helpers = {
 
 exports.renderHome = catchAsync(async (req, res, next) => {
   // const data = await accountModel.getAll();
-  res.render("home", {
+  res.render("homes", {
+    template: "asd",
+  });
+});
+
+exports.renderDetailRoomInfoPage = catchAsync(async (req, res, next) => {
+  res.render("detailRoomInfoPage", {
     template: "asd",
   });
 });
