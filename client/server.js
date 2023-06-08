@@ -7,7 +7,7 @@ const homeRoutes = require("./router/homeRoutes");
 const dashboardRoutes = require("./router/dashboardRoutes");
 const userInfoRoutes = require("./router/userInfoRoutes");
 const getUserInfoByIdRoutes = require("./router/getUserInfoByIdRoutes");
-const detailRoomInfoPage = require("./router/detailRoomInfoPageRoutes")
+const detailRoomInfoRoutes = require("./router/detailRoomInfoPageRoutes");
 const listRoomInfoRoutes = require("./router/listRoomInfoRoutes");
 
 const app = express();
@@ -36,6 +36,8 @@ app.use("/home", homeRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/userInfo", userInfoRoutes);
 app.use("/getUserInfo", getUserInfoByIdRoutes);
+app.use("/listRoomInfo", listRoomInfoRoutes)
+app.use("/detailRoomInfo", detailRoomInfoRoutes);
 
 app.all("*", (req, res, next) => {
   res.json({
