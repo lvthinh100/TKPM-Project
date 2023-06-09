@@ -21,6 +21,8 @@ const db = require("./db");
 // const userRouter = require("./routes/userRoutes");
 // const provinceRouter = require("./routes/provincesRoutes");
 const KhachHangRoutes = require("./routes/userRoutes");
+const TaiKhoangRoutes = require("./routes/accountRoutes");
+// const TaiKhoangRoutes = require("./routes/accountRoutes");
 
 const app = express();
 
@@ -79,6 +81,7 @@ app.use((req, res, next) => {
 // app.use("/api/products", productRouter);
 
 app.use("/api/user", KhachHangRoutes);
+app.use("/api/account", TaiKhoangRoutes);
 
 //Global error handler
 
