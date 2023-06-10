@@ -87,7 +87,8 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!username || !password) {
     return next(new AppError(400, "Invalid username or password"));
   }
-  if (!account) next(new AppError(401, "Incorrect username or password"));
+  if (!account)
+    return next(new AppError(401, "Incorrect username or password"));
 
   //3. check password
   const correct = await bcrypt.compare(password, account.password);
@@ -130,7 +131,8 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
   //Check user
   const account = await accountModel.checkUsername(decoded.username);
   const adminAcc = await accountModel.checkAdminUsername(decoded.username);
-  if (!account && !adminAcc) return next(new AppError(401, "User not exist"));
+  if (!account && !adminAcc)
+    return next(new AppError(401, "Account not exist"));
 
   //Check change pass after get the token
   // if (freshUser.changedPasswordAfter(decoded.iat)) {
