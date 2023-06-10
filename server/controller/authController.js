@@ -7,8 +7,8 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
 // Model
-const AccountModel = require("../model/AccountModel");
-const UserModel = require("../model/UserModel");
+const accountModel = require("../model/accountModel");
+const userModel = require("../model/userModel");
 
 const signToken = (username) =>
   jwt.sign({ username }, process.env.JWT_SECRET, {
@@ -43,7 +43,7 @@ const createSendUser = (account, statusCode, res) => {
 exports.register = catchAsync(async (req, res, next) => {
   const { username, name, address, password, type, phone, cmnd } = req.body;
   // //1. check username in db
-  const account = await AccountModel.checkUsername(username);
+  const account = await accountModel.checkUsername(username);
   if (account) {
     return next(new AppError(401, "Username exists"));
   }
@@ -67,8 +67,8 @@ exports.register = catchAsync(async (req, res, next) => {
     address,
     type: type == 0 ? "NOIDIA" : "NUOCNGOAI",
   };
-  const dbResponse1 = await UserModel.createOne(newUser);
-  const dbResponse2 = await AccountModel.createOne(newAccount);
+  const dbResponse1 = await userModel.createOne(newUser);
+  const dbResponse2 = await accountModel.createOne(newAccount);
   // //4. insert to db
   // userModel.createUser(newUser);
   // res.render("auth", {
@@ -83,7 +83,7 @@ exports.register = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { username, password } = req.body;
   // //1. check username in db
-  const account = await AccountModel.checkUsername(username);
+  const account = await accountModel.checkUsername(username);
   if (!username || !password) {
     return next(new AppError(400, "Invalid username or password"));
   }
@@ -128,8 +128,8 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   console.log(decoded);
   //Check user
-  const account = await AccountModel.checkUsername(decoded.username);
-  const adminAcc = await AccountModel.checkAdminUsername(decoded.username);
+  const account = await accountModel.checkUsername(decoded.username);
+  const adminAcc = await accountModel.checkAdminUsername(decoded.username);
   if (!account && !adminAcc) return next(new AppError(401, "User not exist"));
 
   //Check change pass after get the token
@@ -148,7 +148,7 @@ exports.adminLogin = catchAsync(async (req, res, next) => {
     return next(new AppError(400, "Invalid username or password"));
   }
   // //1. check username in db
-  const account = await AccountModel.checkAdminUsername(username);
+  const account = await accountModel.checkAdminUsername(username);
   if (!account) next(new AppError(401, "Incorrect username or password"));
 
   //3. check password
@@ -161,7 +161,7 @@ exports.adminLogin = catchAsync(async (req, res, next) => {
 
 exports.restrictToAdmin = catchAsync(async (req, res, next) => {
   const { username } = req.account;
-  const account = await AccountModel.checkAdminUsername(username);
+  const account = await accountModel.checkAdminUsername(username);
 
   if (!account) {
     return next(
@@ -174,13 +174,13 @@ exports.restrictToAdmin = catchAsync(async (req, res, next) => {
 exports.createAdminAccount = catchAsync(async (req, res, next) => {
   const { username, password } = req.body;
   // //1. check username in db
-  const account = await AccountModel.checkAdminUsername(username);
+  const account = await accountModel.checkAdminUsername(username);
   if (account) {
     return next(new AppError(401, "Username exists"));
   }
   //3.Generate Id and hash password
   const accountId = IdGenerator("AD");
-  const dbResponse = await AccountModel.createAdmin({
+  const dbResponse = await accountModel.createAdmin({
     username,
     password,
     id: accountId,

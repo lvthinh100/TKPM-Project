@@ -1,10 +1,10 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
-const UserModel = require("../model/UserModel");
+const userModel = require("../model/userModel");
 
 exports.getCustomer = catchAsync(async (req, res) => {
-  const data = await UserModel.createOne();
+  const data = await userModel.createOne();
   //Xử lý data => Controller
   console.log(data);
   //Gửi data lại thông qua res
@@ -39,7 +39,7 @@ exports.getUserById = catchAsync(async (req, res, next) => {
     return next(new AppError(403, "You do not have permission to do this"));
   // const query = req.query;
   // console.log(query);
-  const [data] = await UserModel.getOneById(id);
+  const [data] = await userModel.getOneById(id);
   // next (new AppError)
   res.json({
     message: "success",
