@@ -11,7 +11,9 @@ $(window).on("popstate", function(e) {
     change(e.originalEvent.state);
 });
 
-$('.item-container').click(function(){
+$(".item-container").click(function(){
     id=$(this).attr('id');
-    window.location.href=`/item-detail?id=${id}`
+    console.log("ALOLALO");
+    //window.location.href=`/item-detail?id=${id}`
+    window.location.href=`/detailRoomInfo`
 })

@@ -9,6 +9,7 @@ const userInfoRoutes = require("./router/userInfoRoutes");
 const getUserInfoByIdRoutes = require("./router/getUserInfoByIdRoutes");
 const detailRoomInfoRoutes = require("./router/detailRoomInfoPageRoutes");
 const listRoomInfoRoutes = require("./router/listRoomInfoRoutes");
+const addNewRoomRoutes = require("./router/addNewRoomRoutes");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/userInfo", userInfoRoutes);
 app.use("/getUserInfo", getUserInfoByIdRoutes);
 app.use("/listRoomInfo", listRoomInfoRoutes)
 app.use("/detailRoomInfo", detailRoomInfoRoutes);
+app.use("/addNewRoom", addNewRoomRoutes);
 
 app.all("*", (req, res, next) => {
   res.json({

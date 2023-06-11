@@ -1,6 +1,6 @@
 exports.renderlistRoomInfoPage = async (req, res) => {
     // Trả về home.hbs
-    return res.render("listRoomInfoPage", {
+    res.render("listRoomInfoPage", {
       template: { title: "Quản lý phòng" },
       listRoom: [{
         MAPHONG: "520",
