@@ -19,8 +19,24 @@ exports.checkUsername = async (username) => {
         PASSWORD: password,
         MAKHACHHANG: userId,
         TENKHACHHANG: name,
+        EMAIL: email,
+        LOAIKHACH: type,
+        SODIENTHOAI: phone,
+        CMND: cmnd,
+        DIACHI: address,
       } = dbUser;
-      return { id, username, password, userId, name };
+      return {
+        id,
+        username,
+        password,
+        userId,
+        name,
+        email,
+        type,
+        phone,
+        cmnd,
+        address,
+      };
     } else return null;
   } catch (err) {
     throw err;

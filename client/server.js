@@ -1,5 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 //Route
 // const viewRoutes = require("./router/viewRoutes");
@@ -9,6 +11,7 @@ const userInfoRoutes = require("./router/userInfoRoutes");
 const getUserInfoByIdRoutes = require("./router/getUserInfoByIdRoutes");
 const authRoutes = require("./router/authRoutes");
 const userRoutes = require("./router/userRoutes");
+const adminRoutes = require("./router/adminRoutes");
 
 const app = express();
 
@@ -18,6 +21,12 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 //body parser
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+
+// cookie
+app.use(cookieParser());
+
+// Env
+dotenv.config({ path: "./config.env" });
 
 //Handlebar view engine
 app.engine(
@@ -38,6 +47,7 @@ app.use("/userInfo", userInfoRoutes);
 app.use("/getUserInfo", getUserInfoByIdRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/admin", adminRoutes);
 
 app.all("*", (req, res, next) => {
   res.json({

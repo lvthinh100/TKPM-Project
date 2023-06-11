@@ -16,10 +16,10 @@
     </div>
     <!-- Registeration Form -->
     <div class="col-md-7 col-lg-6 ml-auto">
-      <form action="#">
+      <form id="form__register" action="/auth/register" method="post">
         <div class="row">
 
-          <!-- First Name -->
+          <!-- Name -->
           <div class="input-group col-lg-6 mb-4">
             <div class="input-group-prepend">
               <span
@@ -31,31 +31,11 @@
               </span>
             </div>
             <input
-              id="firstName"
+              id="name"
               type="text"
-              name="firstName"
-              placeholder="Last Name"
-              class="form-control border border-3 bg-white border-start-0"
-            />
-          </div>
-
-          <!-- Last Name -->
-          <div class="input-group col-lg-6 mb-4">
-            <div class="input-group-prepend">
-              <span
-                class="input-group-text border border-3 bg-white px-4 border-md border-end-0"
-              >
-                <div class="py-2">
-                  <i class="fa fa-user text-muted"></i>
-
-                </div>
-              </span>
-            </div>
-            <input
-              id="lastName"
-              type="text"
-              name="lastname"
-              placeholder="Last Name"
+              name="name"
+              placeholder="Họ và tên"
+              value="Le Van Thinh In test mode"
               class="form-control border border-3 bg-white border-start-0"
             />
           </div>
@@ -68,7 +48,6 @@
               >
                 <div class="py-2">
                   <i class="fa fa-envelope text-muted"></i>
-
                 </div>
               </span>
             </div>
@@ -76,11 +55,32 @@
               id="email"
               type="email"
               name="email"
-              placeholder="Email Address"
+              value="lvthinh@test.com"
+              placeholder="Địa chỉ Email"
               class="form-control border border-3 bg-white border-start-0 border-md"
             />
           </div>
 
+          {{! CMND }}
+          <div class="input-group col-lg-6 mb-4">
+            <div class="input-group-prepend">
+              <span
+                class="input-group-text border border-3 bg-white px-4 rounded-0 border-end-0"
+              >
+                <div class="py-2">
+                  <i class="fa fa-user text-muted"></i>
+                </div>
+              </span>
+            </div>
+            <input
+              id="cmnd"
+              type="text"
+              name="cmnd"
+              placeholder="Chứng minh nhân dân"
+              value="054202000061"
+              class="form-control border border-3 bg-white border-start-0"
+            />
+          </div>
           <!-- Phone Number -->
           <div class="input-group col-lg-12 mb-4">
             <div class="input-group-prepend">
@@ -97,12 +97,35 @@
               id="phoneNumber"
               type="tel"
               name="phone"
-              placeholder="Phone Number"
+              placeholder="Số điện thoại"
+              value="0796792539"
               class="form-control border border-3 bg-white border-md border-start-0 pl-3"
             />
-          </div>.
+          </div>
 
-          <!-- Job -->
+          <!-- Address -->
+          <div class="input-group col-lg-12 mb-4">
+            <div class="input-group-prepend">
+              <span
+                class="input-group-text border border-3 bg-white px-4 border-md border-end-0"
+              >
+                <div class="py-2">
+                  <i class="fa fa-phone-square text-muted"></i>
+
+                </div>
+              </span>
+            </div>
+            <input
+              id="address"
+              type="tel"
+              name="address"
+              placeholder="Địa chỉ"
+              value="Address for testing"
+              class="form-control border border-3 bg-white border-md border-start-0 pl-3"
+            />
+          </div>
+
+          <!-- Type -->
           <div class="input-group col-lg-12 mb-4">
             <div class="input-group-prepend">
               <span
@@ -116,15 +139,16 @@
             </div>
             <select
               id="job"
-              name="jobtitle"
+              name="type"
               class="form-control border border-3 custom-select bg-white border-start-0 border-md"
             >
-              <option value="">Nội địa</option>
-              <option value="">Khách nước ngoài</option>
+              <option value="NOIDIA">Nội địa</option>
+              <option value="NUOCNGOAI">Nước ngoài</option>
 
             </select>
           </div>
 
+          {{! Username }}
           <div class="input-group col-lg-6 mb-4">
             <div class="input-group-prepend">
               <span
@@ -140,6 +164,7 @@
               type="text"
               name="username"
               placeholder="Tên tài khoản"
+              value="testAccount1"
               class="form-control border border-3 bg-white border-start-0"
             />
           </div>
@@ -161,6 +186,7 @@
               type="password"
               name="password"
               placeholder="Password"
+              value="123456"
               class="form-control border border-3 bg-white border-start-0 border-md"
             />
           </div>
@@ -182,15 +208,22 @@
               type="text"
               name="passwordConfirmation"
               placeholder="Confirm Password"
+              value="123456"
               class="form-control border border-3 bg-white border-start-0 border-md"
             />
           </div>
-
+          {{#if error}}
+            <span class="text-danger">{{message}}</span>
+          {{/if}}
           <!-- Submit Button -->
           <div class="form-group col-lg-12 d-flex justify-content-center">
-            <a href="#" class="btn btn-primary btn-block py-2">
+            <button
+              type="submit"
+              href="#"
+              class="btn btn-primary btn-block py-2"
+            >
               <span class="font-weight-bold">Create your account</span>
-            </a>
+            </button>
           </div>
 
           <!-- Divider Text -->

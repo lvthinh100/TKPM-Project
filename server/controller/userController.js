@@ -92,3 +92,10 @@ exports.updateCustomerById = catchAsync(async (req, res) => {
     data: newData,
   });
 });
+
+exports.getMe = (req, res, next) => {
+  return res.json({
+    status: "success",
+    data: req.account,
+  });
+};

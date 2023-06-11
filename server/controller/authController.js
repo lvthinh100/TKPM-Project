@@ -41,12 +41,15 @@ const createSendUser = (account, statusCode, res) => {
 };
 
 exports.register = catchAsync(async (req, res, next) => {
-  const { username, name, address, password, type, phone, cmnd } = req.body;
+  const { username, name, address, password, type, phone, cmnd, confirm } =
+    req.body;
   // //1. check username in db
   const account = await accountModel.checkUsername(username);
-  if (account) {
-    return next(new AppError(401, "Username exists"));
-  }
+  if (account) return next(new AppError(401, "Username exists"));
+  if (phone.length < 10)
+    return next(new AppError(401, "Phone number not valid"));
+  if (password !== confirm)
+    return next(new AppError(401, "Incorrect confirm password"));
   //3.Generate Id and hash password
   const accountId = IdGenerator("TK");
   const userId = IdGenerator("KH");
@@ -113,6 +116,7 @@ exports.logout = catchAsync((req, res, next) => {
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   //Get token from header or cookies
   let token;
+  console.log(req.cookies);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -127,20 +131,14 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 
   //Verify token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
   //Check user
   const account = await accountModel.checkUsername(decoded.username);
   const adminAcc = await accountModel.checkAdminUsername(decoded.username);
   if (!account && !adminAcc)
     return next(new AppError(401, "Account not exist"));
-
-  //Check change pass after get the token
-  // if (freshUser.changedPasswordAfter(decoded.iat)) {
-  //   return next(
-  //     new AppError(401, 'User has changed password! Please log in again')
-  //   );
-  // }
-  req.account = account ? account : adminAcc;
+  if (account) account.password = undefined;
+  if (adminAcc) adminAcc.password = undefined;
+  req.account = account ? account : { ...adminAcc, isAdmin: true };
   next();
 });
 

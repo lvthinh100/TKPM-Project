@@ -17,17 +17,11 @@
           <h4 class="text-right">Profile Settings</h4>
         </div>
         <div class="row">
-          <div class="col-md-6"><label class="labels">Tên</label><input
+          <div class="col-md-12"><label class="labels">Họ và tên</label><input
               type="text"
               class="form-control"
-              placeholder="first name"
-              value=""
-            /></div>
-          <div class="col-md-6"><label class="labels">Tên đệm</label><input
-              type="text"
-              class="form-control"
-              value=""
-              placeholder="surname"
+              placeholder="name"
+              value="{{user.name}}"
             /></div>
         </div>
         <div class="row mt-2 gap-2">
@@ -35,27 +29,24 @@
               type="text"
               class="form-control"
               placeholder="enter phone number"
-              value=""
+              value="{{user.phone}}"
             /></div>
           <div class="col-md-12"><label class="labels">Địa chỉ</label><input
               type="text"
               class="form-control"
+              value="{{user.address}}"
               placeholder="enter address line 1"
-              value=""
             /></div>
-          <div class="col-md-12"><label class="labels">Chứng minh nhân dân</label><input
+          <div class="col-md-12">
+            <label class="labels">Chứng minh nhân dân</label>
+            <input
               type="text"
               class="form-control"
               placeholder="enter address line 2"
-              value=""
-            /></div>
+              value="{{user.cmnd}}"
+            />
+          </div>
 
-          <div class="col-md-12"><label class="labels">Địa chỉ email</label><input
-              type="text"
-              class="form-control"
-              placeholder="enter email id"
-              value=""
-            /></div>
           <div class="mt-5 text-center"><button
               class="btn btn-primary profile-button"
               type="button"

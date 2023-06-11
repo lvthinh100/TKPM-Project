@@ -33,7 +33,7 @@
 
           {{! Co user thi ra logout khong co thi ra auth }}
           {{#if user}}
-            <form action="/api/user/logout" method="post" class="m-0">
+            <form action="/auth/logout" method="post" class="m-0">
               <span>Hello {{user.name}} </span>
               <input
                 class="btn btn-primary ms-1"

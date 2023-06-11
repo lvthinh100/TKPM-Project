@@ -6,11 +6,11 @@ const userController = require("../controller/userController");
 const router = express.Router();
 
 router.get("/", userController.getCustomer);
+router.post("/", userController.createCustomer);
+router.get("/me", authController.isLoggedIn, userController.getMe);
 
 //Get user by ID
 router.get("/:id", authController.isLoggedIn, userController.getUserById);
-
-router.post("/", userController.createCustomer);
 
 router.delete(
   "/:id",
