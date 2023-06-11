@@ -1,13 +1,14 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
-//const KhachHangModel = require("../model/KhachHangModel");
 const roomModel = require("../model/RoomModel");
 
-exports.getRoomInfo = catchAsync(async (req, res) => {
+exports.getAllRoom = catchAsync(async (req, res) => {
     const data = await roomModel.getAllRoomsInfo();
+
     //Xử lý data => Controller
     console.log(data);
+
     //Gửi data lại thông qua res
     res.json({
         status: 200,
@@ -16,21 +17,47 @@ exports.getRoomInfo = catchAsync(async (req, res) => {
     });
 });
 
-/*
-exports.createCustomer = catchAsync(async (req, res, next) => {
-  //Lấy dữ liệu được upload
-  const data = req.body;
-  //Xử lý dữ liệu
-  if (data.phone.length < 10) return next(new AppError(400, "Phone not valid"));
-  //Up lên database
-  const newData = await KhachHangModel.insertOne(data);
+exports.getRoomById = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
-  console.log(newData);
+  const query = req.query;
+  console.log(query);
 
-  //Trả kết quả về thông qua res
+  const data = await roomModel.getRoomInfoById(id);
+
   res.json({
+    status: 200,
+    message: "success",
+    data,
+  });
+});
+
+exports.createRoom = catchAsync(async (req, res, next) => {
+  const data = req.body;
+  
+  // Xử lý dữ liệu nếu cần
+  /* 
+  Code. . .
+  */
+
+  // Insert into table . . .
+  const newData = await roomModel.createNewRoom(data);
+
+  res.json({
+    status: 200,
     message: "success",
     data: newData,
   });
-});
-*/
+})
+
+exports.deleteRoomById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const data = await roomModel.deleteRoom(id);
+
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
+})

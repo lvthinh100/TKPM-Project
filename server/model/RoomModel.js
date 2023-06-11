@@ -15,13 +15,13 @@ exports.getAllRoomsInfo = async () => {
 };
 
 //get room information by id room
-exports.getRoomInfoById = async () => {
+exports.getRoomInfoById = async (id) => {
     try {
         //Lấy data từ db => Model
-        const query = ' Select * from "PHONG" ';
+        const query = ' Select * from "PHONG" where "MAPHONG" = $1';
 
         //Bất đồng bộ
-        const data = await db.any(query);
+        const data = await db.any(query, [id]);
 
         return data;
     } catch (err) {
@@ -33,25 +33,37 @@ exports.getRoomInfoById = async () => {
 exports.createNewRoom = async (dataRoom) => {
     try {
         //Lấy data từ db => Model
-        const query = ' Select * from "PHONG" ';
+        const query = ` 
+        Insert into "PHONG"("MAPHONG", "LOAIPHONG", "TANG", "SOGIUONG", "SOKHACHTOIDA", "DIENTICH", "TINHTRANG", "MOTA", "GHICHU")
+        values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *; `;
 
         //Bất đồng bộ
-        const data = await db.any(query);
+        const newData = await db.one(query, [
+        data.maphong,
+        data.loaiphong,
+        data.tang,
+        data.sogiuong,
+        data.sokhachtoida,
+        data.dientich,
+        data.tinhtrang,
+        data.mota,
+        data.ghichu,
+      ]);
 
-        return data;
+        return newData;
     } catch (err) {
         throw err;
     }
 };
 
 //delete room
-exports.deleteRoom = async (idRoom) => {
+exports.deleteRoom = async (id) => {
     try {
         //Lấy data từ db => Model
-        const query = ' Select * from "PHONG" ';
+        const query = ' Delete from "PHONG" where "MAPHONG" = $1 ';
 
         //Bất đồng bộ
-        const data = await db.any(query);
+        const data = await db.any(query, [id]);
 
         return data;
     } catch (err) {
@@ -63,46 +75,33 @@ exports.deleteRoom = async (idRoom) => {
 exports.updateRoomInfo = async (dataUpdated) => {
     try {
         //Lấy data từ db => Model
-        const query = ' Select * from "PHONG" ';
+        const query = ` 
+        Update "PHONG" 
+        set "LOAIPHONG" = $2,
+            "TANG" = $3,
+            "SOGIUONG" = $4,
+            "SOKHACHTOIDA" = $5,
+            "DIENTICH" = $6,
+            "TINHTRANG" = $7,
+            "MOTA" = $8,
+            "GHICHU" = $9
+        where "MAPHONG" = $1 `;
 
         //Bất đồng bộ
-        const data = await db.any(query);
+        const newData = await db.one(query, [
+            data.maphong,
+            data.loaiphong,
+            data.tang,
+            data.sogiuong,
+            data.sokhachtoida,
+            data.dientich,
+            data.tinhtrang,
+            data.mota,
+            data.ghichu,
+          ]);
 
         return data;
     } catch (err) {
         throw err;
     }
 };
-
-/*
-exports.insertOne = async (data) => {
-  const query = ` INSERT INTO "KHACHHANG"(
-        "MAKHACHHANG", "TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI")
-        VALUES ($1, $2, $3, $4, $5, $6) returning *; `;
-
-  const newData = await db.one(query, [
-    data.id,
-    data.name,
-    data.type,
-    data.phone,
-    data.cmnd,
-    data.address,
-  ]);
-
-  return newData;
-};
-
-exports.getOneById = async (id) => {
-  try {
-    //Lấy data từ db => Model
-    const query = ' Select * from "KHACHHANG" Where "MAKHACHHANG" = $1 ';
-
-    //Bất đồng bộ
-    const data = await db.any(query, [id]);
-
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-*/
