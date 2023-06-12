@@ -1,0 +1,30 @@
+.panel-container {
+    max-width: 1200px;
+    margin: 2rem auto 0 auto;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 2rem;
+    color: #475D8F;
+}
+
+.swap-panel-container {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+.fade-out {
+    background-color: rgba(68, 118, 204, 0.221) !important;
+    border: none;
+}
+
+.btn {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+#life-span {
+    max-width: 100px;
+}
