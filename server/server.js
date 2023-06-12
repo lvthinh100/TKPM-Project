@@ -3,7 +3,7 @@ const pgp = require("pg-promise");
 
 // Exception handler
 process.on("uncaughtException", (err) => {
-  console.log(err.name, err.message);
+  console.log(err.name, err.message, err.stack);
   console.log("Uncaught Exception: server is shutting down");
   process.exit(1);
 });

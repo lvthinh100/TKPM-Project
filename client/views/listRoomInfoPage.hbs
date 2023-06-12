@@ -1,0 +1,52 @@
+<body>
+    <link rel="stylesheet" href="../public/css/style_listRoomInfo.css">
+    <!--
+    {{#if message}}
+    <h3>{{message}}</h3>
+    {{/if}}
+    -->
+    <div class="container" style="">
+        <div style="display: flex; align-items:center; margin-bottom:2rem">
+            <img src="images/flame.png" alt="" style="width: 20px; height: 20px">
+            <strong style="white-space: nowrap; padding-left: 10px;">Bán chạy</strong>
+        </div>
+
+        <div class="row best-selling-row">
+            {{#each listRoom}}
+            <div class="col-md-3 col-margin item-container" id="{{this.MAPHONG}}">
+                <div class="card-sl">
+                    <div class="card-image">
+                        <img src="{{this.img_url}}" />
+                    </div>
+
+                    <div class="card-heading text-center">
+                        PHÒNG {{this.MAPHONG}}
+                    </div>
+                    <div class="card-text text-center">
+                        Loại phòng: {{this.LOAIPHONG}}
+                    </div>
+                    <div class="card-text text-center">
+                        Tầng: {{this.TANG}}
+                    </div>
+                    <div class="card-text text-center">
+                        Số giường: {{this.SOGIUONG}}
+                    </div>
+                    <div class="card-text text-center">
+                        Số khách tối đa: {{this.SOKHACHTOIDA}}
+                    </div>
+                    <div class="card-text text-center">
+                        Trình trạng: {{this.TINHTRANG}}
+                    </div>
+                    <div class="card-text text-center">
+                        Mô tả: {{this.MOTA}}
+                    </div>
+                    <div class="card-text text-center">
+                        Ghi chú: {{this.GHICHU}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <script src="../public/script/script_listRoomInfo.js"></script>
+</body>
