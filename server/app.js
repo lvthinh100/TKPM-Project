@@ -14,14 +14,13 @@ const AppError = require("./utils/AppError");
 
 const GlobalErrorHandler = require("./controller/errorController");
 
-const db = require("./db");
-
 //router
-// const tourRouter = require('./routes/tourRoutes');
-// const userRouter = require("./routes/userRoutes");
-// const provinceRouter = require("./routes/provincesRoutes");
-const KhachHangRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const accountRoutes = require("./routes/accountRoutes");
+
 const RoomRoutes = require("./routes/RoomRoutes");
+
 
 const app = express();
 
@@ -72,15 +71,13 @@ app.use((req, res, next) => {
 });
 
 //DEFINE API HERE
-// app.use("/api/users", userRouter);
-// app.use("/api/provinces", provinceRouter);
-// app.use("/api/comments", commentRouter);
-// app.use("/api/vouchers", voucherRouter);
-// app.use("/api/orders", orderRouter);
-// app.use("/api/products", productRouter);
 
-app.use("/api/user", KhachHangRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/account", accountRoutes);
+
 app.use("/api/room", RoomRoutes);
+
 
 //Global error handler
 
