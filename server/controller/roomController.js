@@ -1,20 +1,20 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
-const roomModel = require("../model/RoomModel");
+const roomModel = require("../model/roomModel");
 
 exports.getAllRoom = catchAsync(async (req, res) => {
-    const data = await roomModel.getAllRoomsInfo();
+  const data = await roomModel.getAllRoomsInfo();
 
-    //Xử lý data => Controller
-    console.log(data);
+  //Xử lý data => Controller
+  console.log(data);
 
-    //Gửi data lại thông qua res
-    res.json({
-        status: 200,
-        message: "success",
-        data: data,
-    });
+  //Gửi data lại thông qua res
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
 });
 
 exports.getRoomById = catchAsync(async (req, res) => {
@@ -34,7 +34,7 @@ exports.getRoomById = catchAsync(async (req, res) => {
 
 exports.createRoom = catchAsync(async (req, res, next) => {
   const data = req.body;
-  
+
   // Xử lý dữ liệu nếu cần
   /* 
   Code. . .
@@ -48,7 +48,7 @@ exports.createRoom = catchAsync(async (req, res, next) => {
     message: "success",
     data: newData,
   });
-})
+});
 
 exports.deleteRoomById = catchAsync(async (req, res) => {
   const { id } = req.params;
@@ -60,4 +60,4 @@ exports.deleteRoomById = catchAsync(async (req, res) => {
     message: "success",
     data: data,
   });
-})
+});

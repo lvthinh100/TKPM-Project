@@ -1,6 +1,4 @@
-<body>
-    <link rel="stylesheet" href="../public/css/style_addNewRoom.css" />
-    <!--
+<!--
     {{#if message}}
         <h3>{{message}}</h3>
     {{/if}}
@@ -19,40 +17,71 @@
     </div>
     -->
 
-    <div class="panel-container">
-        <h3>THÊM PHÒNG MỚI</h3>
+<div class="panel-container">
+  <h3>THÊM PHÒNG MỚI</h3>
 
-        <div id="detail-rows">
-            <div class="card-body import-good-main-panel">
+  <div id="detail-rows">
+    <div class="card-body import-good-main-panel">
 
-                <form class="row g-3">
-                    <div class="col-md-6">
-                        <label for="typeRoom" class="form-label">Loại phòng</label>
-                        <select class="form-select" id="typeRoom" value="">
-                            {{#each goodsCategory}}
-                            <option value="{{this.ma_loai_hang}}">{{this.ten_loai_hang}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="imgRoom" class="form-label">Hình ảnh</label>
-                        <input type="file" class="form-control amount-field" id="imgRoom" value="" required>
-                    </div>
+      <form class="row g-3" action="/addNewRoom" method="post">
+        <div class="col-md-6">
+          <label for="typeRoom" class="form-label">Loại phòng</label>
+          <select
+            name="typeRoom"
+            class="form-select"
+            id="typeRoom"
+            value="DONVIP"
+          >
+            {{!-- {{#each goodsCategory}}
+              <option
+                value="{{this.ma_loai_hang}}"
+              >{{this.ten_loai_hang}}</option>
+            {{/each}} --}}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="imgRoom" class="form-label">Hình ảnh</label>
+          <input
+            type="file"
+            class="form-control amount-field"
+            id="imgRoom"
+            value=""
+          />
+        </div>
 
-                    <div class="col-md-4">
-                        <label for="maxPeople" class="form-label">Số khách tối đa</label>
-                        <input type="number" class="form-control price-field" id="maxPeople" value="" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="floor" class="form-label">Tầng</label>
-                        <input type="number" class="form-control price-field" id="floor" value="" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="numBed" class="form-label">Số giường</label>
-                        <input type="number" class="form-control price-field" id="numBed" value="" required>
-                    </div>
+        <div class="col-md-4">
+          <label for="maxPeople" class="form-label">Số khách tối đa</label>
+          <input
+            type="number"
+            name="maxPeople"
+            class="form-control price-field"
+            id="maxPeople"
+            value="5"
+            required
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="floor" class="form-label">Tầng</label>
+          <input
+            type="number"
+            class="form-control price-field"
+            id="floor"
+            value="1"
+            required
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="numBed" class="form-label">Số giường</label>
+          <input
+            type="number"
+            class="form-control price-field"
+            id="numBed"
+            value="2"
+            required
+          />
+        </div>
 
-                    <!--
+        <!--
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Address</label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
@@ -87,19 +116,19 @@
                         </div>
                     </div>
                     -->
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Thêm phòng</button>
-                    </div>
-                </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Thêm phòng</button>
+        </div>
+      </form>
 
-                <!--
+      <!--
                 <div class="swap-panel-container">
                     <button id="add-good-btn" class="btn btn-primary">Mặt hàng</button>
                     <button id="add-food-btn" class="btn btn-primary fade-out">Món ăn</button>
                 </div>
                 -->
 
-                <!--
+      <!--
                 <div class="input-group mb-3 input-row hidden" id="row-2">
                     <span class="input-group-text">Tên</span>
                     <input type="text" class="form-control price-field" id="name-2" value="" required>
@@ -114,15 +143,6 @@
                 </div>
                 -->
 
-            </div>
-
-
-
-        </div>
-
-
     </div>
-
-    <!--<script src="script/globalScript.js"></script>-->
-    <script src="../public/script/script_addNewRoom.js"></script>
-</body>
+  </div>
+</div>

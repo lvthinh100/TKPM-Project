@@ -80,7 +80,7 @@ app.use((req, res, next) => {
 // app.use("/api/products", productRouter);
 
 app.use("/api/user", KhachHangRoutes);
-app.use("api/room", RoomRoutes);
+app.use("/api/room", RoomRoutes);
 
 //Global error handler
 
