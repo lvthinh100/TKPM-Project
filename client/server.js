@@ -14,10 +14,11 @@ const authRoutes = require("./router/authRoutes");
 const userRoutes = require("./router/userRoutes");
 const adminRoutes = require("./router/adminRoutes");
 
+const roomBookingRoutes = require("./router/roomBookingRoutes");
+
 const detailRoomInfoRoutes = require("./router/detailRoomInfoPageRoutes");
 const listRoomInfoRoutes = require("./router/listRoomInfoRoutes");
 const addNewRoomRoutes = require("./router/addNewRoomRoutes");
-
 
 const app = express();
 
@@ -56,10 +57,11 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
 
-app.use("/listRoomInfo", listRoomInfoRoutes)
+app.use("/listRoomInfo", listRoomInfoRoutes);
 app.use("/detailRoomInfo", detailRoomInfoRoutes);
 app.use("/addNewRoom", addNewRoomRoutes);
 
+app.use("/roomBooking", roomBookingRoutes);
 
 app.all("*", (req, res, next) => {
   res.json({

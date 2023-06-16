@@ -1,0 +1,105 @@
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal{{id}}"
+>
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal{{id}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          Content here
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <button type="button" class="btn btn-primary">Check In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search ticket"
+    aria-label="Search ticket"
+    aria-describedby="button-addon2"
+  />
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    id="button-addon2"
+  >Search</button>
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    id="button-addon3"
+  >Reset</button>
+</div>
+<table class="table table-hover table-striped table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Mã phiếu</th>
+      <th scope="col">Mã Khách Hàng</th>
+      <th scope="col">Tên Khách Đặt</th>
+      <th scope="col">Check in</th>
+      <th scope="col">Check out</th>
+      <th scope="col">Khách</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tickets}}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ticketId}}</td>
+        <td>{{userId}}</td>
+        <td>{{userName}}</td>
+        <td>{{checkIn}}</td>
+        <td>{{checkOut}}</td>
+        <td>{{num}}</td>
+        <td>{{status}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal{{../id}}"
+          >
+            Check in
+          </button>
+          <button class="btn btn-primary">Check out</button>
+        </td>
+      </tr>
+    {{/each}}
+
+  </tbody>
+</table>
