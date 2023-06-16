@@ -1,3 +1,4 @@
+/*
 Handlebars.registerHelper('times', function(n, block) {
     var accum = '';
     for(var i = 0; i < n; ++i) {
@@ -7,15 +8,15 @@ Handlebars.registerHelper('times', function(n, block) {
         accum += block.fn(this);
     }
     return accum;
-});
+});*/
 
 $('.detailInvoice').click(function(){
-    window.location.href= `/trading-details?id=${$(this).attr('value')}`
+    window.location.href= `/detailInvoice?id=${$(this).attr('value')}`
 })
 
 $('#search-receipt-btn').click(function(){
     if($('#search-rec-id').val()!=""){
-        window.location.href= `/trading-details?id=${$('#search-rec-id').val()}`
+        window.location.href= `/detailInvoice?id=${$('#search-rec-id').val()}`
     }
     
 })

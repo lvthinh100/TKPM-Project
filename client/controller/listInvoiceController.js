@@ -4,9 +4,10 @@ var totalPage = 0;
 var currentPage = 0;
 
 exports.renderlistInvoicePage = async (req, res) => {
-    //const { data } = await api.getAllRoom();
+    const { data } = await api.getAllInvoice();
 
-    //console.log(data.data);
+    console.log(data.data);
+    /*
     listInvoice = [{
         "MAHOADON": "A5PhS25",
         "MAKHTHANHTOAN": "K5YHJ2k",
@@ -19,7 +20,7 @@ exports.renderlistInvoicePage = async (req, res) => {
         "NGAYTHANHTOAN": "24-05-2023",
         "TONGTIEN": "200.000"
     },
-    ];
+    ];*/
     /*
     if (req.query.page) {
         if (req.query.page != "") {
@@ -65,6 +66,6 @@ exports.renderlistInvoicePage = async (req, res) => {
 
     res.render("listInvoicePage", {
         template: { title: "Quản lý hóa đơn" },
-        listInvoice: listInvoice,
+        listInvoice: data.data,
     });
 };

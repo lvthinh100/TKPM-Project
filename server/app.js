@@ -20,7 +20,10 @@ const userRoutes = require("./routes/userRoutes");
 const accountRoutes = require("./routes/accountRoutes");
 
 const RoomRoutes = require("./routes/RoomRoutes");
+const typeRoomRoutes = require("./routes/typeRoomRoutes");
 
+const invoiceRoutes = require("./routes/invoiceRoutes");
+const detailInvoiceRoutes = require("./routes/detailInvoiceRoutes");
 
 const app = express();
 
@@ -77,6 +80,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
 
 app.use("/api/room", RoomRoutes);
+app.use("/api/typeRoom", typeRoomRoutes);
+
+app.use("/api/invoice", invoiceRoutes);
+app.use("/api/detailInvoice", detailInvoiceRoutes);
 
 
 //Global error handler

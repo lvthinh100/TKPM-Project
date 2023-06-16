@@ -23,3 +23,10 @@ exports.createRoom = async (data) => axios.post(`${server}/api/room/`, data);
 exports.getRoomById = async (id) => axios.get(`${server}/api/room/${id}`);
 
 exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
+
+exports.getAllInvoice = async () => axios.get(`${server}/api/invoice/`);
+exports.getInvoiceById = async (id) => axios.get(`${server}/api/invoice/${id}`);
+
+exports.getDetailInvoiceById = async (id) => axios.get(`${server}/api/detailInvoice/${id}`);
+
+

@@ -1,12 +1,16 @@
 const api = require("../api/index");
 
 exports.renderDetailInvoicePage = async (req, res) => {
-    //console.log(req.query.id);
+    console.log(req.query.id);
 
-    //const { data } = await api.getRoomById(req.query.id);
+    var { data } = await api.getInvoiceById(req.query.id);
+    dataInvoice = data.data[0];
+    console.log(dataInvoice);
 
-    //console.log(data.data[0])
-
+    var { data } = await api.getDetailInvoiceById(req.query.id);
+    dataDetailInvoice = data.data;
+    console.log(dataDetailInvoice);
+    /*
     dataInvoice = {
         "MAHOADON": "A5PhS25",
         "MAKHTHANHTOAN": "K5YHJ2k",
@@ -37,8 +41,7 @@ exports.renderDetailInvoicePage = async (req, res) => {
         "DONGIA": 200,
         "PHUTHU": 100,
         "THANHTIEN": 1100
-    }];
-
+    }];*/
     // Trả về detailInvoicePage
     res.render("detailInvoicePage", {
         template: { title: "Chi tiết hóa đơn" },
