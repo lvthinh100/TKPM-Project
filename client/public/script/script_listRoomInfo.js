@@ -1,5 +1,4 @@
 function change(state) {
-    console.log('hehe')
     if(state === null) { // initial page
         $('body').html("Original");
     } else {
@@ -13,7 +12,6 @@ $(window).on("popstate", function(e) {
 
 $(".item-container").click(function(){
     id=$(this).attr('id');
-    console.log("ALOLALO");
     //window.location.href=`/item-detail?id=${id}`
-    window.location.href=`/detailRoomInfo`
+    window.location.href=`/detailRoomInfo?id=${id}`
 })

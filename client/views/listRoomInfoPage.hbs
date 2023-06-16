@@ -5,11 +5,16 @@
     <h3>{{message}}</h3>
     {{/if}}
     -->
-    <div class="container" style="">
-        <div style="display: flex; align-items:center; margin-bottom:2rem">
-            <img src="images/flame.png" alt="" style="width: 20px; height: 20px">
-            <strong style="white-space: nowrap; padding-left: 10px;">Bán chạy</strong>
+    <div class="container" style="padding-top:2em">
+        <div class="m-0 pl-3 pt-0 pb-3 text-center h2"> 
+            QUẢN LÝ PHÒNG
         </div>
+
+        <!--<div style="display: flex; align-items:center; margin-bottom:2rem">
+            <img src="images/flame.png" alt="" style="width: 20px; height: 20px">
+            <strong style="white-space: nowrap; padding-left: 10px;">QUẢN LÝ PHÒNG</strong>
+            
+        </div>-->
 
         <div class="row best-selling-row">
             {{#each listRoom}}
@@ -22,26 +27,20 @@
                     <div class="card-heading text-center">
                         PHÒNG {{this.MAPHONG}}
                     </div>
-                    <div class="card-text text-center">
+                    <div class="card-text text-left">
                         Loại phòng: {{this.LOAIPHONG}}
                     </div>
-                    <div class="card-text text-center">
+                    <div class="card-text text-left">
                         Tầng: {{this.TANG}}
                     </div>
-                    <div class="card-text text-center">
+                    <div class="card-text text-left">
                         Số giường: {{this.SOGIUONG}}
                     </div>
-                    <div class="card-text text-center">
+                    <div class="card-text text-left">
                         Số khách tối đa: {{this.SOKHACHTOIDA}}
                     </div>
-                    <div class="card-text text-center">
+                    <div class="card-text text-left">
                         Trình trạng: {{this.TINHTRANG}}
-                    </div>
-                    <div class="card-text text-center">
-                        Mô tả: {{this.MOTA}}
-                    </div>
-                    <div class="card-text text-center">
-                        Ghi chú: {{this.GHICHU}}
                     </div>
                 </div>
             </div>
