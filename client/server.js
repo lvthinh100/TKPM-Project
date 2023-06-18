@@ -18,6 +18,8 @@ const detailRoomInfoRoutes = require("./router/detailRoomInfoPageRoutes");
 const listRoomInfoRoutes = require("./router/listRoomInfoRoutes");
 const addNewRoomRoutes = require("./router/addNewRoomRoutes");
 
+const bookingRoomRoutes = require("./router/bookingRoomRoutes");
+
 
 const app = express();
 
@@ -59,6 +61,8 @@ app.use("/admin", adminRoutes);
 app.use("/listRoomInfo", listRoomInfoRoutes)
 app.use("/detailRoomInfo", detailRoomInfoRoutes);
 app.use("/addNewRoom", addNewRoomRoutes);
+
+app.use("/bookingRoom", bookingRoomRoutes);
 
 
 app.all("*", (req, res, next) => {

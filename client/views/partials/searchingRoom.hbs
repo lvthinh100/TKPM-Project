@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="../public/css/style_listRoomInfo.css">
+
+<form class="container card p-3" action="" method="" id="">
+    <!-- Mã đơn input 
+        <input type="hidden" name="madon" value="<?php echo $madon ?>">
+        <div class="my-2 form-outline align-items-center">
+            <label class="col form-label" for="showmadon">Mã đơn: </label>
+            <input type="text" id="showmadon" class="col form-control" value="<?php echo $madon ?>" disabled />
+        </div>
+        -->
+
+    
+    <div class="row align-items-end justify-content-end">
+        <!-- Check-in input -->
+        <div class="col-12 col-sm-6 col-lg-2 form-outline">
+            <label class="form-label" for="checkinDate">Ngày check-in</label>
+            <input type="date" id="checkinDate" name="date" class="form-control" value="2022-01-01" />
+        </div>
+
+        <!-- Check-out input -->
+        <div class="col-12 col-sm-6 col-lg-2 form-outline">
+            <label class="col form-label" for="checkoutDate">Ngày check-out</label>
+            <input type="date" id="checkoutDate" name="date" class="col form-control" value="" />
+        </div>
+
+        <!-- Số giường input -->
+        <div class="col-12 col-sm-6 col-lg form-outline">
+            <label class="form-label" for="soGiuong">Số giường: </label>
+            <input type="number" id="soGiuong" class="form-control" placeholder="Tất cả" min="0" max="5" onchange=""/>
+
+        </div>
+
+        <!-- Số khách tối đa input -->
+        <div class="col-12 col-sm-6 col-lg form-outline">
+            <label class="form-label" for="soKhach">Số khách tối đa: </label>
+            <input type="number" id="soKhach" class="form-control" placeholder="10" min="0" max="10" onchange=""/>
+        </div>
+
+        <div class="col-5 col-sm-2 col-lg-1 p-0 mt-2 ">
+            <input class="btn btn-primary m-0" type="submit" value="Search"/> 
+        </div>
+        
+    </div>
+    <!--
+    <button type="button" form="bill" id="btnSubmit" class="col-2 btn text-white" onclick="purchaseSubmit()"
+        style="border-radius: 8rem; padding: 0.75rem 2rem; background: #80ff80;">Thanh toán</button>
+    -->
+</form>
+
+<div class="row mb-1 align-items-center justify-content-end">
+
+</div>
+
+<script src="../public/js/currentDate.js"></script>
