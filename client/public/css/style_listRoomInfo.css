@@ -155,9 +155,9 @@
 }
 
 .card-text {
-    padding: 10px 15px;
+    padding: 5px 8px;
     background: #fff;
-    font-size: 20px;
+    font-size: 16px;
     color: #636262;
 }
 
@@ -219,6 +219,7 @@
 .text-center{
     margin-bottom: 0;
 }
+
 .best-selling-row{
     margin: 0 5rem 0 5rem;
 }
