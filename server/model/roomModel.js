@@ -3,7 +3,7 @@ const db = require("../db");
 exports.getAllRoomsInfo = async () => {
   try {
     //Lấy data từ db => Model
-    const query = ' Select * from "PHONG" ORDER BY "MAPHONG" ASC';
+    const query = ' Select * from "PHONG" as p JOIN "LOAIPHONG" as lp ON p."LOAIPHONG"=lp."MALOAI" ORDER BY "MAPHONG" ASC';
 
     //Bất đồng bộ
     const data = await db.any(query);
@@ -18,7 +18,7 @@ exports.getAllRoomsInfo = async () => {
 exports.getRoomInfoById = async (id) => {
   try {
     //Lấy data từ db => Model
-    const query = ' Select * from "PHONG" where "MAPHONG" = $1';
+    const query = ' Select * from "PHONG" as p JOIN "LOAIPHONG" as lp ON p."LOAIPHONG"=lp."MALOAI" where "MAPHONG" = $1';
 
     //Bất đồng bộ
     const data = await db.any(query, [id]);
