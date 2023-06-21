@@ -33,3 +33,9 @@ html {
 .liked:hover {
   background-color: #d92efc !important;
 }
+#updateTicketInfoForm .carousel-indicators {
+  position: relative;
+  right: 0;
+  left: 0px;
+  margin: 10px auto 0;
+}

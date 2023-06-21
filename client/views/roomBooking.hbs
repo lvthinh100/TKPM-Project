@@ -1,0 +1,259 @@
+<div
+  class="modal fade"
+  id="ticketInfoModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg ticket-info">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Phiếu Check in</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        
+      </div>
+      <div class="modal-header">
+        <div class="row">
+          <span class="col-md-6 fs-5 d-block " >Phòng:  <span class="ticket-room"></span> </span>
+          <span class="col-md-6 fs-5 d-block " >CheckIn: <span class="ticket-checkIn"></span>  </span>
+          <span class="col-md-6 fs-5 d-block " >Mã phiếu: <span class="ticket-id"></span>  </span>
+          <span class="col-md-6 fs-5 d-block " >CheckOut: <span class="ticket-checkOut"></span>  </span>
+        </div>
+      </div>
+      <div class="modal-body">
+          <form id="updateTicketInfoForm">
+              
+              <div id="carouselExampleIndicators" class="carousel carousel-dark slide z-3">
+                  
+                  <div class="carousel-inner ticket-users">
+                    <div class="carousel-item active">
+                      <div class="row">
+                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
+                        <div class="col-md-6">
+                          <label class="labels">Tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Họ và tên"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">CMND</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">SDT</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">Địa chỉ</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <div class="row">
+                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
+                        <div class="col-md-6">
+                          <label class="labels">Tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Họ và tên"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">CMND</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">SDT</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">Địa chỉ</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <div class="row">
+                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
+                        <div class="col-md-6">
+                          <label class="labels">Tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Họ và tên"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">CMND</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">SDT</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="labels">Địa chỉ</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="CMND"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <button type="button" class="btn btn-primary">Check In</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  
+  <h1>This is room booking</h1>
+  <ul class="nav nav-tabs nav-justified mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="ex-with-icons-tab-1"
+        data-bs-toggle="tab"
+        href="#ex-with-icons-tabs-1"
+        role="tab"
+        aria-controls="ex-with-icons-tabs-1"
+        aria-selected="true"
+      ><i class="fas fa-circle-user fa-fw me-2"></i>All</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="ex-with-icons-tab-2"
+        data-bs-toggle="tab"
+        href="#ex-with-icons-tabs-2"
+        role="tab"
+        aria-controls="ex-with-icons-tabs-2"
+        aria-selected="false"
+      ><i class="fas fa-chalkboard-user fa-fw me-2"></i>Not Check-in</a>
+    </li>
+
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="ex-with-icons-tab-3"
+        data-bs-toggle="tab"
+        href="#ex-with-icons-tabs-3"
+        role="tab"
+        aria-controls="ex-with-icons-tabs-3"
+        aria-selected="false"
+      ><i class="fas fa-chalkboard-user fa-fw me-2"></i>Checked in</a>
+    </li>
+  </ul>
+
+  {{! Tab content }}
+
+  <div class="tab-content booking" id="ex-with-icons-content">
+    <div
+      class="tab-pane fade show active"
+      id="ex-with-icons-tabs-1"
+      role="tabpanel"
+      aria-labelledby="ex-with-icons-tab-1"
+    >
+      <div class="container">
+        <h1>All Ticket</h1>
+        {{> BookingTable tickets=tickets}}
+
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="ex-with-icons-tabs-2"
+      role="tabpanel"
+      aria-labelledby="ex-with-icons-tab-2"
+    >
+      <div class="container">
+        <h1>Not Checked in ticket</h1>
+        {{> BookingTable}}
+        
+      </div>
+    </div>
+
+    <div
+      class="tab-pane fade"
+      id="ex-with-icons-tabs-3"
+      role="tabpanel"
+      aria-labelledby="ex-with-icons-tab-3"
+    >
+      <div class="container">
+        <h1>Checked in ticket</h1>
+        {{> BookingTable}}
+        
+      </div>
+    </div>
+  </div>
+
+</div>

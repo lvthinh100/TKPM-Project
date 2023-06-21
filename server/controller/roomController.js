@@ -32,6 +32,24 @@ exports.getRoomById = catchAsync(async (req, res) => {
   });
 });
 
+exports.getMaxIDRoom = catchAsync(async (req, res) => {
+  const { floor } = req.params;
+
+  const query = req.query;
+  console.log(query);
+
+  const searchFloor = floor + '%';
+  console.log(searchFloor);
+
+  const data = await roomModel.getMaxIDRoomByFloor(searchFloor);
+
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
+});
+
 exports.createRoom = catchAsync(async (req, res, next) => {
   const data = req.body;
 
