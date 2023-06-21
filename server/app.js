@@ -18,8 +18,8 @@ const GlobalErrorHandler = require("./controller/errorController");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const accountRoutes = require("./routes/accountRoutes");
-
 const RoomRoutes = require("./routes/RoomRoutes");
+const bookingTicketRoutes = require("./routes/bookingTicketRoutes");
 
 
 const app = express();
@@ -75,8 +75,8 @@ app.use((req, res, next) => {
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
-
 app.use("/api/room", RoomRoutes);
+app.use("/api/bookingTicket", bookingTicketRoutes);
 
 
 //Global error handler
