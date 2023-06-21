@@ -1,3 +1,3 @@
-exports.renderProfilePage = async (req, res) => {
+exports.renderProfilePage = (req, res) => {
   return res.render("userProfile");
 };

@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search ticket"
+    aria-label="Search ticket"
+    aria-describedby="button-addon2"
+  />
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    id="button-addon2"
+  >Search</button>
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    id="button-addon3"
+  >Reset</button>
+</div>
+<table class="table table-hover table-striped table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Mã phiếu</th>
+      <th scope="col">Mã Khách Hàng</th>
+      <th scope="col">Tên Khách Đặt</th>
+      <th scope="col">Phòng</th>
+      <th scope="col">Check in</th>
+      <th scope="col">Check out</th>
+      <th scope="col">Khách</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tickets}}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ticketId}}</td>
+        <td>{{userId}}</td>
+        <td>{{userName}}</td>
+        <td>{{room}}</td>
+        <td>{{checkIn}}</td>
+        <td>{{checkOut}}</td>
+        <td>{{num}}</td>
+        <td>{{status}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary btn-checkIn"
+            data-bs-toggle="modal"
+            data-bs-target="#ticketInfoModal"
+            data-ticket="{{ticketId}}"
+          >
+            Check in
+          </button>
+          <button class="btn btn-primary">Check out</button>
+        </td>
+      </tr>
+    {{/each}}
+
+  </tbody>
+</table>
