@@ -5,7 +5,6 @@
     <h3>{{message}}</h3>
     {{/if}}
     -->
-    {{> searchingRoom}}
     
     <div class="container" style="padding-top:2em">
         <div class="m-0 pl-3 pt-0 pb-3 text-center h2"> 
@@ -20,7 +19,7 @@
 
         <div class="row best-selling-row">
             {{#each listRoom}}
-            <div class="col-md-3 col-margin item-container" id="{{this.MAPHONG}}">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 col-margin item-container" id="{{this.MAPHONG}}">
                 <div class="card-sl">
                     <div class="card-image">
                         <img src="{{this.img_url}}" />

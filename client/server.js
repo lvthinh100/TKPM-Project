@@ -23,6 +23,9 @@ const bookingRoomRoutes = require("./router/bookingRoomRoutes");
 const listInvoiceRoutes = require("./router/listInvoiceRoutes");
 const detailInvoiceRoutes = require("./router/detailInvoiceRoutes");
 
+const listRoomForGuessRoutes = require("./router/listRoomForGuessRoutes");
+const checkoutRoutes = require("./router/checkoutRoutes");
+
 
 const app = express();
 
@@ -68,6 +71,9 @@ app.use("/addNewRoom", addNewRoomRoutes);
 app.use("/bookingRoom", bookingRoomRoutes);
 app.use("/listInvoice", listInvoiceRoutes);
 app.use("/detailInvoice", detailInvoiceRoutes);
+
+app.use("/listRoomForGuess", listRoomForGuessRoutes);
+app.use("/checkout", checkoutRoutes);
 
 
 app.all("*", (req, res, next) => {
