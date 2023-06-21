@@ -5,6 +5,8 @@ exports.renderDetailRoomInfoPage = async (req, res) => {
 
   const { data } = await api.getRoomById(req.query.id);
 
+  console.log(data.data[0])
+
   // Trả về detailRoomInfoPage
   res.render("detailRoomInfoPage", {
     template: { title: "Test" },

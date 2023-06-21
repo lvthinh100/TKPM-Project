@@ -1,9 +1,9 @@
 const db = require("../db");
 
-exports.getAllRoomsInfo = async () => {
+exports.getAllInvoiceInfo = async () => {
   try {
     //Lấy data từ db => Model
-    const query = ' Select * from "PHONG" as p JOIN "LOAIPHONG" as lp ON p."LOAIPHONG"=lp."MALOAI" ORDER BY "MAPHONG" ASC';
+    const query = 'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" ORDER BY "NGAYTHANHTOAN" DESC;';
 
     //Bất đồng bộ
     const data = await db.any(query);
@@ -14,36 +14,22 @@ exports.getAllRoomsInfo = async () => {
   }
 };
 
-//get room information by id room
-exports.getRoomInfoById = async (id) => {
+//get invoice information by id
+exports.getInvoiceInfoById = async (id) => {
   try {
     //Lấy data từ db => Model
-    const query = ' Select * from "PHONG" as p JOIN "LOAIPHONG" as lp ON p."LOAIPHONG"=lp."MALOAI" where "MAPHONG" = $1';
-
+    const query = 'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" where hd."MAHOADON" = $1;'
+    
     //Bất đồng bộ
     const data = await db.any(query, [id]);
-
+    console.log(data);
     return data;
   } catch (err) {
     throw err;
   }
 };
 
-//get max idroom by floor
-exports.getMaxIDRoomByFloor = async (floor) => {
-  try {
-    //Lấy data từ db => Model
-    const query = 'select max("MAPHONG") from "PHONG" where "MAPHONG" like $1';
-
-    //Bất đồng bộ
-    const data = await db.any(query, [floor]);
-
-    return data.max;
-  } catch (err) {
-    throw err;
-  }
-};
-
+/*
 //create new room
 exports.createNewRoom = async (data) => {
   try {
@@ -120,3 +106,4 @@ exports.updateRoomInfo = async (dataUpdated) => {
     throw err;
   }
 };
+*/
