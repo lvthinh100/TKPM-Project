@@ -1,52 +1,90 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">QLKS</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav w-100">
-        <li class="nav-item">
-          {{#if user}}
-            <a
-              class="nav-link active"
-              aria-current="page"
-              href="/favorites"
-            >Favorite</a>
-          {{/if}}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/rooms">All rooms</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">All About</a>
-        </li>
-        <li class="nav-item d-block ms-auto">
+<link rel="stylesheet" href="../../public/css/style_header.css">
+<div class="navbar-container">
+    <nav class="navbar navbar-secondary navbar-color ">
+        <div class="container-fluid ">
+            <div class="meunu">
 
-          {{! Co user thi ra logout khong co thi ra auth }}
-          {{#if user}}
-            <form action="/auth/logout" method="post" class="m-0">
-              <span>Hello {{user.name}} </span>
-              <input
-                class="btn btn-primary ms-1"
-                type="submit"
-                value="Logout"
-              />
-            </form>
-          {{else}}
-            <a class="btn btn-primary" href="/auth">Login</a>
+                <div id="mySidenav" class="sidenav">
+                    <div class="close-btn-container">
+                        <i id="close-nav-btn" class="fas fa-bars"></i>
+                    </div>
+                    <a href="/listRoomInfo">Quản lý phòng</a>
+                    <a href="/listInvoice">Quản lý hóa đơn</a>
+                    <a href="/addNewRoom">Thêm mới phòng</a>
 
-          {{/if}}
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+                </div>
+                <button class="nav-menu">
+                    <i id="menu-icon" class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <div class="d-flex" style="flex-wrap: nowrap; align-items:center">
+                                <div class="nav-item" style="margin-right: 1em;">
+                                    <a href="/home">
+                                        <img src="../../public/image/logo.png" alt="" style="width: 40px; height: 40px">
+                                    </a>
+                                </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/home"><strong
+                                            style="color: #475D8F; white-space: nowrap;">QUẢN LÝ KHÁCH SẠN</strong></a>
+
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-6 text-center">
+                        <div class="row height d-flex justify-content-center align-items-center">
+                            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-1">
+
+                                <div class="input-group">
+                                    <input type="search" placeholder="Tìm kiếm đặt phòng"
+                                        aria-describedby="button-addon1"
+                                        class="rounded rounded-pill form-control border-0 bg-light search-field"
+                                        id="search-key">
+                                    <div class="input-group-append">
+                                        <button id="search-product-btn" type="submit"
+                                            class="btn btn-link text-primary search-items"><i
+                                                class="fa fa-search"></i></button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-3 justify-content-center align-items-center">
+                        <div class="d-flex align-items-end justify-content-end h-100">
+                            {{#if user}}
+                            <form action="/auth/logout" method="post" class="m-0">
+                                <span>Hello {{user.name}} </span>
+                                <input class="btn btn-primary ms-1" type="submit" value="Logout" />
+                            </form>
+                            {{else}}
+                            <button type="button" class="btn me-3 sign-up-btn h-100">
+                                <i class="fa fa-user-plus" style="padding-right: 0.5rem;"></i>Đăng kí
+                            </button>
+                            <button type="button" class="btn me-3 sign-in-btn h-100">
+                                <i class="fa fa-arrow-right" style="padding-right: 0.5rem;"></i>Đăng nhập
+                            </button>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+
+{{!-- This is pop up place--}}
+<script src="../../public/script/script_header.js"></script>

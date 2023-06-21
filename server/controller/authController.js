@@ -48,8 +48,8 @@ exports.register = catchAsync(async (req, res, next) => {
   if (account) return next(new AppError(401, "Username exists"));
   if (phone.length < 10)
     return next(new AppError(401, "Phone number not valid"));
-  if (password !== confirm)
-    return next(new AppError(401, "Incorrect confirm password"));
+  //if (password !== confirm)
+    //return next(new AppError(401, "Incorrect confirm password"));
   //3.Generate Id and hash password
   const accountId = IdGenerator("TK");
   const userId = IdGenerator("KH");
