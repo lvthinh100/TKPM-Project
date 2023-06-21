@@ -1,0 +1,63 @@
+<body>
+    <link rel="stylesheet" href="../public/css/style_listRoomInfo.css">
+    <link rel="stylesheet" href="../public/css/style_listRoomForGuess.css">
+
+    {{> searchingRoom}}
+    {{> bookingRoom}}
+
+    <div class="container pt-4">
+        <div class="m-0 pl-3 pt-0 pb-3 text-center h2">
+            ĐẶT PHÒNG
+        </div>
+
+        <fieldset class="row best-selling-row">
+            {{#each listRoom}}
+            <label class="col-12 col-md-6 col-lg-4 col-xl-3 col-margin item-container" id="{{this.MAPHONG}}">
+                <div class="card card-sl p-1 btn bg-white btn-outline-info text-dark" data-loaiphong="{{this.LOAIPHONG}}"
+                    data-sogiuong="{{this.SOGIUONG}}" data-sokhach="{{this.SOKHACHTOIDA}}" onclick="updateForm()">
+                    <input type="checkbox" class="checkbox-input form-check-input" name="" id="">
+                    <div class="card-image">
+                        <img src="{{this.img_url}}" data-img="{{this.IMAGE}}" />
+                    </div>
+
+                    <div class="card-heading h-3 text-center">
+                        PHÒNG {{this.MAPHONG}}
+                    </div>
+                    <div class="card-text text-start">
+                        Loại phòng: {{this.LOAIPHONG}}
+                    </div>
+                    <div class="card-text text-start">
+                        Tầng: {{this.TANG}}
+                    </div>
+                    <div class="card-text text-start">
+                        Số giường: {{this.SOGIUONG}}
+                    </div>
+                    <div class="card-text text-start">
+                        Số khách tối đa: {{this.SOKHACHTOIDA}}
+                    </div>
+                    <div class="card-text text-start">
+                        Tình trạng: {{this.TINHTRANG}}
+                    </div>
+                    <div class="card-text text-start" hidden="true">
+                        Mô tả: {{this.MOTA}}
+                    </div>
+                    <div class="card-text text-left" hidden="true">
+                        Ghi chú: {{this.GHICHU}}
+                    </div>
+                    <hr>
+                    <div class="card-text btn btn-info mb-2 " data-bs-toggle="modal" data-bs-target="#Modal"
+                        onclick="showInfoRoom({{this.MAPHONG}})">
+                        Thông tin chi tiết
+                    </div>
+                </div>
+            </label>
+            {{/each}}
+            </field>
+    </div>
+
+    {{> modalInfoRoom}}
+
+
+    <script src="../public/script/script_searchingRoom.js"></script>
+    <script src="../public/script/script_bookingRoom.js"></script>
+</body>
