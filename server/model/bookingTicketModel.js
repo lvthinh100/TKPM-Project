@@ -71,12 +71,26 @@ exports.updateStatusCheckin = async (id, data) => {
   }
 }
 
-exports.checkExitsUser = async (id) => {
+exports.findIdUserTTLT = async (id, room, iduser) => {
   try {
-    const query = ` Select * from "KHACHHANG"
-                    where  "MAKHACHHANG" = $1`;
-    const newdata = await db.any(query, id);
+    const query = ` Select "MADATPHONG", "MAPHONG"
+                    from "CT_LUUTRU"
+                    where  "MADATPHONG" = $1 and "MAPHONG" = $2 and "MAKHACHHANG" = $3`;
+    const newdata = await db.any(query, [id, room, iduser]);
     
+    return (newdata);
+  } catch (err) {
+    throw err;
+  }
+}
+
+exports.createStatusLL = async (id, room, data) => {
+  try {
+    const query = ` INSERT INTO "CT_LUUTRU"(
+                      "MADATPHONG", "MAPHONG", "MAKHACHHANG")
+                      VALUES ($1, $2, $3) returning "MADATPHONG", "MAPHONG"; `;
+    const newdata = await db.any(query, [id, room, data]);
+
     return (newdata);
   } catch (err) {
     throw err;

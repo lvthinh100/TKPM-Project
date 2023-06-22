@@ -75,7 +75,6 @@ exports.updateCustomerById = catchAsync(async (req, res) => {
 
   // data_f la mảng 1 phần tử [{}]
   let data_f = await userModel.getOneById(id);
-  // console.log(newData);
 
   // update 1 truong
   const attri = ["TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI"];

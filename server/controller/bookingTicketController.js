@@ -60,18 +60,34 @@ exports.updateStatusById = catchAsync(async (req, res) => {
 exports.updateInforCheckInByIdRoom = catchAsync(async (req, res) => {
   //----------
   const { id } = req.params;
-  const query = req.query// lay room(MAPHONG)
+  const query = req.query // lay room(MAPHONG)
   const data = req.body;
-  // const newData = await bookingTicketModel.updateInforCheckIn(id, query, data);
 
-  const newData = await bookingTicketModel.checkExitsUser(id);
-  // if (newData.length() != 0)
-      // return (newData);
-  console.log(newData.length);
+  const status = await bookingTicketModel.findIdUserTTLT(id, query.room, data.MAKHACHHANG);
+
+  if (status.length != 0){
+    let data_f = await userModel.getOneById(data.MAKHACHHANG);
+    // update 1 truong
+    const attri = ["TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI"]; // update thoong tin KH
+    for (let i of attri) {
+      if (String(data[i]) != "undefined") {
+        data_f[0][i] = data[i];
+      }
+    }
+    newuser = await userModel.updateOne(data_f[0]);
+    dataNewLL = status
+    dataNewLL.push({'user':newuser})
+
+  }
+  else{ // Tao moi KH 
+    newuser = await userModel.createOne(data)
+    dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data.MAKHACHHANG)
+    dataNewLL.push({'user':newuser})
+  }
 
   res.status(200).json({
     status: "success",
-    // data: newData,
+    dataa: dataNewLL
   });
 
 });
