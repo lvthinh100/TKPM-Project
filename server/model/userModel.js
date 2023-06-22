@@ -18,15 +18,17 @@ exports.createOne = async (data) => {
   try {
     const query = ` INSERT INTO "KHACHHANG"(
           "MAKHACHHANG", "TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI")
-          VALUES ($1, $2, $3, $4, $5, $6) returning *; `;
+          VALUES ($1, $2, $3, $4, $5, $6) 
+          returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone, 
+           "DIACHI" as address, "MAKHACHHANG" as userId; `;
 
     const newData = await db.one(query, [
-      data.MAKHACHHANG,
-      data.TENKHACHHANG,
-      data.LOAIKHACH,
-      data.SODIENTHOAI,
-      data.CMND,
-      data.DIACHI,
+      data.id,
+      data.name,
+      data.type,
+      data.phone,
+      data.cmnd,
+      data.address,
     ]);
 
     return newData;
@@ -70,15 +72,17 @@ exports.updateOne = async (data) => {
     const query = ` 
           UPDATE "KHACHHANG" 
           SET "TENKHACHHANG"=($2), "LOAIKHACH"=$3, "SODIENTHOAI"=$4, "CMND"=$5 , "DIACHI"=$6
-          WHERE "MAKHACHHANG"=$1  returning *; `;
+          WHERE "MAKHACHHANG"=$1  
+          returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone, 
+          "DIACHI" as address, "MAKHACHHANG" as userId; `;
 
     const newData = await db.one(query, [
-      data.MAKHACHHANG,
-      data.TENKHACHHANG,
-      data.LOAIKHACH,
-      data.SODIENTHOAI,
-      data.CMND,
-      data.DIACHI,
+      data.id,
+      data.name,
+      data.type,
+      data.phone,
+      data.cmnd,
+      data.address,
     ]);
 
     return newData;
