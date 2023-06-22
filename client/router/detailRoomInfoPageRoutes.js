@@ -4,5 +4,6 @@ const detailRoomInfoPageController = require("../controller/detailRoomInfoPageCo
 const router = express.Router();
 
 router.get("/", detailRoomInfoPageController.renderDetailRoomInfoPage);
+router.post("/", detailRoomInfoPageController.deleteRoomById);
 
 module.exports = router;

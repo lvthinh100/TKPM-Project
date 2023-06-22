@@ -5,11 +5,11 @@
 </div>
 <div class="col-lg-10 border p-3 main-section bg-white">
     <div class="row m-0 product-detail" id="{{itemRoom.MAPHONG}}">
-        
-            <div class="col-lg-5 left-side-product-box pb-3">
-                <img src="public/image/{{itemRoom.IMAGE}}" class="p-3">
-            </div>
-            
+
+        <div class="col-lg-5 left-side-product-box pb-3">
+            <img src="public/image/{{itemRoom.IMAGE}}" class="p-3">
+        </div>
+
         <div class="col-lg-7">
             <div class="right-side-pro-detail border p-3 m-0">
                 <div class="m-0 pl-3 pt-0 pb-3 text-center h2">
@@ -23,6 +23,14 @@
                             </div>
                             <div class="col-lg-9">
                                 <p class="m-0 quantity-pro"> {{itemRoom.TENLOAI}} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <p class="m-0 p-0 bold-text">Đơn giá: </p>
+                            </div>
+                            <div class="col-lg-9">
+                                <p class="m-0 quantity-pro"> {{itemRoom.DONGIA}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -73,6 +81,7 @@
                                 <p class="m-0 quantity-pro"> {{itemRoom.GHICHU}} </p>
                             </div>
                         </div>
+                        
                         <hr class="m-0 pt-2 mt-2">
                     </div>
                     <!--
@@ -92,8 +101,10 @@
                                     phòng</a>
                             </div>
                             <div class="col-lg-6">
-                                <a id="payment-now" class="btn w-100" style="background-color: #40ea92;">Xóa phòng</a>
+                                <a id="delete-room" class="btn w-100" style="background-color: #40ea92;">Xóa
+                                    phòng</a>
                             </div>
+
                         </div>
                     </div>
 

@@ -18,27 +18,26 @@ exports.handleAddNewRoom = async (req, res) => {
 
   const { data } = await api.getMaxIDRoom(req.body.floor);
 
-  console.log(data.data);
-
-  /*
-  const data = {
-    maphong: "109",
-    loaiphong: "DONVIP",
-    tang: 1,
-    sogiuong: 3,
-    sokhachtoida: 2,
-    dientich: 140,
+  const idRoom = String(parseInt(data.data[0].max)+1)
+  console.log(idRoom);
+  
+  const dataRoom = {
+    maphong: idRoom,
+    loaiphong: req.body.typeRoom,
+    tang: req.body.floor,
+    sogiuong: req.body.numBed,
+    sokhachtoida: req.body.maxPeople,
+    dientich: req.body.areaRoom,
     tinhtrang: "TRONG",
-    mota: "Phòng 103 với nhiều giường",
-    ghichu: "Ghi chú của 103",
+    mota: req.body.description,
+    ghichu: req.body.remark,
   };
-
-  const resData = await api.createRoom(data);
+  console.log(dataRoom)
+  
+  const { resData } = await api.createRoom(dataRoom);
 
   console.log(resData);
   
 
-  res.render("addNewRoomPage", {
-    template: { title: "Thêm phòng mới" },
-  });*/
+  this.renderAddNewRoomPage;
 };

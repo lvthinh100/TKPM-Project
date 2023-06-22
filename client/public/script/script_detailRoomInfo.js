@@ -1,3 +1,14 @@
+function convertToVND(value) {
+  try {
+    value = value.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+
+    return value
+  } catch (error) {
+    return value
+  }
+  
+}
+
 $('#add-to-cart').click(function()
 {
     // console.log('hahaha')
@@ -68,3 +79,31 @@ $('#payment-now').click(function(e)
 
 })
 
+
+$('#delete-room').click(function(e)
+{
+  const id = $('.product-detail').attr('id');
+
+  console.log(id);
+
+  $.ajax({
+    method: 'post',
+    url: '/detailRoomInfo',
+    data: {id: id,},
+    success: function(data)
+    {
+        console.log(data.id)
+
+        window.location.href = '/listRoomInfo'
+        // if(data.name){
+        //     $('.noti-content').html(`Thêm mặt hàng thành công. <br>Chi tiết: ${data.name} - Số lượng: ${quantity}`)
+        //   }
+        //   else{
+        //     $('.noti-content').html(data)
+        //   }
+        // console.log(data)
+        // $('.pop-up').removeClass('hidden')
+
+    }
+})
+});
