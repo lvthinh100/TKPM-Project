@@ -21,12 +21,12 @@ exports.createOne = async (data) => {
           VALUES ($1, $2, $3, $4, $5, $6) returning *; `;
 
     const newData = await db.one(query, [
-      data.id,
-      data.name,
-      data.type,
-      data.phone,
-      data.cmnd,
-      data.address,
+      data.MAKHACHHANG,
+      data.TENKHACHHANG,
+      data.LOAIKHACH,
+      data.SODIENTHOAI,
+      data.CMND,
+      data.DIACHI,
     ]);
 
     return newData;
