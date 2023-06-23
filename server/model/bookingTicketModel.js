@@ -4,9 +4,9 @@ exports.getAllTicketsInfo = async () => {
   try {
     //Lấy data từ db => Model
     // const query = ` Select a."MADATPHONG", a."MAKHACHHANG", c."TENKHACHHANG", a."NGAYDATPHONG", a."NGAYCHECKIN", a."NGAYCHECKOUT", b."MAPHONG", a."SLKHACH", a."TRANGTHAI"
-    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c
     //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    const query = ` Select * from "KHACHHANG" `;
+    const query = ` Select * from "PHIEUDATHANG" `;
 
     //Bất đồng bộ
     const data = await db.any(query);
@@ -26,7 +26,7 @@ exports.getInfoByTicket = async (id, room) => {
     //Bất đồng bộ
     const data = await db.any(query1, [id, room]);
 
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
@@ -39,11 +39,11 @@ exports.getInfoByUser = async (id, room) => {
                     where a."MAKHACHHANG" = b."MAKHACHHANG" and a."MADATPHONG" = $1 and a."MAPHONG" = $2 `;
     const data = await db.any(query2, [id, room]);
 
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.updateStatusOne = async (id, data) => {
   try {
@@ -52,11 +52,11 @@ exports.updateStatusOne = async (id, data) => {
                     WHERE "MADATPHONG" = $2 returning *;`;
     const newdata = await db.any(query, [data.TRANGTHAI, id]);
 
-    return (newdata);
+    return newdata;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.updateStatusCheckin = async (id, data) => {
   try {
@@ -65,11 +65,11 @@ exports.updateStatusCheckin = async (id, data) => {
                     WHERE "MADATPHONG" = $2 returning *;`;
     const newdata = await db.any(query, [data.TRANGTHAI, id]);
 
-    return (newdata);
+    return newdata;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.findIdUserTTLT = async (id, room, iduser) => {
   try {
@@ -77,12 +77,12 @@ exports.findIdUserTTLT = async (id, room, iduser) => {
                     from "CT_LUUTRU"
                     where  "MADATPHONG" = $1 and "MAPHONG" = $2 and "MAKHACHHANG" = $3`;
     const newdata = await db.any(query, [id, room, iduser]);
-    
-    return (newdata);
+
+    return newdata;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.createStatusLL = async (id, room, data) => {
   try {
@@ -91,8 +91,8 @@ exports.createStatusLL = async (id, room, data) => {
                       VALUES ($1, $2, $3) returning "MADATPHONG", "MAPHONG"; `;
     const newdata = await db.any(query, [id, room, data]);
 
-    return (newdata);
+    return newdata;
   } catch (err) {
     throw err;
   }
-}
+};

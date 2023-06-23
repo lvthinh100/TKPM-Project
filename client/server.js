@@ -25,6 +25,7 @@ const detailInvoiceRoutes = require("./router/detailInvoiceRoutes");
 
 const listRoomForGuessRoutes = require("./router/listRoomForGuessRoutes");
 const checkoutRoutes = require("./router/checkoutRoutes");
+const reportRoutes = require("./router/reportRoutes");
 
 const app = express();
 
@@ -62,11 +63,11 @@ app.use("/getUserInfo", getUserInfoByIdRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
+app.use("/report", reportRoutes);
 
 app.use("/listRoomInfo", listRoomInfoRoutes);
 app.use("/detailRoomInfo", detailRoomInfoRoutes);
 app.use("/addNewRoom", addNewRoomRoutes);
-
 
 app.use("/roomBooking", roomBookingRoutes);
 
