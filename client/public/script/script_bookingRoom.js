@@ -18,6 +18,7 @@ function updateForm() {
     listRoom.map(x => {
         if (x.children[0].checked) {
             const phong = x.children[2].cloneNode(true);
+            phong.classList.remove('card-heading');
             phong.classList.add('card-text', 'float-start', 'mx-2');
             formBookingRoom.append(phong);
         }
