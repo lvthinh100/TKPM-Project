@@ -3,15 +3,29 @@ const db = require("../db");
 exports.getAllTicketsInfo = async () => {
   try {
     // // Lấy data từ db => Model
-    // const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName,
-    //                 a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
-    //                  a."SLKHACH" as numUser, a."TRANGTHAI" as status
-    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c
-    //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    const query = ` Select * from "KHACHHANG" `;
+    const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
+                    a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
+                     a."SLKHACH" as numUser, a."TRANGTHAI" as status
+                    from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+                    where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
+    // const query = ` Select * from "CT_LUUTRU" `;
 
     //Bất đồng bộ
     const data = await db.any(query);
+
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.checkStatusLL = async (id, room) => {
+  try {
+    const query = ` Select * from "CT_LUUTRU"
+                    where "MADATPHONG" = $1 and "MAPHONG" = $2 `;
+
+    //Bất đồng bộ
+    const data = await db.any(query, [id, room]);
 
     return data;
   } catch (err) {
@@ -94,6 +108,29 @@ exports.createStatusLL = async (id, room, data) => {
     const newdata = await db.any(query, [id, room, data]);
 
     return newdata;
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.changeAttribute = async (data1, data2) => {
+  try {
+    let Newdata = data2;
+    const attri1 = [
+      "TENKHACHHANG",
+      "LOAIKHACH",
+      "SODIENTHOAI",
+      "CMND",
+      "DIACHI",
+    ]; // update thoong tin KH
+    const attri2 = ["name", "type", "phone", "cmnd", "address"];
+    for (let i = 0; i < 5; i++) {
+      if (String(data2[attri2[i]]) == "undefined") {
+        Newdata[attri2[i]] = data1[attri1[i]];
+      }
+    }
+
+    return Newdata;
   } catch (err) {
     throw err;
   }

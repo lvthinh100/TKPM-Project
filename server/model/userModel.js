@@ -41,7 +41,9 @@ exports.createOne = async (data) => {
 exports.getOneById = async (id) => {
   try {
     //Lấy data từ db => Model
-    const query = ' Select * from "KHACHHANG"  Where "MAKHACHHANG" = $1 ';
+    const query = ` Select *
+                  from "KHACHHANG"  
+                  Where "MAKHACHHANG" = $1 `;
 
     //Bất đồng bộ
     const data = await db.any(query, [id]);
