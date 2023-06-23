@@ -1,5 +1,7 @@
 const db = require("../db");
 
+const IdGenerator = require("../utils/UIDGenerator");
+
 const table = "TAIKHOANKHACHHANG";
 const adminTable = "TAIKHOANADMIN";
 
@@ -50,7 +52,13 @@ exports.createOne = async (data) => {
       ` INSERT INTO "${table}"(
                 "MATAIKHOAN", "USERNAME", "PASSWORD", "NGAYLAP", "MAKHACHHANG")
                 VALUES ($1, $2, $3, $4, $5) returning *; `,
-      [data.id, data.username, data.password, data.createdAt, data.userId]
+      [
+        IdGenerator("TK"),
+        data.username,
+        data.password,
+        data.createdAt,
+        data.userId,
+      ]
     );
     return dbAccount;
   } catch (err) {

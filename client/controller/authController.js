@@ -71,6 +71,20 @@ exports.handleAdminLogin = async (req, res) => {
 exports.isLoggedIn = async (req, res, next) => {
   try {
     const { jwt } = req.cookies;
+    if (!jwt) return next();
+    const { data } = await api.getMe(req.headers.cookie);
+    res.locals.user = data.data;
+    req.user = data.data;
+    console.log(data.data);
+    next();
+  } catch (err) {
+    res.redirect("/auth/login");
+  }
+};
+
+exports.protected = async (req, res, next) => {
+  try {
+    const { jwt } = req.cookies;
     if (!jwt) return res.redirect("/auth/login");
     const { data } = await api.getMe(req.headers.cookie);
     res.locals.user = data.data;

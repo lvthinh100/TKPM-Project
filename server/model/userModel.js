@@ -1,4 +1,5 @@
 const db = require("../db");
+const IdGenerator = require("../utils/UIDGenerator");
 
 exports.getAll = async () => {
   try {
@@ -19,17 +20,17 @@ exports.createOne = async (data) => {
     const query = ` INSERT INTO "KHACHHANG"(
           "MAKHACHHANG", "TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI")
           VALUES ($1, $2, $3, $4, $5, $6) returning *; `;
-
+    const userId = IdGenerator("KH");
     const newData = await db.one(query, [
-      data.MAKHACHHANG,
-      data.TENKHACHHANG,
-      data.LOAIKHACH,
-      data.SODIENTHOAI,
-      data.CMND,
-      data.DIACHI,
+      userId,
+      data.name,
+      data.type,
+      data.phone,
+      data.cmnd,
+      data.address,
     ]);
 
-    return newData;
+    return { ...data, userId };
   } catch (err) {
     throw err;
   }
