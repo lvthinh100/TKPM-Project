@@ -1,4 +1,5 @@
 const db = require("../db");
+const IdGenerator = require("../utils/UIDGenerator");
 
 exports.getAll = async () => {
   try {
@@ -23,7 +24,7 @@ exports.createOne = async (data) => {
            "DIACHI" as address, "MAKHACHHANG" as userId; `;
 
     const newData = await db.one(query, [
-      data.id,
+      IdGenerator("KH"),
       data.name,
       data.type,
       data.phone,
@@ -70,7 +71,7 @@ exports.updateOne = async (data) => {
   try {
     //Lấy data từ db => Model
     const query = ` 
-          UPDATE "KHACHHANG" 
+          UPDATE "KHACHHANG"
           SET "TENKHACHHANG"=($2), "LOAIKHACH"=$3, "SODIENTHOAI"=$4, "CMND"=$5 , "DIACHI"=$6
           WHERE "MAKHACHHANG"=$1  
           returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone, 
