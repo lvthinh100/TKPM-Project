@@ -2,17 +2,17 @@ const db = require("../db");
 
 exports.getAllTicketsInfo = async () => {
   try {
-    // // Lấy data từ db => Model
-    // const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
-    //                 a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
-    //                  a."SLKHACH" as numUser, a."TRANGTHAI" as status
-    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
-    //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    const query = ` Select * 
-                    from "PHONG" a, "LOAIPHONG" b
-                    where a."LOAIPHONG" = b."MALOAI"` ;  
-    // const query = ` Select DISTINCT * 
-    //                 from "PHIEUDATPHONG" a, "KHACHHANG" b  
+    // Lấy data từ db => Model
+    const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
+                    a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
+                     a."SLKHACH" as numUser, a."TRANGTHAI" as status
+                    from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+                    where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
+    // const query = ` Select *
+    //                 from "PHONG" a, "LOAIPHONG" b
+    //                 where a."LOAIPHONG" = b."MALOAI"` ;
+    // const query = ` Select DISTINCT *
+    //                 from "PHIEUDATPHONG" a, "KHACHHANG" b
     //                 where  a."MAKHACHHANG" = b."MAKHACHHANG"  `;
 
     //Bất đồng bộ
@@ -146,9 +146,8 @@ exports.checkRoomExits = async (id, room, iduser) => {
     const query = ` Select * from "PHONG" where  "MAPHONG" = $1 `;
 
     const newdata = await db.any(query, [id, room, iduser]);
-    if (newdata.length > 0) 
-      return true
-    return false
+    if (newdata.length > 0) return true;
+    return false;
   } catch (err) {
     throw err;
   }
@@ -158,9 +157,8 @@ exports.checkBookingTicketExits = async (id) => {
     const query = ` Select * from "PHIEUDATPHONG" where  "MADATPHONG" = $1 `;
 
     const newdata = await db.any(query, [id]);
-    if (newdata.length > 0) 
-      return true
-    return false
+    if (newdata.length > 0) return true;
+    return false;
   } catch (err) {
     throw err;
   }
@@ -171,10 +169,10 @@ exports.searchTicket = async (data, status) => {
                     from "PHIEUDATPHONG" a, "KHACHHANG" b  
                     where  (a."MADATPHONG" like $1 or a."MAKHACHHANG" like $1 or b."TENKHACHHANG" LIKE $1) 
                     and a."MAKHACHHANG" = b."MAKHACHHANG" and a."TRANGTHAI" like $2 `;
-                    
+
     const newdata = await db.any(query, [data, status]);
-    
-    return newdata
+
+    return newdata;
   } catch (err) {
     throw err;
   }
