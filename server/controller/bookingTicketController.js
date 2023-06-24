@@ -25,20 +25,27 @@ exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   //Lấy dữ liệu được upload  
   // const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
 
+  checkRoom = await bookingTicketModel.checkRoomExits(query['room'])
+  if (checkRoom == false)
+    return next(new AppError(401, "Room not exist"));
+
+  checkBookingTicket = await bookingTicketModel.checkBookingTicketExits(id)
+  if (checkBookingTicket == false)
+    return next(new AppError(401, "Booking ticket not exist"));
+
   const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
   if (data.length == 0)
     return next(new AppError(401, "Accommodation information not exist"));
 
   const user = await bookingTicketModel.getInfoByUser(id, query['room']);
   data.push({'users':user})
-
+  console.log(data)
   //Gửi data lại thông qua res
   res.json({
     status: 200,
     message: "success",
     data: data
-  });
-  
+  }); 
 });
 
 exports.updateStatusById = catchAsync(async (req, res) => {
@@ -89,4 +96,25 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
     status: "success",
     // data: dataNewLL
   });
+});
+
+exports.searchBookingTicket = catchAsync(async (req, res, next) => {
+  //----------
+  const searchQuery = req.query.search;
+  let actualStr = decodeURIComponent(searchQuery)
+  let status = req.query.status;
+
+  actualStr = '%' + actualStr + '%'
+  status = status + '%'
+  data = await bookingTicketModel.searchTicket(actualStr, status)
+  console.log(actualStr)
+
+  if (data.length == 0)
+    return next(new AppError(404, "Not found"));
+  
+  res.status(200).json({
+    status: "success",
+    data: data
+  });
+
 });
