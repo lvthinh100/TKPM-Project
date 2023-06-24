@@ -1,5 +1,5 @@
 const catchAsync = require("../utils/catchAsync");
-// const AppError = require("../utils/AppError");
+const AppError = require("../utils/AppError");
 
 const bookingTicketModel = require("../model/bookingTicketModel");
 const userModel = require("../model/userModel");
@@ -18,28 +18,34 @@ exports.getAllTicket = catchAsync(async (req, res) => {
   });
 });
 
-exports.getStatusByIdRoom = catchAsync(async (req, res) => {
+exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   //----------
   const { id } = req.params;
   const query = req.query// lay room(MAPHONG)
   //Lấy dữ liệu được upload  
+  // const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
 
-  const data = await bookingTicketModel.getInfoByTicket(id, query['MAPHONG']);
+  checkRoom = await bookingTicketModel.checkRoomExits(query['room'])
+  if (checkRoom == false)
+    return next(new AppError(401, "Room not exist"));
 
-  const user = await bookingTicketModel.getInfoByUser(id, query['MAPHONG']);
+  checkBookingTicket = await bookingTicketModel.checkBookingTicketExits(id)
+  if (checkBookingTicket == false)
+    return next(new AppError(401, "Booking ticket not exist"));
 
-  data.push({'user':user})
-  //Xử lý data => Controller
+  const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
+  if (data.length == 0)
+    return next(new AppError(401, "Accommodation information not exist"));
 
-  console.log(user);
-
+  const user = await bookingTicketModel.getInfoByUser(id, query['room']);
+  data.push({'users':user})
+  console.log(data)
   //Gửi data lại thông qua res
   res.json({
     status: 200,
     message: "success",
     data: data
-  });
-  
+  }); 
 });
 
 exports.updateStatusById = catchAsync(async (req, res) => {
@@ -57,37 +63,58 @@ exports.updateStatusById = catchAsync(async (req, res) => {
 
 });
 
-exports.updateInforCheckInByIdRoom = catchAsync(async (req, res) => {
+exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
   //----------
   const { id } = req.params;
   const query = req.query // lay room(MAPHONG)
   const data = req.body;
+  checkStatusLL = await bookingTicketModel.checkStatusLL(id, query.room);
+  if (checkStatusLL.length == 0) 
+    return next(new AppError(401, "Accommodation information not exist"));
 
-  const status = await bookingTicketModel.findIdUserTTLT(id, query.room, data.MAKHACHHANG);
+  arr_user = []
+  for (let index = 0; index < data.length ; index++){
+    let status = await bookingTicketModel.findIdUserTTLT(id, query.room, data[index].id);
+    let checkExitsUser = await userModel.getOneById(data[index].id) 
 
-  if (status.length != 0){
-    let data_f = await userModel.getOneById(data.MAKHACHHANG);
-    // update 1 truong
-    const attri = ["TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI"]; // update thoong tin KH
-    for (let i of attri) {
-      if (String(data[i]) != "undefined") {
-        data_f[0][i] = data[i];
-      }
+    if (status.length == 0 && checkExitsUser.length == 0){ // Phiêu ko có user và user chưa tồn tại.
+      newuser = await userModel.createOne(data[index])
+      dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data[index].id)
     }
-    newuser = await userModel.updateOne(data_f[0]);
-    dataNewLL = status
-    dataNewLL.push({'user':newuser})
-
+    else{ // khi này user luon tôn tại
+      Newdata = await bookingTicketModel.changeAttribute(checkExitsUser[0], data[index])// update truong
+      newuser = await userModel.updateOne(Newdata)
+      dataNewLL = status
+      if (status.length == 0) // chưa có phieu
+        dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data[index].id)
+    }
+    arr_user.push(newuser)
   }
-  else{ // Tao moi KH 
-    newuser = await userModel.createOne(data)
-    dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data.MAKHACHHANG)
-    dataNewLL.push({'user':newuser})
-  }
+  dataNewLL.push({'users':arr_user})
 
   res.status(200).json({
     status: "success",
-    dataa: dataNewLL
+    // data: dataNewLL
+  });
+});
+
+exports.searchBookingTicket = catchAsync(async (req, res, next) => {
+  //----------
+  const searchQuery = req.query.search;
+  let actualStr = decodeURIComponent(searchQuery)
+  let status = req.query.status;
+
+  actualStr = '%' + actualStr + '%'
+  status = status + '%'
+  data = await bookingTicketModel.searchTicket(actualStr, status)
+  console.log(actualStr)
+
+  if (data.length == 0)
+    return next(new AppError(404, "Not found"));
+  
+  res.status(200).json({
+    status: "success",
+    data: data
   });
 
 });

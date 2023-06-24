@@ -72,23 +72,25 @@ exports.updateCustomerById = catchAsync(async (req, res) => {
   const { id } = req.params;
   //Lấy dữ liệu được upload
   const data = req.body;
+  const Newdata = data
 
   // data_f la mảng 1 phần tử [{}]
   let data_f = await userModel.getOneById(id);
 
   // update 1 truong
-  const attri = ["TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI"];
-  for (let i of attri) {
-    if (String(data[i]) != "undefined") {
-      data_f[0][i] = data[i];
+  const attri1 = ["TENKHACHHANG", "LOAIKHACH", "SODIENTHOAI", "CMND", "DIACHI"]; // update thoong tin KH
+  const attri2 = ["name", "type", "phone", "cmnd", "address"];
+  for (let i = 0; i < 5 ; i++){ 
+    if (String(data[attri2[i]]) == "undefined") {
+      Newdata[attri2[i]] = data_f[0][attri1[i]];
     }
   }
 
-  const newData = await userModel.updateOne(data_f[0]);
+  const newDataup = await userModel.updateOne(Newdata);
 
   res.status(200).json({
     status: "success",
-    data: newData,
+    data: newDataup
   });
 });
 
