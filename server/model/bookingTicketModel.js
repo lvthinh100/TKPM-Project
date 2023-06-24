@@ -2,15 +2,15 @@ const db = require("../db");
 
 exports.getAllTicketsInfo = async () => {
   try {
-    // // Lấy data từ db => Model
-    // const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName,
-    //                 a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
-    //                  a."SLKHACH" as numUser, a."TRANGTHAI" as status
-    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c
-    //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    const query = ` Select * 
-                    from "PHONG" a, "LOAIPHONG" b
-                    where a."LOAIPHONG" = b."MALOAI"`;
+    // Lấy data từ db => Model
+    const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
+                    a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
+                     a."SLKHACH" as numUser, a."TRANGTHAI" as status
+                    from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+                    where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
+    // const query = ` Select *
+    //                 from "PHONG" a, "LOAIPHONG" b
+    //                 where a."LOAIPHONG" = b."MALOAI"` ;
     // const query = ` Select DISTINCT *
     //                 from "PHIEUDATPHONG" a, "KHACHHANG" b
     //                 where  a."MAKHACHHANG" = b."MAKHACHHANG"  `;
