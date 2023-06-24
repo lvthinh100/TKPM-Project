@@ -46,7 +46,7 @@ function filter(x) {
   const invalid = checkGuess(x) || checkBed(x) || checkDate(x);
   if (invalid) {
     x.parentElement.classList.add("disabledbutton")
-    x.children[0].checked = false;
+    //x.children[0].checked = false;
   }
   else {
     x.parentElement.classList.remove("disabledbutton");
