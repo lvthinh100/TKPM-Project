@@ -25,21 +25,18 @@ exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   //Lấy dữ liệu được upload  
   // const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
 
-  checkRoom = await bookingTicketModel.checkRoomExits(query['room'])
+  checkRoom = await bookingTicketModel.checkRoomExits(id, query['room'])
   if (checkRoom == false)
-    return next(new AppError(401, "Room not exist"));
+    return next(new AppError(401, "Ticket room not exist"));
 
-  checkBookingTicket = await bookingTicketModel.checkBookingTicketExits(id)
-  if (checkBookingTicket == false)
-    return next(new AppError(401, "Booking ticket not exist"));
+  // checkBookingTicket = await bookingTicketModel.checkBookingTicketExits(id)
+  // if (checkBookingTicket == false)
+  //   return next(new AppError(401, "Booking ticket not exist"));
 
   const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
-  if (data.length == 0)
-    return next(new AppError(401, "Accommodation information not exist"));
 
   const user = await bookingTicketModel.getInfoByUser(id, query['room']);
   data.push({'users':user})
-  console.log(data)
   //Gửi data lại thông qua res
   res.json({
     status: 200,
@@ -100,14 +97,9 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
 
 exports.searchBookingTicket = catchAsync(async (req, res, next) => {
   //----------
-  const searchQuery = req.query.search;
-  let actualStr = decodeURIComponent(searchQuery)
-  let status = req.query.status;
+  const searchQuery = req.query;
 
-  actualStr = '%' + actualStr + '%'
-  status = status + '%'
-  data = await bookingTicketModel.searchTicket(actualStr, status)
-  console.log(actualStr)
+  data = await bookingTicketModel.searchTicket(searchQuery)
 
   if (data.length == 0)
     return next(new AppError(404, "Not found"));
