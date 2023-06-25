@@ -3,6 +3,10 @@ const exphbs = require("express-handlebars");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+
+// hbs helper
+const hbsHelpers = require("./utils/hbsHelper");
+
 //Route
 // const viewRoutes = require("./router/viewRoutes");
 const homeRoutes = require("./router/homeRoutes");
@@ -49,6 +53,7 @@ app.engine(
     extname: "hbs",
     layoutsDir: "views/layouts",
     defaultLayout: "index",
+    helpers: hbsHelpers,
   })
 );
 app.set("view engine", "hbs");

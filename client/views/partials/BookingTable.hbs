@@ -1,24 +1,48 @@
 <!-- Modal -->
-<div class="input-group mb-3">
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Search ticket"
-    aria-label="Search ticket"
-    aria-describedby="button-addon2"
-  />
-  <button
-    class="btn btn-outline-secondary"
-    type="button"
-    id="button-addon2"
-  >Search</button>
-  <button
-    class="btn btn-outline-secondary"
-    type="button"
-    id="button-addon3"
-  >Reset</button>
+<div class="container card p-3 my-4 w-100 shadow-sm">
+  <form id="searchTicketForm">
+    <div class="row align-items-end justify-content-center">
+      <!-- Số khách tối đa input -->
+      <div class="col-12 col-sm-6 col-lg form-outline">
+        <label class="form-label">Nhập thông tin tìm kiếm </label>
+        <div class="d-flex">
+          <input
+            class="form-control"
+            type="text"
+            name="text"
+            id="text"
+            placeholder="Nhập mã phiếu, mã khách hàng, tên khách hàng"
+          />
+        </div>
+      </div>
+
+      <!-- Check-out input -->
+      <div class="col-12 col-md-6 col-lg-2 form-outline">
+        <label class="col form-label" for="checkoutDate">Tình trạng phiếu</label>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="status"
+        >
+          <option value="SAPTOI">Sắp tới</option>
+          <option value="DANGSUDUNG">Đang sử dụng</option>
+          <option value="DASUDUNG">Đã sử dụng</option>
+          <option value="DAHUY">Đã hủy</option>
+          <option value="">Tất cả</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="col-2 btn btn-primary text-white btn-search__ticket"
+      >Tìm kiếm</button>
+    </div>
+  </form>
 </div>
-<table class="table table-hover table-striped table-bordered border-primary">
+
+<table
+  class="table table-hover table-striped table-bordered border-primary booking"
+>
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -33,17 +57,17 @@
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="bookingTicket__body">
     {{#each tickets}}
       <tr>
         <th scope="row">1</th>
-        <td>{{ticketId}}</td>
-        <td>{{userId}}</td>
-        <td>{{userName}}</td>
+        <td>{{ticketid}}</td>
+        <td>{{userid}}</td>
+        <td>{{username}}</td>
         <td>{{room}}</td>
-        <td>{{checkIn}}</td>
-        <td>{{checkOut}}</td>
-        <td>{{num}}</td>
+        <td>{{formatDate checkin}}</td>
+        <td>{{formatDate checkout}}</td>
+        <td>{{numuser}}</td>
         <td>{{status}}</td>
         <td>
           <button
@@ -51,7 +75,7 @@
             class="btn btn-primary btn-checkIn"
             data-bs-toggle="modal"
             data-bs-target="#ticketInfoModal"
-            data-ticket="{{ticketId}}"
+            data-ticket="{{ticketid}}"
           >
             Check in
           </button>

@@ -1,8 +1,6 @@
 const db = require("../db");
 const IdGenerator = require("../utils/UIDGenerator");
 
-const IdGenerator = require("../utils/UIDGenerator");
-
 const table = "TAIKHOANKHACHHANG";
 const adminTable = "TAIKHOANADMIN";
 

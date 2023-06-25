@@ -1,14 +1,16 @@
-exports.renderRoomBookingPage = (req, res) => {
-  const data = {
-    ticketId: "PHKHS12F",
-    userId: "KH12KD4D",
-    userName: "Lê Văn Thịnh",
-    checkIn: "25/02/2002",
-    checkOut: "27/02/2002",
-    room: 102,
-    num: 3,
-    status: "checked in",
-  };
+const api = require("../api/index");
+
+exports.renderRoomBookingPage = async (req, res) => {
+  // const data = {
+  //   ticketId: "PHKHS12F",
+  //   userId: "KH12KD4D",
+  //   userName: "Lê Văn Thịnh",
+  //   checkIn: "25/02/2002",
+  //   checkOut: "27/02/2002",
+  //   room: 102,
+  //   num: 3,
+  //   status: "checked in",
+  // };
 
   /*
     [{
@@ -19,9 +21,13 @@ exports.renderRoomBookingPage = (req, res) => {
       users: [ {name, cmnd, phone, address} ]
     }]
   */
-  const tickets = [data, data, data, data, data, data, data];
-
+  const { data } = await api.getAllBookingTicket();
   return res.render("roomBooking", {
-    tickets,
+    tickets: data.data,
+    helpers: {
+      dateFormat: () => {
+        return "Date";
+      },
+    },
   });
 };
