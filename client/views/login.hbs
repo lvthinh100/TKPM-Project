@@ -50,9 +50,9 @@
                     <span class="fw-bold">MyHotel</span>
                   </span>
                   <br />
-                  <span class="fst-italic d-block mb-2">Lorem ipsum dolor sit
-                    amet elit. Sapiente sit aut eos consectetur adipisicing.</span>
-                  <form action="/auth/login" method="post">
+                  <span class="fst-italic d-block mb-2">Đăng nhập với tư cách là
+                    một khách hàng của MyHotel.</span>
+                  <form class="user-login" action="/auth/login" method="post">
                     <label for="username">Tên tài khoản</label>
                     <div class="input-group col-lg-6 mb-2">
                       <div class="input-group-prepend">
@@ -95,14 +95,14 @@
                         class="form-control border border-3 bg-white border-start-0 border-md"
                       />
                     </div>
-                    {{#if error}}
-                      <span class="text-danger">{{message}}</span>
-                    {{/if}}
+                    <span class="text-danger user-message">
+
+                    </span>
                     <div class="d-grid">
                       <input
                         type="submit"
                         value="Log In"
-                        class="btn btn-primary"
+                        class="btn btn-primary m-0"
                       />
                     </div>
                   </form>
@@ -128,10 +128,13 @@
 
                   </span>
                   <br />
-                  <span class="fst-italic d-block mb-2">theo admin Lorem ipsum
-                    dolor sit amet elit. Sapiente sit aut eos consectetur
-                    adipisicing.</span>
-                  <form action="/auth/loginAdmin" method="post">
+                  <span class="fst-italic d-block mb-2">Đăng nhập với tư cách là
+                    một admin của MyHotel</span>
+                  <form
+                    class="admin-login"
+                    action="/auth/loginAdmin"
+                    method="post"
+                  >
                     <label for="usernameAdmin">Tên tài khoản</label>
                     <div class="input-group col-lg-6 mb-2">
                       <div class="input-group-prepend">
@@ -174,11 +177,13 @@
                         class="form-control border border-3 bg-white border-start-0 border-md"
                       />
                     </div>
+                    <span class="text-danger admin-message"></span>
                     <div class="d-grid">
+
                       <input
                         type="submit"
                         value="Log In"
-                        class="btn btn-primary"
+                        class="btn btn-primary m-0 full-width"
                       />
                     </div>
                   </form>

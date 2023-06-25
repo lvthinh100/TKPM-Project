@@ -12,6 +12,10 @@ exports.renderRegisterPage = (req, res) => {
 };
 
 exports.renderLoginPage = (req, res) => {
+  // Disable caching for the auth page
+  res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
   return res.render("login");
 };
 
@@ -99,6 +103,7 @@ exports.protected = async (req, res, next) => {
 exports.notLoggedIn = async (req, res, next) => {
   try {
     const { jwt } = req.cookies;
+    console.log(jwt);
     if (!jwt || jwt == "loggedOut") return next();
     return res.redirect("/user/profile");
   } catch (err) {

@@ -12,3 +12,9 @@ exports.searchTicket = async (text, status) => {
     `${server}/api/bookingTicket/search?search=${validStr}&status=${status}`
   );
 };
+exports.login = async (user) =>
+  axios.post(`${server}/api/auth/login`, user, { withCredentials: true });
+exports.loginAdmin = async (user) =>
+  axios.post(`${server}/api/auth/admin/login`, user, { withCredentials: true });
+exports.register = async (user) =>
+  axios.post(`${server}/api/auth/register`, user, { withCredentials: true });

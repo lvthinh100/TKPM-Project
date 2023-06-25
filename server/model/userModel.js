@@ -23,8 +23,10 @@ exports.createOne = async (data) => {
           returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone, 
            "DIACHI" as address, "MAKHACHHANG" as userId; `;
 
+    const userId = IdGenerator("KH");
+
     const newData = await db.one(query, [
-      IdGenerator("KH"),
+      userId,
       data.name,
       data.type,
       data.phone,
