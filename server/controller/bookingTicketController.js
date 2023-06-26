@@ -21,11 +21,11 @@ exports.getAllTicket = catchAsync(async (req, res) => {
 exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   //----------
   const { id } = req.params;
-  const query = req.query// lay room(MAPHONG)
-  //Lấy dữ liệu được upload  
+  const query = req.query; // lay room(MAPHONG)
+  //Lấy dữ liệu được upload
   // const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
 
-  checkRoom = await bookingTicketModel.checkRoomExits(id, query['room'])
+  checkRoom = await bookingTicketModel.checkRoomExits(id, query["room"]);
   if (checkRoom == false)
     return next(new AppError(401, "Ticket room not exist"));
 
@@ -33,16 +33,15 @@ exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   // if (checkBookingTicket == false)
   //   return next(new AppError(401, "Booking ticket not exist"));
 
-  const data = await bookingTicketModel.getInfoByTicket(id, query['room']);
+  const data = await bookingTicketModel.getInfoByTicket(id, query.room);
+  const users = await bookingTicketModel.getInfoByUser(id, query.room);
 
-  const user = await bookingTicketModel.getInfoByUser(id, query['room']);
-  data.push({'users':user})
   //Gửi data lại thông qua res
   res.json({
     status: 200,
     message: "success",
-    data: data
-  }); 
+    data: { ...data[0], users },
+  });
 });
 
 exports.updateStatusById = catchAsync(async (req, res) => {
@@ -57,37 +56,53 @@ exports.updateStatusById = catchAsync(async (req, res) => {
     status: "success",
     data: newData,
   });
-
 });
 
 exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
   //----------
   const { id } = req.params;
-  const query = req.query // lay room(MAPHONG)
+  const query = req.query; // lay room(MAPHONG)
   const data = req.body;
   checkStatusLL = await bookingTicketModel.checkStatusLL(id, query.room);
-  if (checkStatusLL.length == 0) 
+  if (checkStatusLL.length == 0)
     return next(new AppError(401, "Accommodation information not exist"));
 
-  arr_user = []
-  for (let index = 0; index < data.length ; index++){
-    let status = await bookingTicketModel.findIdUserTTLT(id, query.room, data[index].id);
-    let checkExitsUser = await userModel.getOneById(data[index].id) 
+  arr_user = [];
+  for (let index = 0; index < data.length; index++) {
+    let status = await bookingTicketModel.findIdUserTTLT(
+      id,
+      query.room,
+      data[index].id
+    );
+    let checkExitsUser = await userModel.getOneById(data[index].id);
 
-    if (status.length == 0 && checkExitsUser.length == 0){ // Phiêu ko có user và user chưa tồn tại.
-      newuser = await userModel.createOne(data[index])
-      dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data[index].id)
+    if (status.length == 0 && checkExitsUser.length == 0) {
+      // Phiêu ko có user và user chưa tồn tại.
+      newuser = await userModel.createOne(data[index]);
+      dataNewLL = await bookingTicketModel.createStatusLL(
+        id,
+        query.room,
+        newuser.userId
+      );
+    } else {
+      // khi này user luon tôn tại
+      Newdata = await bookingTicketModel.changeAttribute(
+        checkExitsUser[0],
+        data[index]
+      ); // update truong
+      newuser = await userModel.updateOne(Newdata);
+      dataNewLL = status;
+      if (status.length == 0)
+        // chưa có phieu
+        dataNewLL = await bookingTicketModel.createStatusLL(
+          id,
+          query.room,
+          data[index].id
+        );
     }
-    else{ // khi này user luon tôn tại
-      Newdata = await bookingTicketModel.changeAttribute(checkExitsUser[0], data[index])// update truong
-      newuser = await userModel.updateOne(Newdata)
-      dataNewLL = status
-      if (status.length == 0) // chưa có phieu
-        dataNewLL = await bookingTicketModel.createStatusLL(id, query.room, data[index].id)
-    }
-    arr_user.push(newuser)
+    arr_user.push(newuser);
   }
-  dataNewLL.push({'users':arr_user})
+  dataNewLL.push({ users: arr_user });
 
   res.status(200).json({
     status: "success",
@@ -99,14 +114,12 @@ exports.searchBookingTicket = catchAsync(async (req, res, next) => {
   //----------
   const searchQuery = req.query;
 
-  data = await bookingTicketModel.searchTicket(searchQuery)
+  data = await bookingTicketModel.searchTicket(searchQuery);
 
-  if (data.length == 0)
-    return next(new AppError(404, "Not found"));
-  
+  if (data.length == 0) return next(new AppError(404, "Not found"));
+
   res.status(200).json({
     status: "success",
-    data: data
+    data: data,
   });
-
 });

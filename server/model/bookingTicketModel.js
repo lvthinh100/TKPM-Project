@@ -26,26 +26,30 @@ exports.getAllTicketsInfo = async () => {
 
 exports.checkStatusLL = async (id, room) => {
   try {
-    const query = ` Select * from "CT_LUUTRU"
+    const query = ` Select * from "CT_PHIEUDATPHONG"
                     where "MADATPHONG" = $1 and "MAPHONG" = $2 `;
 
     //Bất đồng bộ
     const data = await db.any(query, [id, room]);
-
-    return data;
+    if (data.length == 0) return false;
+    return true;
   } catch (err) {
     throw err;
   }
 };
 
-exports.getInfoByTicket = async (id) => {
+exports.getInfoByTicket = async (id, room) => {
   try {
     //Lấy data từ db => Model
-    const query1 = ` Select DISTINCT a."MAPHONG" as roomId, a."MADATPHONG" as ticketId, b."NGAYCHECKIN" as checkIn, b."NGAYCHECKOUT" as checkOut
-                    from "CT_LUUTRU" a, "PHIEUDATPHONG" b
-                    where a."MADATPHONG" = b."MADATPHONG" and a."MADATPHONG" = $1 `;
+    const query1 = ` Select DISTINCT a."MAPHONG" as roomId, a."MADATPHONG" as ticketId, 
+                      b."NGAYCHECKIN" as checkIn, b."NGAYCHECKOUT" as checkOut,
+                      c."SOKHACHTOIDA"
+                    from "CT_PHIEUDATPHONG" a, "PHIEUDATPHONG" b, "PHONG" c
+                    where a."MADATPHONG" = b."MADATPHONG"
+                          and a."MAPHONG" = c."MAPHONG"
+                          and b."MADATPHONG" = $1 and a."MAPHONG" = $2 `;
     //Bất đồng bộ
-    const data = await db.any(query1, [id]);
+    const data = await db.any(query1, [id, room]);
 
     return data;
   } catch (err) {
