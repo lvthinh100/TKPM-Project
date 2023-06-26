@@ -28,20 +28,22 @@ exports.getRoomById = catchAsync(async (req, res) => {
   res.json({
     status: 200,
     message: "success",
-    data,
+    data: data,
   });
 });
 
 exports.getMaxIDRoom = catchAsync(async (req, res) => {
   const { floor } = req.params;
+  console.log(req.params.id);
 
-  const query = req.query;
-  console.log(query);
+  //const query = req.query;
+  //console.log(query);
 
-  const searchFloor = floor + '%';
+  const searchFloor = req.params.id + '%';
   console.log(searchFloor);
 
   const data = await roomModel.getMaxIDRoomByFloor(searchFloor);
+  console.log(data)
 
   res.json({
     status: 200,

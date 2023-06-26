@@ -13,7 +13,8 @@
         <fieldset class="row best-selling-row">
             {{#each listRoom}}
             <label class="col-12 col-md-6 col-lg-4 col-xl-3 col-margin item-container" id="{{this.MAPHONG}}">
-                <div class="card card-sl p-1 btn bg-white btn-outline-info text-dark" data-loaiphong="{{this.LOAIPHONG}}"
+                <div class="card card-sl p-1 btn bg-white btn-outline-info text-dark" 
+                    data-loaiphong="{{this.LOAIPHONG}}" data-dongia="{{this.DONGIA}}"
                     data-sogiuong="{{this.SOGIUONG}}" data-sokhach="{{this.SOKHACHTOIDA}}" onclick="updateForm()">
                     <input type="checkbox" class="checkbox-input form-check-input" name="" id="">
                     <div class="card-image">

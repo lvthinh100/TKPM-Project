@@ -7,5 +7,6 @@ const router = express.Router();
 router.use(authController.protected, authController.restrictToAdmin);
 
 router.get("/", detailRoomInfoPageController.renderDetailRoomInfoPage);
+router.post("/", detailRoomInfoPageController.deleteRoomById);
 
 module.exports = router;
