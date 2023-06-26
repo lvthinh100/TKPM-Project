@@ -3,6 +3,10 @@ const exphbs = require("express-handlebars");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+
+// hbs helper
+const hbsHelpers = require("./utils/hbsHelper");
+
 //Route
 // const viewRoutes = require("./router/viewRoutes");
 const homeRoutes = require("./router/homeRoutes");
@@ -25,6 +29,7 @@ const detailInvoiceRoutes = require("./router/detailInvoiceRoutes");
 
 const listRoomForGuessRoutes = require("./router/listRoomForGuessRoutes");
 const checkoutRoutes = require("./router/checkoutRoutes");
+const reportRoutes = require("./router/reportRoutes");
 
 const app = express();
 
@@ -48,6 +53,7 @@ app.engine(
     extname: "hbs",
     layoutsDir: "views/layouts",
     defaultLayout: "index",
+    helpers: hbsHelpers,
   })
 );
 app.set("view engine", "hbs");
@@ -62,11 +68,11 @@ app.use("/getUserInfo", getUserInfoByIdRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
+app.use("/report", reportRoutes);
 
 app.use("/listRoomInfo", listRoomInfoRoutes);
 app.use("/detailRoomInfo", detailRoomInfoRoutes);
 app.use("/addNewRoom", addNewRoomRoutes);
-
 
 app.use("/roomBooking", roomBookingRoutes);
 

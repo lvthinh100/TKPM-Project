@@ -49,20 +49,11 @@ exports.register = catchAsync(async (req, res, next) => {
   if (phone.length < 10)
     return next(new AppError(401, "Phone number not valid"));
   //if (password !== confirm)
-    //return next(new AppError(401, "Incorrect confirm password"));
+  //return next(new AppError(401, "Incorrect confirm password"));
   //3.Generate Id and hash password
-  const accountId = IdGenerator("TK");
-  const userId = IdGenerator("KH");
   const hashedPass = await bcrypt.hash(password, 12);
-  const newAccount = {
-    id: accountId,
-    username,
-    password: hashedPass,
-    createdAt: new Date(),
-    userId,
-  };
+
   const newUser = {
-    id: userId,
     name,
     address,
     phone,
@@ -71,6 +62,14 @@ exports.register = catchAsync(async (req, res, next) => {
     type: type == 0 ? "NOIDIA" : "NUOCNGOAI",
   };
   const dbResponse1 = await userModel.createOne(newUser);
+
+  const newAccount = {
+    username,
+    password: hashedPass,
+    createdAt: new Date(),
+    userId: dbResponse1.userId,
+  };
+
   const dbResponse2 = await accountModel.createOne(newAccount);
   // //4. insert to db
   // userModel.createUser(newUser);

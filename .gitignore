@@ -10,7 +10,9 @@
 /qlks/.vscode
 /.pnp
 .pnp.js
-
+/client/public/js/bundle.js
+/client/public/js/bundle.js.map
+/client/.cache
 # testing
 /coverage
 
