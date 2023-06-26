@@ -29,7 +29,7 @@ const detailInvoiceRoutes = require("./router/detailInvoiceRoutes");
 
 const listRoomForGuessRoutes = require("./router/listRoomForGuessRoutes");
 const checkoutRoutes = require("./router/checkoutRoutes");
-const listRoomBookedRoutes = require("./router/listRoomBookedRoutes")
+const listRoomBookedRoutes = require("./router/listRoomBookedRoutes");
 const reportRoutes = require("./router/reportRoutes");
 
 const app = express();
@@ -101,7 +101,7 @@ app.use("/", (err, req, res, next) => {
 
 // app.use("/api/transactions", transactionRoutes);
 
-const port = 20585;
+const port = 20120;
 const hostname = "127.0.0.1";
 
 const server = app.listen(port, hostname, () => {

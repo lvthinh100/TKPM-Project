@@ -143,59 +143,60 @@ exports.changeAttribute = async (data1, data2) => {
   } catch (err) {
     throw err;
   }
-}
 };
 
 exports.getDetailTicketByUser = async (id) => {
   try {
-    const query = 'SELECT * FROM "PHIEUDATPHONG" as PDP JOIN "CT_PHIEUDATPHONG" as CTPDP ON PDP."MADATPHONG" = CTPDP."MADATPHONG" JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG" JOIN "LOAIPHONG" LP ON LP."MALOAI" = "PHONG"."LOAIPHONG" WHERE "MAKHACHHANG" = $1';
+    const query =
+      'SELECT * FROM "PHIEUDATPHONG" as PDP JOIN "CT_PHIEUDATPHONG" as CTPDP ON PDP."MADATPHONG" = CTPDP."MADATPHONG" JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG" JOIN "LOAIPHONG" LP ON LP."MALOAI" = "PHONG"."LOAIPHONG" WHERE "MAKHACHHANG" = $1';
     const data = await db.any(query, id);
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.getAllDetailTicket = async () => {
   try {
-    const query = 'SELECT * FROM "PHIEUDATPHONG" as PDP JOIN "CT_PHIEUDATPHONG" as CTPDP ON PDP."MADATPHONG" = CTPDP."MADATPHONG" JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG"';
+    const query =
+      'SELECT * FROM "PHIEUDATPHONG" as PDP JOIN "CT_PHIEUDATPHONG" as CTPDP ON PDP."MADATPHONG" = CTPDP."MADATPHONG" JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG"';
     const data = await db.any(query);
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
-exports.getAllTicket = async() => {
+exports.getAllTicket = async () => {
   try {
     const query = 'SELECT * FROM "PHIEUDATPHONG"';
     const data = await db.any(query);
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
-exports.getTicketsByUser = async(id) => {
+exports.getTicketsByUser = async (id) => {
   try {
     const query = 'SELECT * FROM "PHIEUDATPHONG" WHERE "MAKHACHHANG" = $1';
     const data = await db.any(query, id);
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
-
-exports.getDetailTicket = async(id) => {
+exports.getDetailTicket = async (id) => {
   try {
-    const query = 'SELECT * FROM "CT_PHIEUDATPHONG" as CTPDP JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG" JOIN "LOAIPHONG" LP ON LP."MALOAI" = "PHONG"."LOAIPHONG" WHERE "MADATPHONG" = $1';
+    const query =
+      'SELECT * FROM "CT_PHIEUDATPHONG" as CTPDP JOIN "PHONG" ON CTPDP."MAPHONG" = "PHONG"."MAPHONG" JOIN "LOAIPHONG" LP ON LP."MALOAI" = "PHONG"."LOAIPHONG" WHERE "MADATPHONG" = $1';
     const data = await db.any(query, id);
-    return (data);
+    return data;
   } catch (err) {
     throw err;
   }
-}
+};
 
 exports.checkRoomExits = async (id, room) => {
   try {
