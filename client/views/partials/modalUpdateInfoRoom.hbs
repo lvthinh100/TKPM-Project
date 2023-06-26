@@ -8,7 +8,7 @@
                     <div class="col-md-6">
                         <label for="typeRoom" class="form-label">Loại phòng</label>
                         <select name="typeRoom" class="form-select" id="typeRoom" value="DONVIP">
-                            <option value="NO" selected>Chọn loại phòng</option>
+                            <option value="{{itemRoom.LOAIPHONG}}" selected>Chọn loại phòng</option>
                             {{#each listTypeRoom}}
                             <option value="{{this.MALOAI}}">{{this.TENLOAI}}</option>
                             {{/each}}
@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="imgRoom" class="form-label">Hình ảnh</label>
-                        <input type="file" name="imgRoom" class="form-control amount-field" id="imgRoom" value="" />
+                        <input type="file" name="imgRoom" class="form-control amount-field" id="imgRoom" value="{{itemRoom.IMAGE}}" />
                     </div>
 
                     <div class="col-md-3">
