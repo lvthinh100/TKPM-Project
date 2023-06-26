@@ -75,3 +75,39 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res) => {
   });
 
 });
+
+exports.getAllTicket = catchAsync(async (req, res) => {
+  const data = await bookingTicketModel.getAllTicket();
+
+  res.json({
+    status: 200,
+    message: 'success',
+    data: data
+  })
+})
+
+exports.getTicketsByUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const query = req.query;
+
+  const data = await bookingTicketModel.getTicketsByUser(id);
+
+  res.json({
+    status: 200,
+    message: 'success',
+    data: data
+  })
+})
+
+exports.getDetailTicket = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const query = req.query;
+
+  const data = await bookingTicketModel.getDetailTicket(id);
+
+  res.json({
+    status: 200,
+    message: 'success',
+    data: data
+  })
+})

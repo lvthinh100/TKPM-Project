@@ -29,4 +29,8 @@ exports.getInvoiceById = async (id) => axios.get(`${server}/api/invoice/${id}`);
 
 exports.getDetailInvoiceById = async (id) => axios.get(`${server}/api/detailInvoice/${id}`);
 
+exports.getDetailTicket = async (id) => axios.get(`${server}/api/bookingTicket/detail/${id}`);
+exports.getAllTicket = async () => axios.get(`${server}/api/bookingTicket/ticket/`);
+exports.getTicketsByUser = async (id) => axios.get(`${server}/api/bookingTicket/ticket/${id}`);
+
 
