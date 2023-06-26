@@ -78,7 +78,7 @@ exports.updateOne = async (data) => {
           UPDATE "KHACHHANG"
           SET "TENKHACHHANG"=($2), "LOAIKHACH"=$3, "SODIENTHOAI"=$4, "CMND"=$5 , "DIACHI"=$6
           WHERE "MAKHACHHANG"=$1  
-          returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone, 
+          returning "TENKHACHHANG" as name, "CMND" as cmnd, "SODIENTHOAI" as phone,"LOAIKHACH" as type, 
           "DIACHI" as address, "MAKHACHHANG" as userId; `;
 
     const newData = await db.one(query, [

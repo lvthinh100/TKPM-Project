@@ -18,3 +18,13 @@ exports.loginAdmin = async (user) =>
   axios.post(`${server}/api/auth/admin/login`, user, { withCredentials: true });
 exports.register = async (user) =>
   axios.post(`${server}/api/auth/register`, user, { withCredentials: true });
+exports.getAccommodationInfo = async (ticketId, roomId) =>
+  axios.get(`${server}/api/bookingTicket/${ticketId}?room=${roomId}`);
+exports.updateAccommodationInfo = async (ticketId, roomId, users) =>
+  axios.patch(
+    `${server}/api/bookingTicket/checkIn/${ticketId}?room=${roomId}`,
+    users
+  );
+
+exports.getReportMetrics = async (month, year, type) =>
+  axios.get(`${server}/api/report/${type}?year=${year}&month=${month}`);

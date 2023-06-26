@@ -23,145 +23,19 @@
           <span class="col-md-6 fs-5 d-block " >CheckIn: <span class="ticket-checkIn"></span>  </span>
           <span class="col-md-6 fs-5 d-block " >Mã phiếu: <span class="ticket-id"></span>  </span>
           <span class="col-md-6 fs-5 d-block " >CheckOut: <span class="ticket-checkOut"></span>  </span>
+          <span class="col-md-6 fs-5 d-block " >Số lượng khách: <span class="ticket-num"></span>  </span>
         </div>
       </div>
       <div class="modal-body">
-          <form id="updateTicketInfoForm">
+          <div id="updateTicketInfoForm">
               
               <div id="carouselExampleIndicators" class="carousel carousel-dark slide z-3">
-                  
                   <div class="carousel-inner ticket-users">
-                    <div class="carousel-item active">
-                      <div class="row">
-                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
-                        <div class="col-md-6">
-                          <label class="labels">Tên</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Họ và tên"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">CMND</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">SDT</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">Địa chỉ</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="carousel-item">
-                      <div class="row">
-                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
-                        <div class="col-md-6">
-                          <label class="labels">Tên</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Họ và tên"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">CMND</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">SDT</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">Địa chỉ</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="carousel-item">
-                      <div class="row">
-                        <div class="col-md-12 fw-bold" ><span>Khách 1</span></div>
-                        <div class="col-md-6">
-                          <label class="labels">Tên</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Họ và tên"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">CMND</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">SDT</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="labels">Địa chỉ</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="CMND"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                  <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <div class="carousel-indicators accommodation-indicators">
                   </div>
               </div>
-          </form>
+          </div>
       </div>
       <div class="modal-footer">
         <button
@@ -169,7 +43,7 @@
           class="btn btn-secondary"
           data-bs-dismiss="modal"
         >Close</button>
-        <button type="button" class="btn btn-primary">Check In</button>
+        <button type="button" class="btn btn-primary checkInBtn">Check In</button>
       </div>
     </div>
   </div>

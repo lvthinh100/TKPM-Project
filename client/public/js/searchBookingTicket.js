@@ -6,21 +6,22 @@ const generateMarkup = (data) => {
     (ticket) => `
   <tr>
   <th scope="row">1</th>
-  <td>${ticket.MADATPHONG}</td>
-  <td>${ticket.MAKHACHHANG}</td>
-  <td>${ticket.TENKHACHHANG}</td>
-  <td>${101}</td>
-  <td>${hbsHelper.formatDate(ticket.NGAYCHECKIN)}</td>
-  <td>${hbsHelper.formatDate(ticket.NGAYCHECKOUT)}</td>
-  <td>${ticket.SLKHACH}</td>
-  <td>${ticket.TRANGTHAI}</td>
+  <td>${ticket.ticketid}</td>
+  <td>${ticket.userid}</td>
+  <td>${ticket.username}</td>
+  <td>${ticket.room}</td>
+  <td>${hbsHelper.formatDate(ticket.checkin)}</td>
+  <td>${hbsHelper.formatDate(ticket.checkout)}</td>
+  <td>${ticket.numuser}</td>
+  <td>${ticket.status}</td>
   <td>
     <button
       type="button"
       class="btn btn-primary btn-checkIn"
       data-bs-toggle="modal"
       data-bs-target="#ticketInfoModal"
-      data-ticket="${ticket.MADATPHONG}"
+      data-ticket="${ticket.ticketid}"
+      data-room="${ticket.room}"
     >
       Check in
     </button>

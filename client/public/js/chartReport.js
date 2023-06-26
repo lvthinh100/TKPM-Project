@@ -1,34 +1,31 @@
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import api from "./api.js";
 
 // Chart
-const renderChart = () => {
-  const data = [
-    { type: "A", amount: 200.0 },
-    { type: "B", amount: 300.0 },
-    { type: "C", amount: 400.0 },
-    { type: "D", amount: 500.0 },
-  ];
-  new Chart(document.getElementById("chartReport"), {
+let barChart;
+let pieChart;
+const renderChart = (title, data) => {
+  barChart = new Chart(document.getElementById("chartReport"), {
     type: "bar",
     data: {
-      labels: data.map((row) => row.type),
+      labels: data.map((row) => row.typeid),
       datasets: [
         {
-          label: "Thống kê doanh thu từng loại phòng tháng 4/2022",
+          label: title,
           data: data.map((row) => row.amount),
         },
       ],
     },
   });
 
-  new Chart(document.getElementById("pieChartReport"), {
+  pieChart = new Chart(document.getElementById("pieChartReport"), {
     type: "pie",
     data: {
-      labels: data.map((row) => row.type),
+      labels: data.map((row) => row.typeid),
       datasets: [
         {
-          label: "Thống kê doanh thu từng loại phòng tháng 4/2022",
+          label: title,
           data: data.map((row) => row.amount),
           datalabels: {
             anchor: "center",
@@ -71,4 +68,35 @@ const renderChart = () => {
   });
 };
 
-renderChart();
+const resetChart = () => {
+  if (barChart) barChart.destroy();
+  if (pieChart) pieChart.destroy();
+};
+
+// renderChart(dataset);
+
+export const reportHandler = async (e) => {
+  try {
+    e.preventDefault();
+    const formData = new FormData(e.target); // create a new FormData object
+    const input = Object.fromEntries(formData.entries()); // convert the FormData object to a plain object
+    const [year, month] = input.time.split("-");
+    const { data } = await api.getReportMetrics(month, year, input.type);
+
+    if (data.data.dataset.length === 0) return;
+    console.log(data);
+    resetChart();
+    switch (input.type) {
+      case "revenue":
+        renderChart("Thống kê doanh thu", data.data.dataset);
+        break;
+      case "efficiency":
+        renderChart("Thống kê hiệu suất", data.data.dataset);
+        break;
+      default:
+        break;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

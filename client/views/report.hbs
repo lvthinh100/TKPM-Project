@@ -2,35 +2,34 @@
 <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
 
 <div class="container card p-3 my-4 w-75 shadow-sm" action="" method="" id="">
-  <form action="">
+  <form class="report">
     <div class="row align-items-end justify-content-center">
       <!-- Check-in input -->
       <div class="col-12 col-md-6 col-lg-2 form-outline">
         <label class="form-label" for="checkinDate">Thời điểm (tháng/năm)</label>
         <input
           class="form-control"
+          required
           type="month"
           id="checkinDate"
-          name="checkin"
-          value="2022-01-01"
+          name="time"
         />
       </div>
 
       <!-- Check-out input -->
       <div class="col-12 col-md-6 col-lg-2 form-outline">
         <label class="col form-label" for="checkoutDate">Loại hình thống kê</label>
-        <select class="form-select" aria-label="Default select example">
-          <option value="1">Thống kê doanh thu</option>
-          <option value="2">Thống kê hiệu suất</option>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="type"
+        >
+          <option value="revenue">Thống kê doanh thu</option>
+          <option value="efficiency">Thống kê hiệu suất</option>
         </select>
       </div>
 
-      <button
-        type="button"
-        form="bill"
-        class="col-2 btn btn-primary text-white"
-        onclick="purchaseSubmit()"
-      >Tạo báo cáo</button>
+      <button type="submit" class="col-2 btn btn-primary text-white">Tạo báo cáo</button>
     </div>
   </form>
 </div>

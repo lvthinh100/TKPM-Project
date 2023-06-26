@@ -106,7 +106,7 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
-    // data: dataNewLL
+    data: { ...dataNewLL[0], users: arr_user },
   });
 });
 

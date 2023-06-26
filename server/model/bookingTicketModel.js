@@ -43,7 +43,7 @@ exports.getInfoByTicket = async (id, room) => {
     //Lấy data từ db => Model
     const query1 = ` Select DISTINCT a."MAPHONG" as roomId, a."MADATPHONG" as ticketId, 
                       b."NGAYCHECKIN" as checkIn, b."NGAYCHECKOUT" as checkOut,
-                      c."SOKHACHTOIDA"
+                      c."SOKHACHTOIDA" as num
                     from "CT_PHIEUDATPHONG" a, "PHIEUDATPHONG" b, "PHONG" c
                     where a."MADATPHONG" = b."MADATPHONG"
                           and a."MAPHONG" = c."MAPHONG"
@@ -59,7 +59,7 @@ exports.getInfoByTicket = async (id, room) => {
 
 exports.getInfoByUser = async (id, room) => {
   try {
-    const query2 = ` Select DISTINCT b."TENKHACHHANG" as name, b."CMND" as cmnd, b."SODIENTHOAI" as phone, b."DIACHI" as address, b."MAKHACHHANG" as userId 
+    const query2 = ` Select DISTINCT b."TENKHACHHANG" as name, b."CMND" as cmnd, b."SODIENTHOAI" as phone, b."DIACHI" as address, b."MAKHACHHANG" as userId, b."LOAIKHACH" as type
                     from "CT_LUUTRU" a, "KHACHHANG" b
                     where a."MAKHACHHANG" = b."MAKHACHHANG" and a."MADATPHONG" = $1 and a."MAPHONG" = $2 `;
     const data = await db.any(query2, [id, room]);
