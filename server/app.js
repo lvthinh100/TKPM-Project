@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") console.log("Working in Production");
 // });
 //cors
 const corsOrigin = {
-  origin: "http://127.0.0.1:20585", //or whatever port your frontend is using
+  origin: "http://127.0.0.1:20120", //or whatever port your frontend is using
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -85,7 +85,6 @@ app.use("/api/report", reportRoutes);
 app.use("/api/typeRoom", typeRoomRoutes);
 app.use("/api/invoice", invoiceRoutes);
 app.use("/api/detailInvoice", detailInvoiceRoutes);
-
 
 //Global error handler
 

@@ -7,12 +7,12 @@ const router = express.Router();
 router.get("/search", bookingTicketController.searchBookingTicket);
 
 router.get("/", bookingTicketController.getAllTicket);
-router.get("/:id", bookingTicketController.getStatusByIdRoom);
 router.patch("/checkOut/:id", bookingTicketController.updateStatusById);
 
 router.get("/detail/:id", bookingTicketController.getDetailTicket);
 router.get("/ticket/", bookingTicketController.getAllTicket);
 router.get("/ticket/:id", bookingTicketController.getTicketsByUser);
+router.get("/:id", bookingTicketController.getStatusByIdRoom);
 
 router.patch(
   "/checkIn/:id",

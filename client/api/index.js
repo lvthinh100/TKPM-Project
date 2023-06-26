@@ -21,21 +21,26 @@ exports.getAllRoom = async () => axios.get(`${server}/api/room/`);
 exports.createRoom = async (data) => axios.post(`${server}/api/room/`, data);
 exports.getRoomById = async (id) => axios.get(`${server}/api/room/${id}`);
 exports.deleteRoomById = async (id) => axios.post(`${server}/api/room/${id}`);
-exports.getMaxIDRoom = async (id) => axios.get(`${server}/api/room/maxid/${id}`);
+exports.getMaxIDRoom = async (id) =>
+  axios.get(`${server}/api/room/maxid/${id}`);
 
 exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
 
 exports.getAllInvoice = async () => axios.get(`${server}/api/invoice/`);
 exports.getInvoiceById = async (id) => axios.get(`${server}/api/invoice/${id}`);
 
-exports.getDetailTicket = async (id) => axios.get(`${server}/api/bookingTicket/detail/${id}`);
-exports.getAllTicket = async () => axios.get(`${server}/api/bookingTicket/ticket/`);
-exports.getTicketsByUser = async (id) => axios.get(`${server}/api/bookingTicket/ticket/${id}`);
+exports.getDetailTicket = async (id) =>
+  axios.get(`${server}/api/bookingTicket/detail/${id}`);
+exports.getAllTicket = async () =>
+  axios.get(`${server}/api/bookingTicket/ticket/`);
+exports.getTicketsByUser = async (id) =>
+  axios.get(`${server}/api/bookingTicket/ticket/${id}`);
 
 exports.getDetailInvoiceById = async (id) =>
   axios.get(`${server}/api/detailInvoice/${id}`);
 exports.getAllBookingTicket = async () =>
   axios.get(`${server}/api/bookingTicket`);
+
 exports.searchTicket = async (text, status) => {
   if (!status) return axios.get(`${server}/api/search?search=${text}`);
   if (!text) return axios.get(`${server}/api/search?status=${status}`);

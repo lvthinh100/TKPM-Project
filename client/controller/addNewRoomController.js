@@ -18,9 +18,9 @@ exports.handleAddNewRoom = async (req, res) => {
 
   const { data } = await api.getMaxIDRoom(req.body.floor);
 
-  const idRoom = String(parseInt(data.data[0].max)+1)
+  const idRoom = String(parseInt(data.data[0].max) + 1);
   console.log(idRoom);
-  
+
   const dataRoom = {
     maphong: idRoom,
     loaiphong: req.body.typeRoom,
@@ -32,12 +32,11 @@ exports.handleAddNewRoom = async (req, res) => {
     mota: req.body.description,
     ghichu: req.body.remark,
   };
-  console.log(dataRoom)
-  
+  console.log(dataRoom);
+
   const { resData } = await api.createRoom(dataRoom);
 
   console.log(resData);
-  
 
-  this.renderAddNewRoomPage;
+  res.redirect("/addNewRoom");
 };
