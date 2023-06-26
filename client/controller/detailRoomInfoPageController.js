@@ -1,16 +1,17 @@
 const api = require("../api/index");
 
 exports.renderDetailRoomInfoPage = async (req, res) => {
-  console.log(req.query.id);
 
-  const { data } = await api.getRoomById(req.query.id);
+  var { data } = await api.getRoomById(req.query.id);
+  roomData = data.data[0];
 
-  console.log(data.data[0])
+  var { data } = await api.getAllTypeRoom();
+  typeRoomData = data.data;
 
   // Trả về detailRoomInfoPage
   res.render("detailRoomInfoPage", {
     template: { title: "Test" },
-
-    itemRoom: data.data[0],
+    itemRoom: roomData,
+    listTypeRoom: typeRoomData,
   });
 };
