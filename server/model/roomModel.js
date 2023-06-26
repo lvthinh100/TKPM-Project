@@ -37,8 +37,9 @@ exports.getMaxIDRoomByFloor = async (floor) => {
 
     //Bất đồng bộ
     const data = await db.any(query, [floor]);
+    console.log(data);
 
-    return data.max;
+    return data;
   } catch (err) {
     throw err;
   }

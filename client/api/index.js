@@ -21,6 +21,8 @@ exports.getMe = async (cookies) =>
 exports.getAllRoom = async () => axios.get(`${server}/api/room/`);
 exports.createRoom = async (data) => axios.post(`${server}/api/room/`, data);
 exports.getRoomById = async (id) => axios.get(`${server}/api/room/${id}`);
+exports.deleteRoomById = async (id) => axios.post(`${server}/api/room/${id}`);
+exports.getMaxIDRoom = async (id) => axios.get(`${server}/api/room/maxid/${id}`);
 
 exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
 
