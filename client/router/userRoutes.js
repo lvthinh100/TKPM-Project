@@ -5,7 +5,7 @@ const authController = require("../controller/authController");
 const router = express.Router();
 router.get(
   "/profile",
-  authController.isLoggedIn,
+  authController.protected,
   userController.renderProfilePage
 );
 

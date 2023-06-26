@@ -1,10 +1,11 @@
 const express = require("express");
-const listRoomInfoController = require("../controller/listRoomInfoController");
+const reportController = require("../controller/reportController");
 const authController = require("../controller/authController");
 
 const router = express.Router();
 
 router.use(authController.isLoggedIn, authController.restrictToAdmin);
-router.get("/", listRoomInfoController.renderlistRoomInfoPage);
+
+router.get("/", reportController.renderReportPage);
 
 module.exports = router;

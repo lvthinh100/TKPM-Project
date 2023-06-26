@@ -12,6 +12,10 @@ exports.renderRegisterPage = (req, res) => {
 };
 
 exports.renderLoginPage = (req, res) => {
+  // Disable caching for the auth page
+  res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
   return res.render("login");
 };
 
@@ -71,6 +75,20 @@ exports.handleAdminLogin = async (req, res) => {
 exports.isLoggedIn = async (req, res, next) => {
   try {
     const { jwt } = req.cookies;
+    if (!jwt) return next();
+    const { data } = await api.getMe(req.headers.cookie);
+    res.locals.user = data.data;
+    req.user = data.data;
+    console.log(data.data);
+    next();
+  } catch (err) {
+    res.redirect("/auth/login");
+  }
+};
+
+exports.protected = async (req, res, next) => {
+  try {
+    const { jwt } = req.cookies;
     if (!jwt) return res.redirect("/auth/login");
     const { data } = await api.getMe(req.headers.cookie);
     res.locals.user = data.data;
@@ -85,6 +103,7 @@ exports.isLoggedIn = async (req, res, next) => {
 exports.notLoggedIn = async (req, res, next) => {
   try {
     const { jwt } = req.cookies;
+    console.log(jwt);
     if (!jwt || jwt == "loggedOut") return next();
     return res.redirect("/user/profile");
   } catch (err) {

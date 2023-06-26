@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const server = "http://127.0.0.1:3000";
 
-
 exports.register = async (user) =>
   axios.post(`${server}/api/auth/register`, user);
 
@@ -29,10 +28,16 @@ exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
 exports.getAllInvoice = async () => axios.get(`${server}/api/invoice/`);
 exports.getInvoiceById = async (id) => axios.get(`${server}/api/invoice/${id}`);
 
-exports.getDetailInvoiceById = async (id) => axios.get(`${server}/api/detailInvoice/${id}`);
-
 exports.getDetailTicket = async (id) => axios.get(`${server}/api/bookingTicket/detail/${id}`);
 exports.getAllTicket = async () => axios.get(`${server}/api/bookingTicket/ticket/`);
 exports.getTicketsByUser = async (id) => axios.get(`${server}/api/bookingTicket/ticket/${id}`);
 
-
+exports.getDetailInvoiceById = async (id) =>
+  axios.get(`${server}/api/detailInvoice/${id}`);
+exports.getAllBookingTicket = async () =>
+  axios.get(`${server}/api/bookingTicket`);
+exports.searchTicket = async (text, status) => {
+  if (!status) return axios.get(`${server}/api/search?search=${text}`);
+  if (!text) return axios.get(`${server}/api/search?status=${status}`);
+  return axios.get(`${server}/api/search?search=${text}&status=${status}`);
+};
