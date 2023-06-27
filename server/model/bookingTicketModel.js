@@ -257,3 +257,17 @@ exports.createOneTicket = async (data) => {
     throw err;
   }
 };
+
+exports.updateStatus = async (id, status) => {
+  try {
+    //Lấy data từ db => Model
+    const query = `UPDATE "PHIEUDATPHONG" 
+                    SET "TRANGTHAI" = $1 
+                    WHERE "MADATPHONG" = $2 returning *;`;
+    const newdata = await db.any(query, [status, id]);
+
+    // return newdata;
+  } catch (err) {
+    throw err;
+  }
+};

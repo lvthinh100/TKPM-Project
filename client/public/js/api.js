@@ -28,6 +28,7 @@ exports.updateAccommodationInfo = async (ticketId, roomId, users) =>
     `${server}/api/bookingTicket/checkIn/${ticketId}?room=${roomId}`,
     users
   );
-
 exports.getReportMetrics = async (month, year, type) =>
   axios.get(`${server}/api/report/${type}?year=${year}&month=${month}`);
+exports.createInvoice = async (data) =>
+  axios.post(`${server}/api/invoice`, data);

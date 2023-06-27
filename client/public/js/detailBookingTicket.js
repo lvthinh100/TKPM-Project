@@ -140,7 +140,6 @@ export const updateAccommodationInfoHandler = async (e) => {
   try {
     if (!e.target.classList.contains("checkInBtn")) return;
     const forms = document.querySelectorAll(".accommodationInfo");
-    console.log(forms);
     let users = [];
     forms.forEach((form) => {
       const formData = new FormData(form); // create a new FormData object
@@ -170,7 +169,9 @@ export const updateAccommodationInfoHandler = async (e) => {
 export const checkOutTicketHandler = async (e) => {
   if (!e.target.classList.contains("btn-checkOut")) return;
   //Get ticket Id
-  const { ticket } = e.target.dataset;
-  console.log(ticket);
+  const { ticketid, userid } = e.target.dataset;
   // Render ticket info
+  console.log(ticketid, userid);
+  const { data } = await api.createInvoice({ ticketId: ticketid, userid });
+  console.log(data);
 };
