@@ -31,15 +31,20 @@ exports.getInvoiceInfoById = async (id) => {
 
 exports.createOneInvoice = async (data, cre_data) => {
   try {
-    // const query1 = ` INSERT INTO "HOADONTHANHTOAN"("MAHOADON", "MAKHTHANHTOAN", "NGAYTHANHTOAN", "TONGTIEN")
-    //   VALUES ($1, $2, $3, $4) 
-    //   returning *; `;
-    // const newdata1 = await db.any(query1, [
-    //   cre_data.ticketId,
-    //   data.userid,
-    //   data.createdAt,
-    //   0
-    // ]);
+    DataReturn = {}
+    DataReturn['userid'] =  data.userid
+    DataReturn['ticketId'] =  data.ticketId
+    DataReturn['invoiceId'] =  cre_data.ticketId
+
+    const query1 = ` INSERT INTO "HOADONTHANHTOAN"("MAHOADON", "MAKHTHANHTOAN", "NGAYTHANHTOAN", "TONGTIEN")
+      VALUES ($1, $2, $3, $4) 
+      returning *; `;
+    const newdata1 = await db.any(query1, [
+      cre_data.ticketId,
+      data.userid,
+      cre_data.createdAt,
+      0
+    ]);
 
     const query2 = ` select ("NGAYCHECKOUT" - "NGAYCHECKIN") as day, "SLKHACH"
                     from "PHIEUDATPHONG"
@@ -55,40 +60,36 @@ exports.createOneInvoice = async (data, cre_data) => {
     if (newdata2[0]['SLKHACH'] > 2) 
       const_pt = 0.25
   
-    // const query4 = ` INSERT INTO "CT_HOADON"("MAHOADON", "MADATPHONG", "MAPHONG", "SONGAY", "DONGIA", "PHUTHU", "THANHTIEN")
-    //   VALUES ($1, $2, $3, $4, $5, $6, $7) 
-    //   returning *; `;
+    const query4 = ` INSERT INTO "CT_HOADON"("MAHOADON", "MADATPHONG", "MAPHONG", "SONGAY", "DONGIA", "PHUTHU", "THANHTIEN")
+      VALUES ($1, $2, $3, $4, $5, $6, $7) 
+      returning *; `;
    
-    // for (const i of newdata3){
-    //   const newdata4 = await db.any(query4, [
-    //     cre_data.ticketId,
-    //     data.ticketId,
-    //     i['MAPHONG'],
-    //     SONGAY,
-    //     i['DONGIA'],
-    //     const_pt,
-    //     i['DONGIA']+const_pt*i['DONGIA']
-    //   ]);
-    // }
-
-    // const query2 = ` INSERT INTO "CT_PHIEUDATPHONG"("MADATPHONG", "MAPHONG")
-    //   VALUES ($1, $2) 
-    //    `;
-    // for (const room of data.room){
-    //   const newdata2 = await db.any(query2, [
-    //     data.ticketId,
-    //     room
-    //   ]);
-    // }
-    // console.log(newdata[0]['day']['days'])
-    // return newdata2
+    tongtien = 0
+    detail = []
     for (const i of newdata3){
-      // console.log(const_pt*i['DONGIA'])
-      // console.log(Interger(i['DONGIA']))
-      // console.log(const_pt)
-      // console.log(formatter.format(i['DONGIA']));
+      dg = parseFloat(i['DONGIA'].replace('$', '').replace(',', ''))
+      let newdata4 = await db.any(query4, [
+        cre_data.ticketId,
+        data.ticketId,
+        i['MAPHONG'],
+        SONGAY,
+        dg,
+        const_pt*dg,
+        dg+const_pt*dg
+      ]);
+      detail.push(newdata4[0])
+      tongtien = tongtien + dg+const_pt*dg
+
     }
-  
+    // update
+    const query5 = `UPDATE "HOADONTHANHTOAN" 
+                    SET "TONGTIEN" = $1 
+                    WHERE "MAHOADON" = $2 returning *;`;
+    const newdata5 = await db.any(query5, [tongtien, cre_data.ticketId]);
+    DataReturn['amount'] =  tongtien
+    DataReturn['detail'] =  detail
+    
+    return DataReturn
   } catch (err) {
     throw err;
   }

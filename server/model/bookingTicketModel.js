@@ -9,7 +9,7 @@ exports.getAllTicketsInfo = async () => {
     //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
     //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
     const query = ` Select *
-                    from "PHIEUDATPHONG" ` ;
+                    from "HOADONTHANHTOAN" ` ;
     // const query = ` Select DISTINCT *
     //                 from "PHIEUDATPHONG" a, "KHACHHANG" b
     //                 where  a."MAKHACHHANG" = b."MAKHACHHANG"  `;
