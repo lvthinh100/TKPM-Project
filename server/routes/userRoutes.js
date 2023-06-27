@@ -18,7 +18,6 @@ router.delete(
   authController.restrictToAdmin,
   userController.deleteById
 );
-// router.post("/", userController.createCustomer);
 router.patch("/:id", userController.updateCustomerById);
 
 module.exports = router;

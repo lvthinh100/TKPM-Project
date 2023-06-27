@@ -56,20 +56,8 @@ exports.renderDetailRoomInfoPage = async (req, res) => {
 
 exports.deleteRoomById = async (req, res) => {
   console.log(req.body.id);
-  //console.log(req.data);
 
   const { data } = await api.deleteRoomById(req.body.id);
   console.log(data);
   res.redirect("/listRoomInfo");
-  //console.log(data.data[0])
-
-  // Trả về listRoomInfo
-  /*
-  res.render("detailRoomInfoPage", {
-    template: { title: "Test" },
-
-    itemRoom: data.data[0],
-  });
-  
-  */
 };

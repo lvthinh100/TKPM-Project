@@ -3,7 +3,8 @@ const db = require("../db");
 exports.getAllInvoiceInfo = async () => {
   try {
     //Lấy data từ db => Model
-    const query = 'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" ORDER BY "NGAYTHANHTOAN" DESC;';
+    const query =
+      'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" ORDER BY "NGAYTHANHTOAN" DESC;';
 
     //Bất đồng bộ
     const data = await db.any(query);
@@ -18,8 +19,9 @@ exports.getAllInvoiceInfo = async () => {
 exports.getInvoiceInfoById = async (id) => {
   try {
     //Lấy data từ db => Model
-    const query = 'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" where hd."MAHOADON" = $1;'
-    
+    const query =
+      'SELECT * FROM "HOADONTHANHTOAN" as hd JOIN "KHACHHANG" as kh on hd."MAKHTHANHTOAN"=kh."MAKHACHHANG" where hd."MAHOADON" = $1;';
+
     //Bất đồng bộ
     const data = await db.any(query, [id]);
     console.log(data);
@@ -31,10 +33,10 @@ exports.getInvoiceInfoById = async (id) => {
 
 exports.createOneInvoice = async (data, cre_data) => {
   try {
-    DataReturn = {}
-    DataReturn['userid'] =  data.userid
-    DataReturn['ticketId'] =  data.ticketId
-    DataReturn['invoiceId'] =  cre_data.ticketId
+    DataReturn = {};
+    DataReturn["userid"] = data.userid;
+    DataReturn["ticketId"] = data.ticketId;
+    DataReturn["invoiceId"] = cre_data.ticketId;
 
     const query1 = ` INSERT INTO "HOADONTHANHTOAN"("MAHOADON", "MAKHTHANHTOAN", "NGAYTHANHTOAN", "TONGTIEN")
       VALUES ($1, $2, $3, $4) 
@@ -43,133 +45,52 @@ exports.createOneInvoice = async (data, cre_data) => {
       cre_data.ticketId,
       data.userid,
       cre_data.createdAt,
-      0
+      0,
     ]);
 
     const query2 = ` select ("NGAYCHECKOUT" - "NGAYCHECKIN") as day, "SLKHACH"
                     from "PHIEUDATPHONG"
                     where "MADATPHONG" = $1`;
     let newdata2 = await db.any(query2, [data.ticketId]);
-    let SONGAY = newdata2[0]['day']['days'] + 1
+    let SONGAY = newdata2[0]["day"]["days"] + 1;
 
     const query3 = ` select distinct a."MAPHONG", c."DONGIA"
                     from "CT_PHIEUDATPHONG" a, "PHONG" b, "LOAIPHONG" c
                     where "MADATPHONG" = $1 and a."MAPHONG" = b."MAPHONG" and b."LOAIPHONG" = c."MALOAI"`;
     const newdata3 = await db.any(query3, [data.ticketId]);
-    const_pt = 0
-    if (newdata2[0]['SLKHACH'] > 2) 
-      const_pt = 0.25
-  
+    const_pt = 0;
+    if (newdata2[0]["SLKHACH"] > 2) const_pt = 0.25;
+
     const query4 = ` INSERT INTO "CT_HOADON"("MAHOADON", "MADATPHONG", "MAPHONG", "SONGAY", "DONGIA", "PHUTHU", "THANHTIEN")
       VALUES ($1, $2, $3, $4, $5, $6, $7) 
       returning *; `;
-   
-    tongtien = 0
-    detail = []
-    for (const i of newdata3){
-      dg = parseFloat(i['DONGIA'].replace('$', '').replace(',', ''))
+
+    tongtien = 0;
+    detail = [];
+    for (const i of newdata3) {
+      dg = parseFloat(i["DONGIA"].replace("$", "").replace(",", ""));
       let newdata4 = await db.any(query4, [
         cre_data.ticketId,
         data.ticketId,
-        i['MAPHONG'],
+        i["MAPHONG"],
         SONGAY,
         dg,
-        const_pt*dg,
-        dg+const_pt*dg
+        const_pt * dg,
+        dg + const_pt * dg,
       ]);
-      detail.push(newdata4[0])
-      tongtien = tongtien + dg+const_pt*dg
-
+      detail.push(newdata4[0]);
+      tongtien = tongtien + dg + const_pt * dg;
     }
     // update
     const query5 = `UPDATE "HOADONTHANHTOAN" 
                     SET "TONGTIEN" = $1 
                     WHERE "MAHOADON" = $2 returning *;`;
     const newdata5 = await db.any(query5, [tongtien, cre_data.ticketId]);
-    DataReturn['amount'] =  tongtien
-    DataReturn['detail'] =  detail
-    
-    return DataReturn
+    DataReturn["amount"] = tongtien;
+    DataReturn["detail"] = detail;
+
+    return DataReturn;
   } catch (err) {
     throw err;
   }
 };
-
-/*
-//create new room
-exports.createNewRoom = async (data) => {
-  try {
-    //Lấy data từ db => Model
-    const query = ` 
-        Insert into "PHONG"("MAPHONG", "LOAIPHONG", "TANG", "SOGIUONG", "SOKHACHTOIDA", "DIENTICH", "TINHTRANG", "MOTA", "GHICHU")
-        values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *; `;
-
-    //Bất đồng bộ
-    const newData = await db.one(query, [
-      data.maphong,
-      data.loaiphong,
-      data.tang,
-      data.sogiuong,
-      data.sokhachtoida,
-      data.dientich,
-      data.tinhtrang,
-      data.mota,
-      data.ghichu,
-    ]);
-
-    return newData;
-  } catch (err) {
-    throw err;
-  }
-};
-
-//delete room
-exports.deleteRoom = async (id) => {
-  try {
-    //Lấy data từ db => Model
-    const query = ' Delete from "PHONG" where "MAPHONG" = $1 ';
-
-    //Bất đồng bộ
-    const data = await db.any(query, [id]);
-
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-
-//update room information
-exports.updateRoomInfo = async (dataUpdated) => {
-  try {
-    //Lấy data từ db => Model
-    const query = ` 
-        Update "PHONG" 
-        set "LOAIPHONG" = $2,
-            "TANG" = $3,
-            "SOGIUONG" = $4,
-            "SOKHACHTOIDA" = $5,
-            "DIENTICH" = $6,
-            "TINHTRANG" = $7,
-            "MOTA" = $8,
-            "GHICHU" = $9
-        where "MAPHONG" = $1 `;
-
-    //Bất đồng bộ
-    const newData = await db.one(query, [
-      data.maphong,
-      data.loaiphong,
-      data.tang,
-      data.sogiuong,
-      data.sokhachtoida,
-      data.dientich,
-      data.tinhtrang,
-      data.mota,
-      data.ghichu,
-    ]);
-
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
-*/

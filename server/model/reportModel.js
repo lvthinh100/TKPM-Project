@@ -2,9 +2,6 @@ const db = require("../db");
 
 exports.getAll = async () => {
   try {
-    // const query = ` Select *
-    //                 from "PHONG" a, "LOAIPHONG" b
-    //                 where a."LOAIPHONG" = b."MALOAI"` ;
     const query = ` Select *
                     from "HOADONTHANHTOAN" a, "CT_HOADON" b 
                     where a."MAHOADON" = b."MAHOADON"
