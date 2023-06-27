@@ -3,14 +3,13 @@ const db = require("../db");
 exports.getAllTicketsInfo = async () => {
   try {
     // Lấy data từ db => Model
-    const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
-                    a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
-                     a."SLKHACH" as numUser, a."TRANGTHAI" as status
-                    from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
-                    where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    // const query = ` Select *
-    //                 from "PHONG" a, "LOAIPHONG" b
-    //                 where a."LOAIPHONG" = b."MALOAI"` ;
+    // const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
+    //                 a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
+    //                  a."SLKHACH" as numUser, a."TRANGTHAI" as status
+    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+    //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
+    const query = ` Select *
+                    from "PHIEUDATPHONG" ` ;
     // const query = ` Select DISTINCT *
     //                 from "PHIEUDATPHONG" a, "KHACHHANG" b
     //                 where  a."MAKHACHHANG" = b."MAKHACHHANG"  `;
@@ -209,18 +208,7 @@ exports.checkRoomExits = async (id, room) => {
     throw err;
   }
 };
-// exports.checkBookingTicketExits = async (id) => {
-//   try {
-//     const query = ` Select * from "PHIEUDATPHONG" where  "MADATPHONG" = $1 `;
 
-//     const newdata = await db.any(query, [id]);
-//     if (newdata.length > 0)
-//       return true
-//     return false
-//   } catch (err) {
-//     throw err;
-//   }
-// };
 exports.searchTicket = async (data) => {
   try {
     if (data.search == undefined) search = "%%";
@@ -241,6 +229,40 @@ exports.searchTicket = async (data) => {
     const newdata = await db.any(query, [search, statuss]);
 
     return newdata;
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.createOneTicket = async (data) => {
+  try {
+    // const query = ` Select * from "PHIEUDATPHONG" where  "MADATPHONG" = $1 `;
+    const query1 = ` INSERT INTO "PHIEUDATPHONG"("MADATPHONG", "MAKHACHHANG", "NGAYDATPHONG", 
+    "NGAYCHECKIN", "NGAYCHECKOUT", "SLKHACH", "TRANGTHAI")
+      VALUES ($1, $2, $3, $4, $5, $6, $7) 
+      returning "MADATPHONG" as ticketId, "MAKHACHHANG" as userid, "NGAYDATPHONG" as createdAt, 
+      "NGAYCHECKIN" as checkin, "NGAYCHECKOUT" as checkout, "SLKHACH" as numuser, "TRANGTHAI" as status; `;
+    const newdata = await db.any(query1, [
+      data.ticketId,
+      data.userid,
+      data.createdAt,
+      data.checkin, 
+      data.checkout,
+      data.numuser,
+      "SAPTOI"
+    ]);
+
+    const query2 = ` INSERT INTO "CT_PHIEUDATPHONG"("MADATPHONG", "MAPHONG")
+      VALUES ($1, $2) 
+       `;
+    for (const room of data.room){
+      const newdata2 = await db.any(query2, [
+        data.ticketId,
+        room
+      ]);
+    }
+    return newdata
+
   } catch (err) {
     throw err;
   }

@@ -29,6 +29,71 @@ exports.getInvoiceInfoById = async (id) => {
   }
 };
 
+exports.createOneInvoice = async (data, cre_data) => {
+  try {
+    // const query1 = ` INSERT INTO "HOADONTHANHTOAN"("MAHOADON", "MAKHTHANHTOAN", "NGAYTHANHTOAN", "TONGTIEN")
+    //   VALUES ($1, $2, $3, $4) 
+    //   returning *; `;
+    // const newdata1 = await db.any(query1, [
+    //   cre_data.ticketId,
+    //   data.userid,
+    //   data.createdAt,
+    //   0
+    // ]);
+
+    const query2 = ` select ("NGAYCHECKOUT" - "NGAYCHECKIN") as day, "SLKHACH"
+                    from "PHIEUDATPHONG"
+                    where "MADATPHONG" = $1`;
+    let newdata2 = await db.any(query2, [data.ticketId]);
+    let SONGAY = newdata2[0]['day']['days'] + 1
+
+    const query3 = ` select distinct a."MAPHONG", c."DONGIA"
+                    from "CT_PHIEUDATPHONG" a, "PHONG" b, "LOAIPHONG" c
+                    where "MADATPHONG" = $1 and a."MAPHONG" = b."MAPHONG" and b."LOAIPHONG" = c."MALOAI"`;
+    const newdata3 = await db.any(query3, [data.ticketId]);
+    const_pt = 0
+    if (newdata2[0]['SLKHACH'] > 2) 
+      const_pt = 0.25
+  
+    // const query4 = ` INSERT INTO "CT_HOADON"("MAHOADON", "MADATPHONG", "MAPHONG", "SONGAY", "DONGIA", "PHUTHU", "THANHTIEN")
+    //   VALUES ($1, $2, $3, $4, $5, $6, $7) 
+    //   returning *; `;
+   
+    // for (const i of newdata3){
+    //   const newdata4 = await db.any(query4, [
+    //     cre_data.ticketId,
+    //     data.ticketId,
+    //     i['MAPHONG'],
+    //     SONGAY,
+    //     i['DONGIA'],
+    //     const_pt,
+    //     i['DONGIA']+const_pt*i['DONGIA']
+    //   ]);
+    // }
+
+    // const query2 = ` INSERT INTO "CT_PHIEUDATPHONG"("MADATPHONG", "MAPHONG")
+    //   VALUES ($1, $2) 
+    //    `;
+    // for (const room of data.room){
+    //   const newdata2 = await db.any(query2, [
+    //     data.ticketId,
+    //     room
+    //   ]);
+    // }
+    // console.log(newdata[0]['day']['days'])
+    // return newdata2
+    for (const i of newdata3){
+      // console.log(const_pt*i['DONGIA'])
+      // console.log(Interger(i['DONGIA']))
+      // console.log(const_pt)
+      // console.log(formatter.format(i['DONGIA']));
+    }
+  
+  } catch (err) {
+    throw err;
+  }
+};
+
 /*
 //create new room
 exports.createNewRoom = async (data) => {
