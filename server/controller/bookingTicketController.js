@@ -4,6 +4,8 @@ const AppError = require("../utils/AppError");
 const bookingTicketModel = require("../model/bookingTicketModel");
 const userModel = require("../model/userModel");
 
+const IdGenerator = require("../utils/UIDGenerator");
+
 exports.getAllTicket = catchAsync(async (req, res) => {
   const data = await bookingTicketModel.getAllTicketsInfo();
 
@@ -158,3 +160,17 @@ exports.getDetailTicket = catchAsync(async (req, res) => {
     data: data,
   });
 });
+
+exports.createTicket = catchAsync(async (req, res) => {
+  data = req.body;
+  const ticketId = IdGenerator("DP");
+  data['ticketId'] = ticketId
+  data['createdAt'] = new Date();
+
+  const data_re = await bookingTicketModel.createOneTicket(data);
+  res.json({
+    status: 200,
+    message: 'success',
+    data: data
+  })
+})

@@ -2,6 +2,7 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
 const invoiceModel = require("../model/invoiceModel");
+const IdGenerator = require("../utils/UIDGenerator");
 
 exports.getAllInvoice = catchAsync(async (req, res) => {
     const data = await invoiceModel.getAllInvoiceInfo();
@@ -31,6 +32,23 @@ exports.getInvoiceById = catchAsync(async (req, res) => {
         message: "success",
         data: data,
     });
+});
+
+exports.createInvoice = catchAsync(async (req, res) => {
+  data = req.body;
+  const ticketId = IdGenerator("HD");
+  // cre_data = 
+  let cre_data = {}
+  cre_data['ticketId'] = ticketId
+  cre_data['createdAt'] = new Date();
+
+  const data_re = await invoiceModel.createOneInvoice(data, cre_data);
+
+  res.json({
+    status: 200,
+    message: 'success',
+    data: data_re
+  });
 });
 
 /*
