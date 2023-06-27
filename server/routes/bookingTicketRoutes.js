@@ -1,5 +1,6 @@
 const express = require("express");
 const bookingTicketController = require("../controller/bookingTicketController");
+const authController = require("../controller/authController");
 
 //Comment API
 const router = express.Router();

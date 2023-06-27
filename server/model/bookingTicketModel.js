@@ -3,17 +3,11 @@ const db = require("../db");
 exports.getAllTicketsInfo = async () => {
   try {
     // Lấy data từ db => Model
-    // const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
-    //                 a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
-    //                  a."SLKHACH" as numUser, a."TRANGTHAI" as status
-    //                 from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
-    //                 where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
-    const query = ` Select *
-                    from "PHIEUDATPHONG" ` ;
-    // const query = ` Select DISTINCT *
-    //                 from "PHIEUDATPHONG" a, "KHACHHANG" b
-    //                 where  a."MAKHACHHANG" = b."MAKHACHHANG"  `;
-
+    const query = ` Select DISTINCT a."MADATPHONG" as ticketId, a."MAKHACHHANG" as userId, c."TENKHACHHANG" as userName, 
+                    a."NGAYDATPHONG" as createdAt, a."NGAYCHECKIN" as checkIn, a."NGAYCHECKOUT" as checkOut, b."MAPHONG" as room,
+                     a."SLKHACH" as numUser, a."TRANGTHAI" as status
+                    from "PHIEUDATPHONG" a, "CT_PHIEUDATPHONG" b, "KHACHHANG" c 
+                    where a."MADATPHONG" = b."MADATPHONG" and c."MAKHACHHANG" =  a."MAKHACHHANG" `;
     //Bất đồng bộ
     const data = await db.any(query);
 
@@ -246,23 +240,19 @@ exports.createOneTicket = async (data) => {
       data.ticketId,
       data.userid,
       data.createdAt,
-      data.checkin, 
+      data.checkin,
       data.checkout,
       data.numuser,
-      "SAPTOI"
+      "SAPTOI",
     ]);
 
     const query2 = ` INSERT INTO "CT_PHIEUDATPHONG"("MADATPHONG", "MAPHONG")
       VALUES ($1, $2) 
        `;
-    for (const room of data.room){
-      const newdata2 = await db.any(query2, [
-        data.ticketId,
-        room
-      ]);
+    for (const room of data.room) {
+      const newdata2 = await db.any(query2, [data.ticketId, room]);
     }
-    return newdata
-
+    return newdata;
   } catch (err) {
     throw err;
   }

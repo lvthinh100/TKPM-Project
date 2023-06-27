@@ -2,6 +2,7 @@ import searchTicketHandler from "./searchBookingTicket.js";
 import {
   getDetailBookingTicketHandler,
   updateAccommodationInfoHandler,
+  checkOutTicketHandler,
 } from "./detailBookingTicket.js";
 import { handleRegister, handleUserLogin, handleAdminLogin } from "./auth.js";
 import { reportHandler } from "./chartReport.js";
@@ -25,6 +26,7 @@ if (register) register.addEventListener("submit", handleRegister);
 
 if (booking) {
   booking.addEventListener("click", getDetailBookingTicketHandler);
+  booking.addEventListener("click", checkOutTicketHandler);
 }
 if (searchTicketForm)
   searchTicketForm.addEventListener("submit", searchTicketHandler);

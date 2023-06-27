@@ -11,6 +11,8 @@
             <a href="/listRoomInfo">Quản lý phòng</a>
             <a href="/listInvoice">Quản lý hóa đơn</a>
             <a href="/addNewRoom">Thêm mới phòng</a>
+            <a href="/roomBooking">Quản lý phiếu đặt phòng</a>
+
           {{/if}}
           <a href="/listRoomForGuess">Đặt phòng</a>
           <a href="/user/profile">Hồ sơ</a>
@@ -77,7 +79,12 @@
             <div class="d-flex align-items-end justify-content-end h-100">
               {{#if user}}
                 <form action="/auth/logout" method="post" class="m-0">
-                  <span>Hello {{user.name}} </span>
+                  <span>Hello
+                    {{#if user.isAdmin}}
+                      Admin
+                    {{/if}}
+                    {{user.name}}
+                  </span>
                   <input
                     class="btn btn-primary ms-1"
                     type="submit"

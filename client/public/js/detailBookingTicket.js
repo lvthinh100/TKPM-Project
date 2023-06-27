@@ -42,10 +42,10 @@ const generateUserForm = (index, user) => {
               class="form-control border border-3 custom-select bg-white border-start-0 border-md"
             >
               <option value="NOIDIA" ${
-                user.type === "NOIDIA" ? "selected" : ""
+                user?.type === "NOIDIA" ? "selected" : ""
               } >Nội địa</option>
               <option value="NUOCNGOAI" ${
-                user.type === "NUOCNGOAI" ? "selected" : ""
+                user?.type === "NUOCNGOAI" ? "selected" : ""
               } >Nước ngoài</option>
           </select>
         </div>
@@ -131,6 +131,7 @@ export const getDetailBookingTicketHandler = async (e) => {
   //Get ticket Id
   const { ticket, room } = e.target.dataset;
   const { data: ticketInfo } = await api.getAccommodationInfo(ticket, room);
+  console.log(ticketInfo);
   // Render ticket info
   renderTicket(ticketInfo.data);
 };
@@ -164,4 +165,12 @@ export const updateAccommodationInfoHandler = async (e) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const checkOutTicketHandler = async (e) => {
+  if (!e.target.classList.contains("btn-checkOut")) return;
+  //Get ticket Id
+  const { ticket } = e.target.dataset;
+  console.log(ticket);
+  // Render ticket info
 };
