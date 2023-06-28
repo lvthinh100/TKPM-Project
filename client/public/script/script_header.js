@@ -48,11 +48,6 @@ $('#search-product-btn').click(function(e)
     // })
 })
 
-$('#shopping-cart').click(function(){
-    console.log('tui ne haha')
-    window.location.href = "/shopping-cart"
-})
-
 
 function openNav() {
     $("#mySidenav").css('width',"400px");
@@ -80,19 +75,4 @@ $('input.search-field').on('keypress', function(event) {
         document.querySelector("button.search-items").click();
         return false;
     }
-})
-
-
-$('#recharge-btn').click(function(e)
-{
-    console.log('hahaha')
-    window.location.href = '/recharge'
-})
-
-$('#search-receipt-btn').click(function(){
-    window.location.href = `/trading-details?id=${$('#search-id-key').val()}`
-    
-})
-$('#cart-history-btn').click(function(){
-    window.location.href='/tradings-history'
 })

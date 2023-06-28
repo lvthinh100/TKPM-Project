@@ -8,5 +8,6 @@ router.use(authController.protected, authController.restrictToAdmin);
 
 router.get("/", detailRoomInfoPageController.renderDetailRoomInfoPage);
 router.post("/", detailRoomInfoPageController.deleteRoomById);
+//router.post("/updateRoom/", detailRoomInfoPageController.updateRoomById);
 
 module.exports = router;

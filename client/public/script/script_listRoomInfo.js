@@ -12,6 +12,5 @@ $(window).on("popstate", function(e) {
 
 $(".item-container").click(function(){
     id=$(this).attr('id');
-    //window.location.href=`/item-detail?id=${id}`
     window.location.href=`/detailRoomInfo?id=${id}`
 })

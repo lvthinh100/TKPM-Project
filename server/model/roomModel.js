@@ -116,7 +116,7 @@ exports.updateRoomInfo = async (dataUpdated) => {
       data.ghichu,
     ]);
 
-    return data;
+    return newData;
   } catch (err) {
     throw err;
   }
