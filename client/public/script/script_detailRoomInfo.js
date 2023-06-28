@@ -3,12 +3,21 @@ $("#delete-room").click(function (e) {
 
   $.ajax({
     method: "post",
-    url: "/detailRoomInfo",
+    url: "/listRoomInfo",
     data: { id: id },
     success: function (data) {
       console.log(data.id);
-      window.location.href = "/listRoomInfo";
-      console.log(window);
+      $(".noti-content").html(`<p>Xóa thành công</p>`);
+
+      $(".pop-up").removeClass("hidden");
+      $(".fa-window-close").click(function () {
+        window.location.href = "/listRoomInfo";
+      });
+
+      setTimeout(function () {
+        window.location.href = "/listRoomInfo";
+      }, 1000);
+
     },
   });
 });

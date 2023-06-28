@@ -81,3 +81,22 @@ exports.deleteRoomById = catchAsync(async (req, res) => {
     data: data,
   });
 });
+
+exports.updateRoomById = catchAsync(async (req, res, next) => {
+  
+  const data = req.body;
+
+  // Xử lý dữ liệu nếu cần
+  /* 
+  Code. . .
+  */
+
+  // Update dataroom
+  //const resData = await roomModel.updateRoomInfo(data);
+
+  res.json({
+    status: 200,
+    message: "success",
+    //data: resData,
+  });
+});

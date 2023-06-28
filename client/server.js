@@ -85,6 +85,19 @@ app.use("/listRoomForGuess", listRoomForGuessRoutes);
 app.use("/checkout", checkoutRoutes);
 app.use("/listRoomBooked", listRoomBookedRoutes);
 
+/*
+app.use("/", (err, req, res, next) => {
+  res.status(500).json({
+    data: "error",
+  });
+  console.log(err);
+});
+*/
+
+app.get('/', (req, res) => {
+  res.redirect('/home');
+});
+
 app.all("*", (req, res, next) => {
   res.json({
     status: 404,
@@ -92,12 +105,8 @@ app.all("*", (req, res, next) => {
   });
 });
 
-app.use("/", (err, req, res, next) => {
-  res.status(500).json({
-    data: "error",
-  });
-  console.log(err);
-});
+
+
 
 // app.use("/api/transactions", transactionRoutes);
 

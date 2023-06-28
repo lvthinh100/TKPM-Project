@@ -59,5 +59,19 @@ exports.deleteRoomById = async (req, res) => {
 
   const { data } = await api.deleteRoomById(req.body.id);
   console.log(data);
+
   res.redirect("/listRoomInfo");
+};
+
+exports.updateRoomById = async (req, res) => {
+  //console.log(req.body.id);
+
+  var { data } = await api.getRoomById(req.query.id);
+  roomData = data.data[0];
+  console.log(roomData);
+
+  const { resData } = await api.updateRoomById(roomData);
+  console.log(resData);
+
+  res.redirect("/detailRoomInfoPage?id=107");
 };

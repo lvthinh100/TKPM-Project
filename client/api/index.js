@@ -21,8 +21,8 @@ exports.getAllRoom = async () => axios.get(`${server}/api/room/`);
 exports.createRoom = async (data) => axios.post(`${server}/api/room/`, data);
 exports.getRoomById = async (id) => axios.get(`${server}/api/room/${id}`);
 exports.deleteRoomById = async (id) => axios.post(`${server}/api/room/${id}`);
-exports.getMaxIDRoom = async (id) =>
-  axios.get(`${server}/api/room/maxid/${id}`);
+exports.getMaxIDRoom = async (id) => axios.get(`${server}/api/room/maxid/${id}`);
+exports.updateRoomById = async (data) => axios.post(`${server}/api/room/updateRoom/`, data);
 
 exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
 

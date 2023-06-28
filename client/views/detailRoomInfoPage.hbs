@@ -1,8 +1,26 @@
 <link rel="stylesheet" href="../public/css/style_listRoomInfo.css">
 <link rel="stylesheet" href="../public/css/style_detailRoomInfo.css">
+<link rel="stylesheet" href="../public/css/style_announcement.css">
+
+<div class="pop-up hidden">
+    <div class="popup-container">
+        <div class="notification">
+            <div class="noti-header">
+                <i class="fas fa-window-close"></i>
+            </div>
+            <div class="noti-content-container">
+                <div class="noti-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="m-0 pl-3 pt-0 pb-3 text-center h2">
     THÔNG TIN CHI TIẾT PHÒNG
 </div>
+
 <div class="col-lg-10 border p-3 main-section bg-white">
     <div class="row m-0 product-detail" id="{{itemRoom.MAPHONG}}">
 
@@ -84,25 +102,16 @@
                         
                         <hr class="m-0 pt-2 mt-2">
                     </div>
-                    <!--
-                        <div class="col-lg-12 amount-field">
-                            <p class="bold-text">Số lượng: </p>
-                            <div class="col-lg-6">
-                                <input type="number" id="quantity" class="form-control text-center w-100" value="1">
-                            </div>
-                        </div>
-                        -->
-
 
                     <div class="col-lg-12 mt-3">
                         <div class="row">
                             <div class="col-lg-6 pb-2">
-                                <a class="btn w-100" id="add-to-cart" style="background-color: #DAE5FC;"
+                                <a class="btn w-100 btn-primary" id="add-to-cart" 
                                     data-bs-toggle="modal" data-bs-target="#Modal">Cập nhật
                                     phòng</a>
                             </div>
                             <div class="col-lg-6">
-                                <button id="delete-room" class="btn w-100" style="background-color: #40ea92;">Xóa
+                                <button id="delete-room" class="btn w-100" style="background-color: red;">Xóa
                                     phòng</button>
                             </div>
 
@@ -117,4 +126,6 @@
 </div>
 
 {{> modalUpdateInfoRoom}}
+
+<script src="../public/script/script_announcement.js"></script>
 <script src="../public/script/script_detailRoomInfo.js"></script>
