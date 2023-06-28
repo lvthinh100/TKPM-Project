@@ -93,7 +93,6 @@ exports.protected = async (req, res, next) => {
     const { data } = await api.getMe(req.headers.cookie);
     res.locals.user = data.data;
     req.user = data.data;
-    console.log(data.data);
     next();
   } catch (err) {
     res.redirect("/auth/login");

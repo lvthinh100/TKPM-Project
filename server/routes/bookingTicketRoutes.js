@@ -1,10 +1,12 @@
 const express = require("express");
 const bookingTicketController = require("../controller/bookingTicketController");
+const authController = require("../controller/authController");
 
 //Comment API
 const router = express.Router();
 
 router.get("/search", bookingTicketController.searchBookingTicket);
+router.post("/", bookingTicketController.createTicket);
 
 router.get("/", bookingTicketController.getAllTicket);
 router.patch("/checkOut/:id", bookingTicketController.updateStatusById);

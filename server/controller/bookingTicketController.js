@@ -4,6 +4,8 @@ const AppError = require("../utils/AppError");
 const bookingTicketModel = require("../model/bookingTicketModel");
 const userModel = require("../model/userModel");
 
+const IdGenerator = require("../utils/UIDGenerator");
+
 exports.getAllTicket = catchAsync(async (req, res) => {
   const data = await bookingTicketModel.getAllTicketsInfo();
 
@@ -79,6 +81,7 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
     if (status.length == 0 && checkExitsUser.length == 0) {
       // Phiêu ko có user và user chưa tồn tại.
       newuser = await userModel.createOne(data[index]);
+      newuser.userid = newuser.userId;
       dataNewLL = await bookingTicketModel.createStatusLL(
         id,
         query.room,
@@ -152,6 +155,20 @@ exports.getDetailTicket = catchAsync(async (req, res) => {
 
   const data = await bookingTicketModel.getDetailTicket(id);
 
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
+});
+
+exports.createTicket = catchAsync(async (req, res) => {
+  data = req.body;
+  const ticketId = IdGenerator("DP");
+  data["ticketId"] = ticketId;
+  data["createdAt"] = new Date();
+
+  const data_re = await bookingTicketModel.createOneTicket(data);
   res.json({
     status: 200,
     message: "success",
