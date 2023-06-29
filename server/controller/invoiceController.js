@@ -51,3 +51,16 @@ exports.createInvoice = catchAsync(async (req, res) => {
     data: data_re,
   });
 });
+
+exports.getInvoiceByTicketId = catchAsync(async (req, res) => {
+  const { ticketId } = req.params;
+
+  console.log(ticketId);
+  const data = await invoiceModel.getInvoiceInfoByTicketId(ticketId);
+
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
+});

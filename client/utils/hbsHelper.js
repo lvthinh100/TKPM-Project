@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 module.exports = {
   formatDate: (date) => {
     const today = new Date(date);
@@ -10,4 +12,25 @@ module.exports = {
 
     return dd + "/" + mm + "/" + yyyy;
   },
+  formatFUllDate: (date) => {
+    return moment(date).format("h:mm:ss A, DD-MM-YYYY");
+  },
+  formatCurrency: (amount) => {
+    amount = amount.replace('$', '');
+    amount = amount.replace(',','');
+    amount = amount.replace('.', '')
+    if(typeof(amount)=='string')
+    {
+      try{
+        //console.log(amount);
+        var valueAmount = parseFloat(amount)*10;
+        //console.log(valueAmount);
+      }
+      catch(err){
+
+      }
+    }
+    return valueAmount.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+  },
 };
+

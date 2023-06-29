@@ -175,3 +175,16 @@ exports.createTicket = catchAsync(async (req, res) => {
     data: data,
   });
 });
+
+exports.deleteBookingById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  
+  const newData = await bookingTicketModel.deleteBooking(id);
+
+  console.log(newData);
+
+  res.status(200).json({
+    status: "success",
+    data: newData,
+  });
+});

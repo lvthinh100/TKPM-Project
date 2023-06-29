@@ -13,7 +13,7 @@ const generateMarkup = (data) => {
   <td>${hbsHelper.formatDate(ticket.checkin)}</td>
   <td>${hbsHelper.formatDate(ticket.checkout)}</td>
   <td>${ticket.numuser}</td>
-  <td>${ticket.status}</td>
+  <td class="status" >${ticket.status}</td>
   <td>
     <button
       type="button"
@@ -25,7 +25,11 @@ const generateMarkup = (data) => {
     >
       Check in
     </button>
-    <button class="btn btn-primary">Check out</button>
+    <button 
+      class="btn btn-primary btn-checkOut"
+      data-ticketid="${ticket.ticketid}"
+      data-userid="${ticket.userid}"
+    >Check out</button>
   </td>
 </tr>
   `

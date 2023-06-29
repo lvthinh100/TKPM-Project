@@ -29,7 +29,7 @@ exports.handleUserLogin = async (e) => {
     renderSpinner(".user-message");
     const { data } = await api.login(input);
 
-    location.assign("/user/profile");
+    location.assign("/home");
   } catch (err) {
     const { data } = err.response;
     renderMessage(data.message, "user");
