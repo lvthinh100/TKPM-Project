@@ -76,7 +76,8 @@ exports.createNewRoom = async (data) => {
 exports.deleteRoom = async (id) => {
   try {
     //Lấy data từ db => Model
-    const query = ' Delete from "PHONG" where "MAPHONG" = $1 ';
+    console.log(id);
+    const query = 'Delete from "PHONG" where "MAPHONG" = $1 ';
 
     //Bất đồng bộ
     const data = await db.any(query, [id]);

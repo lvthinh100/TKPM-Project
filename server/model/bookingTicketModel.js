@@ -271,3 +271,20 @@ exports.updateStatus = async (id, status) => {
     throw err;
   }
 };
+
+exports.deleteBooking = async (id) => {
+  try {
+    //Lấy data từ db => Model
+    const query1 = `DELETE FROM "CT_PHIEUDATPHONG"
+                    WHERE "MADATPHONG" = $1;`;
+    const res1 = await db.any(query1, [id]);
+
+    const query2 = `DELETE FROM "PHIEUDATPHONG"
+                    WHERE "MADATPHONG" = $1;`;
+    const res2 = await db.any(query2, [id]);
+
+    return res2;
+  } catch (err) {
+    throw err;
+  }
+};

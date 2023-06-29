@@ -1,12 +1,15 @@
 $("#delete-room").click(function (e) {
-  const id = $(".product-detail").attr("id");
+  const id = $(".room-detail").attr("id");
+  console.log(id);
+  const detailURL = "/detailRoomInfo?id=" + id;
+  console.log(detailURL);
 
   $.ajax({
     method: "post",
-    url: "/listRoomInfo",
+    url: detailURL,
     data: { id: id },
     success: function (data) {
-      console.log(data.id);
+      console.log(data);
       $(".noti-content").html(`<p>Xóa thành công</p>`);
 
       $(".pop-up").removeClass("hidden");
