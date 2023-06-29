@@ -40,14 +40,14 @@
       </thead>
       <tbody id="listRoomBooked">
         {{#each listRoom}}
-        <tr id="{{this.MAPHONG}}">
-          <td class="room-id">{{this.MAPHONG}}</td>
-          <td>{{this.TANG}}</td>
-          <td>{{this.TENLOAI}}</td>
-          <td>{{this.SOGIUONG}}</td>
-          <td>{{this.SOKHACHTOIDA}}</td>
-          <td class="text-end">{{this.DONGIA}}</td>
-        </tr>
+          <tr id="{{this.MAPHONG}}">
+            <td class="room-id">{{this.MAPHONG}}</td>
+            <td>{{this.TANG}}</td>
+            <td>{{this.TENLOAI}}</td>
+            <td>{{this.SOGIUONG}}</td>
+            <td>{{this.SOKHACHTOIDA}}</td>
+            <td class="text-end">{{formatCurrency this.DONGIA}}</td>
+          </tr>
         {{/each}}
       </tbody>
     </table>

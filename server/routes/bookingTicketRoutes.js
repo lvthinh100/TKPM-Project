@@ -21,4 +21,6 @@ router.patch(
   bookingTicketController.updateInforCheckInByIdRoom
 );
 
+router.post("/deleteBooking/:id", bookingTicketController.deleteBookingById);
+
 module.exports = router;

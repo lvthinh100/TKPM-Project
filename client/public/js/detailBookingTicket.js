@@ -2,6 +2,18 @@ import api from "./api.js";
 import hbsHelper from "../../utils/hbsHelper.js";
 import { renderSpinner } from "./ui.js";
 
+const updateStatus = (ticketId, status) => {
+  const btn = document.querySelector(`[data-ticket="${ticketId}"]`);
+  if (!btn) return;
+  btn.closest("tr").querySelector(".status").textContent = status;
+};
+
+const getStatus = (ticketId) => {
+  const btn = document.querySelector(`[data-ticket="${ticketId}"]`);
+  if (!btn) return;
+  return btn.closest("tr").querySelector(".status").textContent;
+};
+
 const renderIndicatorBtn = (num) => {
   const body = document.querySelector(".accommodation-indicators");
 
@@ -31,6 +43,7 @@ const generateUserForm = (index, user) => {
             placeholder="Mã Khách Hang"
             value="${user ? user.userid : ""}"
             name="id"
+            disabled
           />
         </div>
         <div class="col-md-6">
@@ -143,7 +156,14 @@ export const updateAccommodationInfoHandler = async (e) => {
     let users = [];
     forms.forEach((form) => {
       const formData = new FormData(form); // create a new FormData object
+
+      const userIdInput = form.querySelector('input[name="id"]');
+      userIdInput.disabled = false;
+
+      // Add the email input to the FormData object
+      formData.set("id", userIdInput.value);
       const input = Object.fromEntries(formData.entries()); // convert the FormData object to a plain object
+
       if (input.id === "") delete input["id"];
       users.push(input);
     });
@@ -151,16 +171,15 @@ export const updateAccommodationInfoHandler = async (e) => {
     const ticketId = document.querySelector(".ticket-id");
     const room = document.querySelector(".ticket-room");
     const num = document.querySelector(".ticket-num");
-
+    console.log(users);
     renderSpinner(".ticket-users");
     const { data } = await api.updateAccommodationInfo(
       ticketId.textContent,
       room.textContent,
       users
     );
-    console.log(data.data.users, +num.textContent);
-    // console.log(data.data[1].users);
     renderForm(+num.textContent, data.data.users);
+    updateStatus(ticketId, "DANGSUDUNG");
   } catch (err) {
     console.log(err);
   }
@@ -171,7 +190,14 @@ export const checkOutTicketHandler = async (e) => {
   //Get ticket Id
   const { ticketid, userid } = e.target.dataset;
   // Render ticket info
-  console.log(ticketid, userid);
+  const status = getStatus(ticketid);
+  if (status === "DASUDUNG") {
+    const { data } = await api.getInvoiceByTicketId(ticketid);
+    const invoice = data.data.invoice;
+
+    return location.assign(`/detailInvoice?id=${invoice}`);
+  }
   const { data } = await api.createInvoice({ ticketId: ticketid, userid });
-  console.log(data);
+  updateStatus(ticketid, "DASUDUNG");
+  return location.assign(`/detailInvoice?id=${data.data.invoiceId}`);
 };

@@ -73,6 +73,8 @@ exports.createRoom = catchAsync(async (req, res, next) => {
 exports.deleteRoomById = catchAsync(async (req, res) => {
   const { id } = req.params;
 
+  console.log(id);
+  
   const data = await roomModel.deleteRoom(id);
 
   res.json({
@@ -82,6 +84,7 @@ exports.deleteRoomById = catchAsync(async (req, res) => {
   });
 });
 
+/*
 exports.updateRoomById = catchAsync(async (req, res, next) => {
   
   const data = req.body;
@@ -89,7 +92,7 @@ exports.updateRoomById = catchAsync(async (req, res, next) => {
   // Xử lý dữ liệu nếu cần
   /* 
   Code. . .
-  */
+  
 
   // Update dataroom
   //const resData = await roomModel.updateRoomInfo(data);
@@ -99,4 +102,4 @@ exports.updateRoomById = catchAsync(async (req, res, next) => {
     message: "success",
     //data: resData,
   });
-});
+});*/

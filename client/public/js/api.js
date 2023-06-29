@@ -32,3 +32,5 @@ exports.getReportMetrics = async (month, year, type) =>
   axios.get(`${server}/api/report/${type}?year=${year}&month=${month}`);
 exports.createInvoice = async (data) =>
   axios.post(`${server}/api/invoice`, data);
+exports.getInvoiceByTicketId = async (id) =>
+  axios.get(`${server}/api/invoice/ticket/${id}`);

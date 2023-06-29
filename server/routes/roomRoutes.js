@@ -9,6 +9,5 @@ router.post("/", roomController.createRoom);
 router.get("/:id", roomController.getRoomById);
 router.post("/:id", roomController.deleteRoomById);
 router.get("/maxid/:id", roomController.getMaxIDRoom);
-//router.post("/updateRoom/", roomController.updateRoomById);
 
 module.exports = router;

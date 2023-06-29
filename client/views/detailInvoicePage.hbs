@@ -26,15 +26,15 @@
                 </tr>
                 <tr>
                     <td>Thời gian</td>
-                    <td>{{dataInvoice.NGAYTHANHTOAN}}</td>
+                    <td>{{formatFUllDate dataInvoice.NGAYTHANHTOAN}}</td>
                 </tr>
                 <tr>
                     <td>Mã hóa đơn</td>
-                    <td>{{dataInvoice.MAHOADON}}</td>
+                    <td>{{formatFUllDate dataInvoice.MAHOADON}}</td>
                 </tr>
                 <tr>
                     <td>TỔNG TIỀN</td>
-                    <td>{{dataInvoice.TONGTIEN}}</td>
+                    <td>{{formatCurrency dataInvoice.TONGTIEN}}</td>
 
                 </tr>
             </tbody>
@@ -61,9 +61,9 @@
                     <td>{{MADATPHONG}}</td>
                     <td>{{MAPHONG}}</td>
                     <td>{{SONGAY}}</td>
-                    <td>{{DONGIA}}</td>
-                    <td>{{PHUTHU}}</td>
-                    <td>{{THANHTIEN}}</td>
+                    <td>{{formatCurrency DONGIA}}</td>
+                    <td>{{formatCurrency PHUTHU}}</td>
+                    <td>{{formatCurrency THANHTIEN}}</td>
                 </tr>
                 {{/each}}
 

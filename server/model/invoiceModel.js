@@ -31,6 +31,23 @@ exports.getInvoiceInfoById = async (id) => {
   }
 };
 
+//get invoice information by id
+exports.getInvoiceInfoByTicketId = async (id) => {
+  try {
+    //Lấy data từ db => Model
+    const query = `select distinct "MAHOADON" as invoice
+      from "CT_HOADON" 
+      where "MADATPHONG" = $1`;
+
+    //Bất đồng bộ
+    const data = await db.any(query, [id]);
+    console.log(data);
+    return data[0];
+  } catch (err) {
+    throw err;
+  }
+};
+
 exports.createOneInvoice = async (data, cre_data) => {
   try {
     DataReturn = {};
