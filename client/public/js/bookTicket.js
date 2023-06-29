@@ -23,5 +23,5 @@ export const addNewTicketHandler = async (e) => {
 };
 
 export const cancelBookingHandler = (e) => {
-  console.log(e.target);
+  window.location.href = "/listRoomForGuess";
 };
