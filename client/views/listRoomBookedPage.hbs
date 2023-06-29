@@ -13,14 +13,20 @@
         <tbody id="listRoomBooked">
             {{#each listTicket}}
             <tr class="">
-                <th rowspan="2" scope="row" class="align-middle text-center">{{MADATPHONG}}</th>
-                <td>{{NGAYDATPHONG}}</td>
-                <td>{{NGAYCHECKIN}}</td>
-                <td>{{NGAYCHECKOUT}}</td>
+                <th rowspan="2" scope="row" class="align-middle text-center">
+                    <div class="col-12"  style="font-size:1.25em">{{MADATPHONG}}</div>
+                    <div class="col-12" style="margin-top:1em; color:rgb(30, 30, 218)">Trạng thái: {{TRANGTHAI}}</div>                   
+                    <div class="col-lg-9 align-middle text-center" style="margin-top:1em;">
+                        <button id="delete-booking" class="btn w-100" style="background-color: rgb(237, 75, 75);">Hủy đặt phòng</button>
+                    </div>
+                </th>
+                <td>{{formatFUllDate NGAYDATPHONG}}</td>
+                <td>{{formatFUllDate NGAYCHECKIN}}</td>
+                <td>{{formatFUllDate NGAYCHECKOUT}}</td>
                 <td class="text-center">{{SLKHACH}}</td>
                 <td>$ xxx,xxx</td>
             </tr>
-            <tr class="" id="{{MADATPHONG}}">
+            <tr class="" id="{{ticketid}}">
                 <td colspan="12" class="m-0 p-0">
                     <table class="table table-light table-bordered m-auto">
                         <thead class="">
@@ -41,7 +47,7 @@
                                 <td>{{this.TENLOAI}}</td>
                                 <td>{{this.SOGIUONG}}</td>
                                 <td>{{this.SOKHACHTOIDA}}</td>
-                                <td>{{this.DONGIA}}</td>
+                                <td>{{formatCurrency this.DONGIA}}</td>
                             </tr>
                             {{/each}}
                         </tbody>
@@ -59,4 +65,5 @@
     </table>
 </div>
 
+<script src="/public/script/script_format.js"></script>
 <script src="../public/script/script_listRoomBooked.js"></script>

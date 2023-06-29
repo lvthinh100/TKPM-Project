@@ -22,7 +22,7 @@
 </div>
 
 <div class="col-lg-10 border p-3 main-section bg-white">
-    <div class="row m-0 product-detail" id="{{itemRoom.MAPHONG}}">
+    <div class="row m-0 room-detail" id="{{itemRoom.MAPHONG}}">
 
         <div class="col-lg-5 left-side-product-box pb-3">
             <img src="public/image/{{itemRoom.IMAGE}}" class="p-3">
@@ -48,7 +48,7 @@
                                 <p class="m-0 p-0 bold-text">Đơn giá: </p>
                             </div>
                             <div class="col-lg-9">
-                                <p class="m-0 quantity-pro"> {{itemRoom.DONGIA}}</p>
+                                <p class="m-0 quantity-pro"> {{formatCurrency itemRoom.DONGIA}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -99,16 +99,15 @@
                                 <p class="m-0 quantity-pro"> {{itemRoom.GHICHU}} </p>
                             </div>
                         </div>
-                        
+
                         <hr class="m-0 pt-2 mt-2">
                     </div>
 
                     <div class="col-lg-12 mt-3">
                         <div class="row">
                             <div class="col-lg-6 pb-2">
-                                <a class="btn w-100 btn-primary" id="add-to-cart" 
-                                    data-bs-toggle="modal" data-bs-target="#Modal">Cập nhật
-                                    phòng</a>
+                                <a class="btn w-100 btn-primary" id="add-to-cart" data-bs-toggle="modal"
+                                    data-bs-target="#Modal">Cập nhật phòng</a>
                             </div>
                             <div class="col-lg-6">
                                 <button id="delete-room" class="btn w-100" style="background-color: red;">Xóa

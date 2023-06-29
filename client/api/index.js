@@ -22,7 +22,6 @@ exports.createRoom = async (data) => axios.post(`${server}/api/room/`, data);
 exports.getRoomById = async (id) => axios.get(`${server}/api/room/${id}`);
 exports.deleteRoomById = async (id) => axios.post(`${server}/api/room/${id}`);
 exports.getMaxIDRoom = async (id) => axios.get(`${server}/api/room/maxid/${id}`);
-exports.updateRoomById = async (data) => axios.post(`${server}/api/room/updateRoom/`, data);
 
 exports.getAllTypeRoom = async () => axios.get(`${server}/api/typeRoom/`);
 
@@ -46,3 +45,6 @@ exports.searchTicket = async (text, status) => {
   if (!text) return axios.get(`${server}/api/search?status=${status}`);
   return axios.get(`${server}/api/search?search=${text}&status=${status}`);
 };
+
+exports.deleteBookingById = async (id) =>
+  axios.post(`${server}/api/bookingTicket/deleteBooking/${id}`);
