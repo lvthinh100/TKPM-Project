@@ -1,5 +1,7 @@
+import { read, utils, write } from "xlsx";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+
 import api from "./api.js";
 
 // Chart
@@ -68,6 +70,51 @@ const renderChart = (title, data) => {
   });
 };
 
+function s2ab(s) {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) {
+    view[i] = s.charCodeAt(i) & 0xff;
+  }
+  return buf;
+}
+
+const downloadFile = (data) => {
+  // Create a new workbook object
+  console.log(data);
+  const rows = data.map((row) => Object.values(row));
+  const wb = utils.book_new();
+
+  // Create a new worksheet object and add it to the workbook
+  const ws = utils.aoa_to_sheet([Object.keys(data[0]), ...rows]);
+  utils.book_append_sheet(wb, ws, "Sheet1");
+
+  // Convert the workbook object to a binary string
+  const wbBinary = write(wb, { bookType: "xlsx", type: "binary" });
+
+  // Download the file using the Blob and URL APIs
+  const blob = new Blob([s2ab(wbBinary)], { type: "application/octet-stream" });
+  console.log([[data.keys()], ...rows]);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.download = "report.xlsx";
+  a.href = url;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+const renderDownloadButton = (data) => {
+  const button = document.createElement("button");
+  button.innerHTML = `Download here`;
+  button.classList = "btn btn-primary";
+  button.addEventListener("click", downloadFile.bind(this, data));
+  const container = document.querySelector(".downloader");
+  container.innerHTML = "";
+  container.appendChild(button);
+};
+
 const resetChart = () => {
   if (barChart) barChart.destroy();
   if (pieChart) pieChart.destroy();
@@ -96,6 +143,8 @@ export const reportHandler = async (e) => {
       default:
         break;
     }
+
+    renderDownloadButton(data.data.dataset);
   } catch (err) {
     console.log(err);
   }
