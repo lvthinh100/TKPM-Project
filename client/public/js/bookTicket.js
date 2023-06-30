@@ -9,17 +9,26 @@ export const addNewTicketHandler = async (e) => {
     e.textContent.trim()
   );
 
-  const { data } = await api.createTicket({
-    checkin,
-    checkout,
-    room,
-    userid,
-    numuser,
-  });
-  document.querySelector(".ticket-id").textContent = data.data.ticketId;
-  $('#sucessModal').modal('show');
-  setTimeout(() => window.location.href = "/listRoomForGuess", 2500);
-  console.log(data);
+  if (userid == '') {
+    $('#GuessModal').modal('show');
+    const name = document.getElementById("name");
+    const type = document.getElementById("type");
+    const phone = document.getElementById("phone");
+    const location = document.getElementById("location");
+  }
+  else {
+    const { data } = await api.createTicket({
+      checkin,
+      checkout,
+      room,
+      userid,
+      numuser,
+    });
+    document.querySelector(".ticket-id").textContent = data.data.ticketId;
+    $('#SucessModal').modal('show');
+    setTimeout(() => window.location.href = "/listRoomForGuess", 2500);
+    console.log(data);
+  }
 };
 
 export const cancelBookingHandler = (e) => {

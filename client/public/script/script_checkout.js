@@ -32,11 +32,12 @@ function fillData(){
         if (listBooked.includes(x.id) == false)
             x.parentNode.removeChild(x)
         else {
-            cost += parseFloat(x.children[5].innerText.substring(1).replace(/,/g, ""));
+            cost += parseFloat(x.children[5].innerText.slice(0, -4).split(".").join().replace(/,/g, ""));
             numUser += parseInt(x.children[4].innerText);
         }
     })
-    total.innerText = "Tổng chi phí: " + cost.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+    console.log(cost);
+    total.innerText = "Tổng chi phí: " + cost.toLocaleString('it-IT', {style: 'currency', currency: 'VND'});
     numuser.innerText = numUser;
 }
 
