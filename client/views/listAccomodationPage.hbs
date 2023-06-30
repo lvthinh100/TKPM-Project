@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="records-container">
+        <h3 style="margin-top:1em">DANH SÁCH KHÁCH HÀNG ĐANG LƯU TRÚ</h3>
+
+        <div class="d-flex flex-column jusify-content-center align-items-center p-3">
+            <td colspan="12" class="m-0 p-0">
+                <table class="table table-light table-bordered m-auto">
+                    <thead class="">
+                        <tr>
+                            <th scope="col">Mã đặt phòng</th>
+                            <th scope="col">Phòng</th>
+                            <th scope="col">Loại phòng</th>
+                            <th scope="col">Tên khách hàng</th>
+                            <th scope="col">CCCD/Passport</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Ngày checkin</th>
+                            <th scope="col">Ngày checkout</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each listAccomodation}}
+                        <tr>
+                            <td>{{this.MADATPHONG}}</td>
+                            <td>{{this.MAPHONG}}</td>
+                            <td>{{this.TENLOAI}}</td>
+                            <td>{{this.TENKHACHHANG}}</td>
+                            <td>{{this.CMND}}</td>
+                            <td>{{this.SODIENTHOAI}}</td>
+                            <td>{{formatFUllDate this.NGAYCHECKIN}}</td>
+                            <td>{{formatFUllDate this.NGAYCHECKOUT}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </td>
+        </div>
+    </div>
+</div>

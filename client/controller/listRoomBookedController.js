@@ -23,11 +23,13 @@ exports.renderlistRoomBookedPage = async (req, res) => {
   });
 };
 
-exports.deleteBookingById = async (req, res) => {
+exports.updateStatusById = async (req, res) => {
   console.log(req.query);
   console.log(req.body);
 
-  const { data } = await api.deleteBookingById(req.query.id);
+  const status = {TRANGTHAI: req.body.TRANGTHAI};
+
+  const { data } = await api.updateStatusById(req.body.id, status);
   console.log(data);
 
   res.redirect("/listRoomBooked");

@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="../public/css/style_detailInvoice.css" />
 
-<h3>{{message}}</h3>
+
 
 <div class="main-body-container" style="width: 100%;">
-  <div class="title-page">
-    <h3>CHI TIẾT HÓA ĐƠN THANH TOÁN</h3>
-  </div>
-  <div class="search-id-container">
+    <div class="title-page">
+        <h3>{{message}}</h3>
+    </div>
+    <div class="search-id-container">
 
     <input
       type="search"
@@ -23,30 +23,28 @@
         class="btn btn-link text-primary search-items"
       ><i class="fa fa-search"></i></button>
     </div>
-  </div>
-
-  <div class="infor-container" id="{{dataInvoice.MAHOADON}}">
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Khách hàng thanh toán</td>
-          <td>{{dataInvoice.TENKHACHHANG}}</td>
-        </tr>
-        <tr>
-          <td>Thời gian</td>
-          <td>{{formatFUllDate dataInvoice.NGAYTHANHTOAN}}</td>
-        </tr>
-        <tr>
-          <td>Mã hóa đơn</td>
-          <td>{{dataInvoice.MAHOADON}}</td>
-        </tr>
-        <tr>
-          <td>TỔNG TIỀN</td>
-          <td>{{formatCurrency dataInvoice.TONGTIEN}}</td>
-
-        </tr>
-      </tbody>
-    </table>
+    {{#if dataInvoice.MAHOADON}}
+    <div class="infor-container" id="{{dataInvoice.MAHOADON}}">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Khách hàng thanh toán</td>
+                    <td>{{dataInvoice.TENKHACHHANG}}</td>
+                </tr>
+                <tr>
+                    <td>Thời gian</td>
+                    <td>{{formatFUllDate dataInvoice.NGAYTHANHTOAN}}</td>
+                </tr>
+                <tr>
+                    <td>Mã hóa đơn</td>
+                    <td>{{dataInvoice.MAHOADON}}</td>
+                </tr>
+                <tr>
+                    <td>TỔNG TIỀN</td>
+                    <td>{{formatCurrency dataInvoice.TONGTIEN}}</td>
+                </tr>
+             </tbody>
+        </table>
   </div>
   <div class="title-table">
     <h5>Chi tiết thanh toán</h5>
@@ -78,10 +76,11 @@
         {{!<tr>
                     <td colspan="3" id="total-cost">Tổng tiền</td>
                     <td></td>
-                </tr>}}
-      </tbody>
-    </table>
-  </div>
+                </tr>--}}
+            </tbody>
+        </table>
+    </div>
+    {{/if}}
   <button class="btn btn-outline-success d-block mx-auto w-15">
     Xuất hóa đơn
   </button>

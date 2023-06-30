@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="../public/css/style_searchBooking.css">
+
+<div class="main-body-container" style="width: 100%;">
+    <div class="title-page">
+        <h3>{{message}}</h3>
+    </div>
+    {{#if dataBooking.MADATPHONG}}
+    <div class="infor-container" id="{{dataBooking.MADATPHONG}}">
+        <table class="table">
+            <tbody>
+                <tr style="font-size:1.5rem">
+                    <td>Mã đặt phòng</td>
+                    <td>{{dataBooking.MADATPHONG}}</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái</td>
+                    <td>{{dataBooking.TRANGTHAI}}</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td>Khách hàng thanh toán</td>
+                    <td>{{dataBooking.TENKHACHHANG}}</td>
+                </tr>
+                <tr>
+                    <td>Số điện thoại</td>
+                    <td>{{dataBooking.SODIENTHOAI}}</td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ</td>
+                    <td>{{dataBooking.DIACHI}}</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                    <td><br></td>
+                </tr>
+
+                <tr>
+                    <td>Ngày đặt phòng</td>
+                    <td>{{formatFUllDate dataBooking.NGAYDATPHONG}}</td>
+                </tr>
+                <tr>
+                    <td>Ngày Checkin</td>
+                    <td>{{formatFUllDate dataBooking.NGAYCHECKIN}}</td>
+                </tr>
+                <tr>
+                    <td>Ngày checkout</td>
+                    <td>{{formatFUllDate dataBooking.NGAYCHECKOUT}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="title-table">
+        <h5>Chi tiết đặt phòng</h5>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Mã phòng</th>
+                    <th scope="col">Loại phòng</th>
+                    <th scope="col">Số giường</th>
+                    <th scope="col">Số khách tối đa</th>
+                    <th scope="col">Giá mỗi đêm</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each dataDetailBooking}}
+                <tr>
+                    <td>{{MAPHONG}}</td>
+                    <td>{{TENLOAI}}</td>
+                    <td>{{SOGIUONG}}</td>
+                    <td>{{SOKHACHTOIDA}}</td>
+                    <td>{{formatCurrency DONGIA}}</td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+    {{/if}}
+    
+</div>
