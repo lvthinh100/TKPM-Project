@@ -46,17 +46,17 @@ exports.getStatusByIdRoom = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateStatusById = catchAsync(async (req, res) => {
+exports.updateStatusById = catchAsync(async (req, res, next) => {
   //----------
   const { id } = req.params;
   const data = req.body;
+
   const newData = await bookingTicketModel.updateStatusOne(id, data);
 
-  console.log(data);
-
+  console.log(newData);
   res.status(200).json({
     status: "success",
-    data: newData,
+    data: id,
   });
 });
 
@@ -65,6 +65,7 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const query = req.query; // lay room(MAPHONG)
   const data = req.body;
+
   checkStatusLL = await bookingTicketModel.checkStatusLL(id, query.room);
   if (checkStatusLL.length == 0)
     return next(new AppError(401, "Accommodation information not exist"));
@@ -106,6 +107,8 @@ exports.updateInforCheckInByIdRoom = catchAsync(async (req, res, next) => {
     arr_user.push(newuser);
   }
   dataNewLL.push({ users: arr_user });
+  // Update status -> DANGSUDUNG
+  bookingTicketModel.updateStatus(id, 'DANGSUDUNG')
 
   res.status(200).json({
     status: "success",

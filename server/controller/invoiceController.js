@@ -34,15 +34,16 @@ exports.getInvoiceById = catchAsync(async (req, res) => {
   });
 });
 
-exports.createInvoice = catchAsync(async (req, res) => {
+exports.createInvoice = catchAsync(async (req, res, next) => {
   data = req.body;
-  const ticketId = IdGenerator("HD");
-  // cre_data =
-  let cre_data = {};
-  cre_data["ticketId"] = ticketId;
-  cre_data["createdAt"] = new Date();
+  Status = await bookingTicketModel.getStatusById(data.ticketId)
+  if (Status == 'DASUDUNG')
+    return next(new AppError(404, "Error status !!"));
 
-  const data_re = await invoiceModel.createOneInvoice(data, cre_data);
+  const ticketId = IdGenerator("HD");
+  let create_data = {"ticketId" : ticketId, "createdAt" : new Date()};
+
+  const data_re = await invoiceModel.createOneInvoice(data, create_data);
   await bookingTicketModel.updateStatus(data.ticketId, "DASUDUNG");
 
   res.json({
