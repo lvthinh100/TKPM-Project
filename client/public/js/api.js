@@ -34,3 +34,4 @@ exports.createInvoice = async (data) =>
   axios.post(`${server}/api/invoice`, data);
 exports.getInvoiceByTicketId = async (id) =>
   axios.get(`${server}/api/invoice/ticket/${id}`);
+exports.createUser = async (data) => axios.post(`${server}/api/user`, data);

@@ -164,9 +164,6 @@ exports.getDetailTicket = catchAsync(async (req, res) => {
 
 exports.createTicket = catchAsync(async (req, res) => {
   data = req.body;
-  const ticketId = IdGenerator("DP");
-  data["ticketId"] = ticketId;
-  data["createdAt"] = new Date();
 
   const data_re = await bookingTicketModel.createOneTicket(data);
   res.json({
@@ -178,10 +175,37 @@ exports.createTicket = catchAsync(async (req, res) => {
 
 exports.deleteBookingById = catchAsync(async (req, res) => {
   const { id } = req.params;
-  
+
   const newData = await bookingTicketModel.deleteBooking(id);
 
   console.log(newData);
+
+  res.status(200).json({
+    status: "success",
+    data: newData,
+  });
+});
+
+exports.adminCreateTicket = catchAsync(async (req, res) => {
+  const data = req.body;
+
+  //Create new user with info
+  const newUser = await userModel.createOne(data.user);
+
+  const data_re = await bookingTicketModel.createOneTicket({
+    ...data,
+    userid: newUser.userId,
+  });
+
+  res.json({
+    status: 200,
+    message: "success",
+    data: {
+      ...data_re[0],
+      userid: newUser.userId,
+    },
+  });
+  //create ticket with info
 
   res.status(200).json({
     status: "success",

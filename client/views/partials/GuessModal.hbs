@@ -1,49 +1,101 @@
-<div class="modal modal-lg fade" id="GuessModal" tabindex="-1" role="dialog" aria-labelledby="GuessModal"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <h2 class="modal-title text-info">Nhập thông tin khách hàng</h2>
+<div
+  class="modal modal-lg fade"
+  id="GuessModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="GuessModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form class="modal-content admin-booking">
+      <div class="modal-header justify-content-center">
+        <h2 class="modal-title text-info">Nhập thông tin khách hàng</h2>
+      </div>
+      <div class="modal-body">
+
+        <!-- FORM ACTION? -->
+        <div class="container form-group">
+          <div class="row m-2">
+            <label class="col-3 my-auto" for="name">Họ và tên:</label>
+            <input
+              class="col form-control"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Nhập họ và tên"
+              required
+            />
+          </div>
+          <div class="row m-2">
+            <label class="col-3 my-auto" for="name">Chứng minh nhân dân:
+            </label>
+            <input
+              class="col form-control"
+              id="cmnd"
+              name="cmnd"
+              type="text"
+              placeholder="Nhập Chứng minh nhân dân"
+              required
+            />
+          </div>
+
+          <div class="row m-2">
+            <div class="col-3 my-auto">Loại khách:</div>
+            <div class="col form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type"
+                id="option1"
+                value="NOIDIA"
+              />
+              <label class="form-check-label" for="option1">Nội địa</label>
             </div>
-            <div class="modal-body">
-
-
-                <!-- FORM ACTION? -->
-                <form action="">
-                    <div class="container form-group">
-                        <div class="row m-2">
-                            <label class="col-3 my-auto" for="name">Họ và tên:</label>
-                            <input class="col form-control" id="name" type="text" placeholder="Nhập họ và tên" required>
-                        </div>
-
-                        <div class="row m-2">
-                            <div class="col-3 my-auto">Loại khách:</div>
-                            <div class="col form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="typeGuess" id="option1" value="NOIDIA">
-                                <label class="form-check-label" for="option1">Nội địa</label>
-                            </div>
-                            <div class="col form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="typeGuess" id="option2" value="NUOCNGOAI">
-                                <label class="form-check-label" for="option2">Nước ngoài</label>
-                            </div>
-                        </div>
-
-                        <div class="row m-2">
-                            <label class="col-3 my-auto" for="phone">Số điện thoại:</label>
-                            <input class="col form-control" id="phone" type="text" placeholder="Nhập Sđt" required>
-                        </div>
-
-                        <div class="row m-2">
-                            <label class="col-3 my-auto" for="location">Địa chỉ:</label>
-                            <input class="col form-control" id="location" type="text" placeholder="Nhập Địa chỉ">
-                        </div>
-                    </div>
-                </form>
+            <div class="col form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="type"
+                id="option2"
+                value="NUOCNGOAI"
+              />
+              <label class="form-check-label" for="option2">Nước ngoài</label>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Hủy</button>
-                <button type="button" class="btn btn-primary">Tạo phiếu đặt phòng</button>
-            </div>
+          </div>
+
+          <div class="row m-2">
+            <label class="col-3 my-auto" for="phone">Số điện thoại:</label>
+            <input
+              class="col form-control"
+              id="phone"
+              name="phone"
+              type="text"
+              placeholder="Nhập Sđt"
+              required
+            />
+          </div>
+
+          <div class="row m-2">
+            <label class="col-3 my-auto" for="location">Địa chỉ:</label>
+            <input
+              class="col form-control"
+              id="location"
+              name="address"
+              type="text"
+              placeholder="Nhập Địa chỉ"
+            />
+          </div>
         </div>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#GuessModal"
+        >Hủy</button>
+        <button type="submit" class="btn btn-primary">Tạo phiếu đặt phòng</button>
+      </div>
+    </form>
+  </div>
 </div>
