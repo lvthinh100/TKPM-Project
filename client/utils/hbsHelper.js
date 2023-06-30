@@ -16,21 +16,25 @@ module.exports = {
     return moment(date).format("h:mm:ss A, DD-MM-YYYY");
   },
   formatCurrency: (amount) => {
-    amount = amount.replace('$', '');
-    amount = amount.replace(',','');
-    amount = amount.replace('.', '')
-    if(typeof(amount)=='string')
-    {
-      try{
+    amount = amount.replace("$", "");
+    amount = amount.replace(",", "");
+    amount = amount.replace(".", "");
+    if (typeof amount == "string") {
+      try {
         //console.log(amount);
-        var valueAmount = parseFloat(amount)*10;
+        var valueAmount = parseFloat(amount) * 10;
         //console.log(valueAmount);
-      }
-      catch(err){
-
-      }
+      } catch (err) {}
     }
-    return valueAmount.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+    return valueAmount.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    });
+  },
+  add: function (value1, value2) {
+    return value1 + value2;
+  },
+  set: function (name, value, options) {
+    options.data.root[name] = value;
   },
 };
-

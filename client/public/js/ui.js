@@ -16,3 +16,8 @@ exports.renderSpinner = (parent) => {
     `;
   render(parent, markup);
 };
+
+exports.showMessage = (message) => {
+  $("#SucessModal").modal("show");
+  document.querySelector(".message").textContent = message;
+};
