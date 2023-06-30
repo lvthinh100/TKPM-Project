@@ -81,7 +81,7 @@ app.use("/bookingRoom", bookingRoomRoutes);
 app.use("/listInvoice", listInvoiceRoutes);
 app.use("/detailInvoice", detailInvoiceRoutes);
 
-app.use("/listRoomForGuess", listRoomForGuessRoutes);
+app.use("/booking", listRoomForGuessRoutes);
 app.use("/checkout", checkoutRoutes);
 app.use("/listRoomBooked", listRoomBookedRoutes);
 
@@ -94,8 +94,8 @@ app.use("/", (err, req, res, next) => {
 });
 */
 
-app.get('/', (req, res) => {
-  res.redirect('/home');
+app.get("/", (req, res) => {
+  res.redirect("/home");
 });
 
 app.all("*", (req, res, next) => {
@@ -104,9 +104,6 @@ app.all("*", (req, res, next) => {
     message: "Page Not Found",
   });
 });
-
-
-
 
 // app.use("/api/transactions", transactionRoutes);
 
