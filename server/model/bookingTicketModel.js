@@ -68,7 +68,7 @@ exports.updateStatusOne = async (id, data) => {
     const query = `UPDATE "PHIEUDATPHONG" 
                     SET "TRANGTHAI" = $1 
                     WHERE "MADATPHONG" = $2 returning *;`;
-    const newdata = await db.any(query, [data.status, id]);
+    const newdata = await db.any(query, [data.TRANGTHAI, id]);
 
     return newdata;
   } catch (err) {
@@ -173,6 +173,16 @@ exports.getAllTicket = async () => {
 exports.getTicketsByUser = async (id) => {
   try {
     const query = 'SELECT * FROM "PHIEUDATPHONG" WHERE "MAKHACHHANG" = $1';
+    const data = await db.any(query, id);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+exports.getTicketsById = async (id) => {
+  try {
+    const query = 'SELECT * FROM "PHIEUDATPHONG" as pdp JOIN "KHACHHANG" as kh ON pdp."MAKHACHHANG" = kh."MAKHACHHANG" WHERE pdp."MADATPHONG" = $1';
     const data = await db.any(query, id);
     return data;
   } catch (err) {

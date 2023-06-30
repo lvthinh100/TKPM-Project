@@ -13,7 +13,7 @@ module.exports = {
     return dd + "/" + mm + "/" + yyyy;
   },
   formatFUllDate: (date) => {
-    return moment(date).format("h:mm:ss A, DD-MM-YYYY");
+    return moment(date).format("hh:mm:ss A, DD-MM-YYYY");
   },
   formatCurrency: (amount) => {
     amount = amount.replace('$', '');

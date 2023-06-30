@@ -6,6 +6,7 @@ const authController = require("../controller/authController");
 const router = express.Router();
 
 router.get("/search", bookingTicketController.searchBookingTicket);
+router.get("/detailBooking/:id", bookingTicketController.getTicketsById);
 router.post("/", bookingTicketController.createTicket);
 
 router.get("/", bookingTicketController.getAllTicket);

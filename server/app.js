@@ -26,6 +26,8 @@ const typeRoomRoutes = require("./routes/typeRoomRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
 const detailInvoiceRoutes = require("./routes/detailInvoiceRoutes");
 
+const accomodationRoutes = require("./routes/accomodationRoutes");
+
 const app = express();
 
 //Serving static file
@@ -85,6 +87,8 @@ app.use("/api/report", reportRoutes);
 app.use("/api/typeRoom", typeRoomRoutes);
 app.use("/api/invoice", invoiceRoutes);
 app.use("/api/detailInvoice", detailInvoiceRoutes);
+app.use("/api/accomodation", accomodationRoutes);
+
 
 //Global error handler
 

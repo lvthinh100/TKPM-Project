@@ -50,9 +50,11 @@ exports.updateStatusById = catchAsync(async (req, res) => {
   //----------
   const { id } = req.params;
   const data = req.body;
+  console.log(id);
+  console.log(data);
   const newData = await bookingTicketModel.updateStatusOne(id, data);
 
-  console.log(data);
+  console.log(newData);
 
   res.status(200).json({
     status: "success",
@@ -141,6 +143,21 @@ exports.getTicketsByUser = catchAsync(async (req, res) => {
   const query = req.query;
 
   const data = await bookingTicketModel.getTicketsByUser(id);
+
+  res.json({
+    status: 200,
+    message: "success",
+    data: data,
+  });
+});
+
+exports.getTicketsById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  const data = await bookingTicketModel.getTicketsById(id);
+
+  console.log(data);
 
   res.json({
     status: 200,
