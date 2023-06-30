@@ -5,6 +5,10 @@
     {{> searchingRoom}}
     {{> bookingRoom}}
 
+    {{#if user.isAdmin}}
+    {{> GuessModal}}
+    {{/if}}
+
     <div class="container pt-4">
         <div class="m-0 pl-3 pt-0 pb-3 text-center h2">
             ĐẶT PHÒNG

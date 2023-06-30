@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../public/css/style_detailInvoice.css">
+<link rel="stylesheet" href="../public/css/style_detailInvoice.css" />
 
 
 
@@ -8,13 +8,20 @@
     </div>
     <div class="search-id-container">
 
-        <input type="search" placeholder="Tìm kiếm theo mã" aria-describedby="button-addon1"
-            class="form-control border-0 bg-light search-field" id="id-invoice-search-field"
-            value="{{dataInvoice.MAHOADON}}">
-        <div class="input-group-append">
-            <button id="search-id-btn" type="button" class="btn btn-link text-primary search-items"><i
-                    class="fa fa-search"></i></button>
-        </div>
+    <input
+      type="search"
+      placeholder="Tìm kiếm theo mã"
+      aria-describedby="button-addon1"
+      class="form-control border-0 bg-light search-field"
+      id="id-invoice-search-field"
+      value="{{dataInvoice.MAHOADON}}"
+    />
+    <div class="input-group-append">
+      <button
+        id="search-id-btn"
+        type="button"
+        class="btn btn-link text-primary search-items"
+      ><i class="fa fa-search"></i></button>
     </div>
     {{#if dataInvoice.MAHOADON}}
     <div class="infor-container" id="{{dataInvoice.MAHOADON}}">
@@ -35,39 +42,38 @@
                 <tr>
                     <td>TỔNG TIỀN</td>
                     <td>{{formatCurrency dataInvoice.TONGTIEN}}</td>
-
                 </tr>
-            </tbody>
+             </tbody>
         </table>
-    </div>
-    <div class="title-table">
-        <h5>Chi tiết thanh toán</h5>
-    </div>
-    <div class="table-container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Mã đặt phòng</th>
-                    <th scope="col">Mã phòng</th>
-                    <th scope="col">Số ngày</th>
-                    <th scope="col">Đơn giá</th>
-                    <th scope="col">Phụ thu</th>
-                    <th scope="col">Thành tiền</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each dataDetailInvoice}}
-                <tr>
-                    <td>{{MADATPHONG}}</td>
-                    <td>{{MAPHONG}}</td>
-                    <td>{{SONGAY}}</td>
-                    <td>{{formatCurrency DONGIA}}</td>
-                    <td>{{formatCurrency PHUTHU}}</td>
-                    <td>{{formatCurrency THANHTIEN}}</td>
-                </tr>
-                {{/each}}
+  </div>
+  <div class="title-table">
+    <h5>Chi tiết thanh toán</h5>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Mã đặt phòng</th>
+          <th scope="col">Mã phòng</th>
+          <th scope="col">Số ngày</th>
+          <th scope="col">Đơn giá</th>
+          <th scope="col">Phụ thu</th>
+          <th scope="col">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each dataDetailInvoice}}
+          <tr>
+            <td>{{MADATPHONG}}</td>
+            <td>{{MAPHONG}}</td>
+            <td>{{SONGAY}}</td>
+            <td>{{formatCurrency DONGIA}}</td>
+            <td>{{formatCurrency PHUTHU}}</td>
+            <td>{{formatCurrency THANHTIEN}}</td>
+          </tr>
+        {{/each}}
 
-                {{!--<tr>
+        {{!<tr>
                     <td colspan="3" id="total-cost">Tổng tiền</td>
                     <td></td>
                 </tr>--}}
@@ -75,7 +81,9 @@
         </table>
     </div>
     {{/if}}
-
+  <button class="btn btn-outline-success d-block mx-auto w-15">
+    Xuất hóa đơn
+  </button>
 </div>
 
 <script src="../public/script/script_detailInvoice.js"></script>

@@ -15,9 +15,9 @@
           <a href="/listAccomodation">Quản lý lưu trú</a>
           <a href="/roomBooking">Quản lý phiếu đặt phòng</a>
           {{else}}
-          <a href="/listRoomForGuess">Đặt phòng</a>
-          <a href="/listRoomBooked">Lịch sử đặt phòng</a>
-          <a href="/user/profile">Hồ sơ</a>
+            <a href="/booking">Đặt phòng</a>
+            <a href="/listRoomBooked">Lịch sử đặt phòng</a>
+            <a href="/user/profile">Hồ sơ</a>
           {{/if}}
 
         </div>
@@ -31,14 +31,20 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <div class="d-flex" style="flex-wrap: nowrap; align-items:center">
                 <div class="nav-item" style="margin-right: 1em;">
-                  <a href="/home">
-                    <img src="../../public/image/logo.png" alt="" style="width: 40px; height: 40px" />
+                  <a href={{#if user.isAdmin}} "/admin" {{else}} "/home" {{/if}}
+                  
+                  >
+                    <img
+                      src="../../public/image/logo.png"
+                      alt=""
+                      style="width: 40px; height: 40px"
+                    />
                   </a>
                 </div>
                 <li class="nav-item">
-                  <a class="nav-link" href="/home"><strong style="color: #475D8F; white-space: nowrap;">QUẢN LÝ KHÁCH
-                      SẠN</strong></a>
-
+                  <a class="nav-link" href={{#if user.isAdmin}} "/admin" {{else}} "/home" {{/if}}><strong
+                      style="color: #475D8F; white-space: nowrap;"
+                    >QUẢN LÝ KHÁCH SẠN</strong></a>
                 </li>
               </div>
             </ul>

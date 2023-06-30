@@ -9,19 +9,33 @@ export const addNewTicketHandler = async (e) => {
     e.textContent.trim()
   );
 
-  const { data } = await api.createTicket({
-    checkin,
-    checkout,
-    room,
-    userid,
-    numuser,
-  });
-  document.querySelector(".ticket-id").textContent = data.data.ticketId;
-  $('#sucessModal').modal('show');
-  setTimeout(() => window.location.href = "/listRoomForGuess", 2500);
-  console.log(data);
+  if (userid == "") {
+    $("#GuessModal").modal("show");
+  } else {
+    const { data } = await api.createTicket({
+      checkin,
+      checkout,
+      room,
+      userid,
+      numuser,
+    });
+    document.querySelector(".ticket-id").textContent = data.data.ticketId;
+    $("#SucessModal").modal("show");
+    setTimeout(() => (window.location.href = "/listRoomForGuess"), 2500);
+    console.log(data);
+  }
 };
 
 export const cancelBookingHandler = (e) => {
   window.location.href = "/listRoomForGuess";
+};
+
+export const submitUserInfoHandler = async (e) => {
+  e.preventDefault();
+  console.log(e.target);
+  const formData = new FormData(e.target); // create a new FormData object
+  const input = Object.fromEntries(formData.entries()); // convert the FormData object to a plain object
+  const { data } = await api.createUser(input);
+  console.log(data);
+  document.querySelector(".user-id").textContent = data.data.userId;
 };

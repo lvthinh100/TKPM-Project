@@ -1,4 +1,5 @@
 const db = require("../db");
+const IdGenerator = require("../utils/UIDGenerator");
 
 exports.getAllTicketsInfo = async () => {
   try {
@@ -240,6 +241,9 @@ exports.searchTicket = async (data) => {
 
 exports.createOneTicket = async (data) => {
   try {
+    const ticketId = IdGenerator("DP");
+    data["ticketId"] = ticketId;
+    data["createdAt"] = new Date();
     // const query = ` Select * from "PHIEUDATPHONG" where  "MADATPHONG" = $1 `;
     const query1 = ` INSERT INTO "PHIEUDATPHONG"("MADATPHONG", "MAKHACHHANG", "NGAYDATPHONG", 
     "NGAYCHECKIN", "NGAYCHECKOUT", "SLKHACH", "TRANGTHAI")

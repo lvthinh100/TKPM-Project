@@ -6,7 +6,11 @@ import {
 } from "./detailBookingTicket.js";
 import { handleRegister, handleUserLogin, handleAdminLogin } from "./auth.js";
 import { reportHandler } from "./chartReport.js";
-import { addNewTicketHandler, cancelBookingHandler } from "./bookTicket.js";
+import {
+  addNewTicketHandler,
+  cancelBookingHandler,
+  submitUserInfoHandler,
+} from "./bookTicket.js";
 
 const searchTicketForm = document.querySelector("#searchTicketForm");
 const booking = document.querySelector(".booking");
@@ -19,6 +23,7 @@ const reportForm = document.querySelector(".report");
 // New booking Ticket
 const bookTicketBtn = document.querySelector(".book-ticket");
 const cancelBookingBtn = document.querySelector(".cancel-booking");
+const adminBookingForm = document.querySelector(".admin-booking");
 
 if (userLogin) userLogin.addEventListener("submit", handleUserLogin);
 if (adminLogin) adminLogin.addEventListener("submit", handleAdminLogin);
@@ -38,3 +43,5 @@ if (reportForm) reportForm.addEventListener("submit", reportHandler);
 if (cancelBookingBtn)
   cancelBookingBtn.addEventListener("click", cancelBookingHandler);
 if (bookTicketBtn) bookTicketBtn.addEventListener("click", addNewTicketHandler);
+if (adminBookingForm)
+  adminBookingForm.addEventListener("submit", submitUserInfoHandler);

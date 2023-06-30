@@ -40,14 +40,14 @@
       </thead>
       <tbody id="listRoomBooked">
         {{#each listRoom}}
-          <tr id="{{this.MAPHONG}}">
-            <td class="room-id">{{this.MAPHONG}}</td>
-            <td>{{this.TANG}}</td>
-            <td>{{this.TENLOAI}}</td>
-            <td>{{this.SOGIUONG}}</td>
-            <td>{{this.SOKHACHTOIDA}}</td>
-            <td class="text-end">{{formatCurrency this.DONGIA}}</td>
-          </tr>
+        <tr id="{{this.MAPHONG}}">
+          <td class="room-id">{{this.MAPHONG}}</td>
+          <td>{{this.TANG}}</td>
+          <td>{{this.TENLOAI}}</td>
+          <td>{{this.SOGIUONG}}</td>
+          <td>{{this.SOKHACHTOIDA}}</td>
+          <td class="text-end">{{formatCurrency this.DONGIA}}</td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
@@ -66,17 +66,9 @@
   </div>
 </div>
 
-<div class="modal fade" id="sucessModal" tabindex="-1" role="dialog" aria-labelledby="sucessModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header m-2">
-        <h2 class="modal-title text-primary" id="">Tạo phiếu thành công</h3>
-      </div>
-      <div class="modal-body text-center my-3">
-        Đan chuyển hướng bạn về danh sách phòng...
-      </div>
-    </div>
-  </div>
-</div>
+
+
+{{> SucessModal}}
+{{> GuessModal}}
 
 <script src="../public/script/script_checkout.js"></script>
