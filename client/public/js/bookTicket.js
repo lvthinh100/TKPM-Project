@@ -1,4 +1,5 @@
 import api from "./api.js";
+import { showMessage } from "./ui.js";
 
 export const addNewTicketHandler = async (e) => {
   const checkin = document.getElementById("checkinDate").textContent;
@@ -20,7 +21,11 @@ export const addNewTicketHandler = async (e) => {
       numuser,
     });
     document.querySelector(".ticket-id").textContent = data.data.ticketId;
-    $("#SucessModal").modal("show");
+    showMessage(
+      "Tạo phiếu thành công",
+      "Tạo mới Phiếu đặt phòng thành công. Điều hướng sau 2.5 giây"
+    );
+
     setTimeout(() => (window.location.href = "/listRoomForGuess"), 2500);
     console.log(data);
   }
@@ -36,6 +41,11 @@ export const submitUserInfoHandler = async (e) => {
   const formData = new FormData(e.target); // create a new FormData object
   const input = Object.fromEntries(formData.entries()); // convert the FormData object to a plain object
   const { data } = await api.createUser(input);
-  console.log(data);
+  $("#GuessModal").modal("hide");
+  showMessage(
+    "Tạo mới khách hàng",
+    "Tạo mới Khách hàng thành công, sẵn sàng đặt phòng"
+  );
+  // console.log(data);
   document.querySelector(".user-id").textContent = data.data.userId;
 };
