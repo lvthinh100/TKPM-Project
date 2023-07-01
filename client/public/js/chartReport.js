@@ -24,11 +24,11 @@ const renderChart = (title, data) => {
   pieChart = new Chart(document.getElementById("pieChartReport"), {
     type: "pie",
     data: {
-      labels: data.map((row) => row.typeid),
+      labels: data.map((row) => row.typeid.trim()),
       datasets: [
         {
           label: title,
-          data: data.map((row) => row.amount),
+          data: data.map((row) => +row.amount),
           datalabels: {
             anchor: "center",
           },

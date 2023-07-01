@@ -43,24 +43,22 @@
 <table
   class="table table-hover table-striped table-bordered border-primary booking"
 >
-  <thead>
+  <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Mã phiếu</th>
+      <th scope="col">Mã đặt phòng</th>
       <th scope="col">Mã Khách Hàng</th>
-      <th scope="col">Tên Khách Đặt</th>
-      <th scope="col">Phòng</th>
-      <th scope="col">Check in</th>
-      <th scope="col">Check out</th>
-      <th scope="col">Khách</th>
-      <th scope="col">Trạng thái</th>
-      <th scope="col">Action</th>
+      <th scope="col">Tên Khách đặt</th>
+      <th scope="col">Ngày đặt</th>
+      <th scope="col">Ngày checkin</th>
+      <th scope="col">Ngày checkout</th>
+      <th scope="col">Số lượng khách</th>
+      <th scope="col">Danh sách phòng</th>
     </tr>
   </thead>
   <tbody class="bookingTicket__body">
     {{#each tickets}}
       <tr>
-        <th scope="row">{{add @index 1}}</th>
+        {{!-- <th scope="row">{{add @index 1}}</th>
         <td>{{ticketid}}</td>
         <td>{{userid}}</td>
         <td>{{username}}</td>
@@ -68,23 +66,70 @@
         <td>{{formatDate checkin}}</td>
         <td>{{formatDate checkout}}</td>
         <td>{{numuser}}</td>
-        <td class="status">{{status}}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-primary btn-checkIn"
-            data-bs-toggle="modal"
-            data-bs-target="#ticketInfoModal"
-            data-ticket="{{ticketid}}"
-            data-room="{{room}}"
+        <td class="status">{{status}}</td> --}}
+        <td scope="row" class="col-1 align-middle text-center ">
+          <div
+            class="col-12 idBooking"
+            id="{{ticketid}}"
+            style="font-size:1.25em"
+          >{{ticketid}}</div>
+          <div
+            class="col-12"
+            style="margin-top:1em; color:rgb(30, 30, 218)"
+          >Trạng thái: <span class="status" data-ticketid="{{ticketid}}" >{{status}}</span> </div>
+          <div
+            class="col-lg-9 align-middle text-center"
+            style="margin-top:1em;"
           >
-            Check in
-          </button>
-          <button
+            <button
+              data-ticketid="{{ticketid}}"
+              data-userid="{{userid}}"
+              class="btn w-100 btn-checkOut"
+              style="background-color: rgb(237, 75, 75);"
+            >Checkout</button>
+          </div>
+        </td>
+        <td class="col-1" >{{userid}}</td>
+        <td class="col-1">{{username}}</td>
+        <td class="col-1">{{formatFUllDate createdat}}</td>
+        <td class="col-1">{{formatDate checkin}}</td>
+        <td class="col-1">{{formatDate checkout}}</td>
+        <td class="col-1 text-center">{{numuser}}</td>
+        <td class="col-1">
+          <table class="table table-light table-bordered m-auto">
+            <thead>
+              <tr>
+                <th>Phòng</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each room}}
+                <tr>
+                  <td>{{this}}</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-checkIn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#ticketInfoModal"
+                      data-ticket="{{../ticketid}}"
+                      data-room="{{this}}"
+                    >
+                      Check in
+                    </button>
+                  </td>
+                </tr>
+              {{/each}}
+
+            </tbody>
+          </table>
+
+          {{!-- <button
             class="btn btn-primary btn-checkOut"
             data-ticketId="{{ticketid}}"
             data-userid="{{userid}}"
-          >Check out</button>
+          >Check out</button> --}}
         </td>
       </tr>
     {{/each}}

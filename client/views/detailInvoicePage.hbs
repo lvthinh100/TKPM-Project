@@ -8,22 +8,22 @@
     </div>
     <div class="search-id-container">
 
-    <input
-      type="search"
-      placeholder="Tìm kiếm theo mã"
-      aria-describedby="button-addon1"
-      class="form-control border-0 bg-light search-field"
-      id="id-invoice-search-field"
-      value="{{dataInvoice.MAHOADON}}"
-    />
-    <div class="input-group-append">
-      <button
-        id="search-id-btn"
-        type="button"
-        class="btn btn-link text-primary search-items"
-      ><i class="fa fa-search"></i></button>
+      <input
+        type="search"
+        placeholder="Tìm kiếm theo mã"
+        aria-describedby="button-addon1"
+        class="form-control border-0 bg-light search-field"
+        id="id-invoice-search-field"
+        value="{{dataInvoice.MAHOADON}}"
+      />
+      <div class="input-group-append">
+        <button
+          id="search-id-btn"
+          type="button"
+          class="btn btn-link text-primary search-items"
+        ><i class="fa fa-search"></i></button>
+      </div>
     </div>
-    {{#if dataInvoice.MAHOADON}}
     <div class="infor-container" id="{{dataInvoice.MAHOADON}}">
         <table class="table">
             <tbody>
@@ -45,6 +45,7 @@
                 </tr>
              </tbody>
         </table>
+    </div>
   </div>
   <div class="title-table">
     <h5>Chi tiết thanh toán</h5>
@@ -72,15 +73,9 @@
             <td>{{formatCurrency THANHTIEN}}</td>
           </tr>
         {{/each}}
-
-        {{!<tr>
-                    <td colspan="3" id="total-cost">Tổng tiền</td>
-                    <td></td>
-                </tr>--}}
-            </tbody>
-        </table>
-    </div>
-    {{/if}}
+      </tbody>
+    </table>
+  </div>
   <button class="btn btn-outline-success d-block mx-auto w-15">
     Xuất hóa đơn
   </button>

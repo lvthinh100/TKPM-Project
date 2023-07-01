@@ -3,15 +3,19 @@ import hbsHelper from "../../utils/hbsHelper.js";
 import { renderSpinner } from "./ui.js";
 
 const updateStatus = (ticketId, status) => {
-  const btn = document.querySelector(`[data-ticket="${ticketId}"]`);
-  if (!btn) return;
-  btn.closest("tr").querySelector(".status").textContent = status;
+  const statusLabel = document.querySelector(
+    `.status[data-ticket="${ticketId}"]`
+  );
+  if (!statusLabel) return;
+  statusLabel.textContent = status;
 };
 
 const getStatus = (ticketId) => {
-  const btn = document.querySelector(`[data-ticket="${ticketId}"]`);
-  if (!btn) return;
-  return btn.closest("tr").querySelector(".status").textContent;
+  const statusLabel = document.querySelector(
+    `.status[data-ticket="${ticketId}"]`
+  );
+  if (!statusLabel) return;
+  return statusLabel.textContent;
 };
 
 const renderIndicatorBtn = (num) => {
